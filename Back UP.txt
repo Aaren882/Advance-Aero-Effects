@@ -1,0 +1,178 @@
+class AllVehicles;
+	class Air: AllVehicles
+	{
+		class AAE_Config_Handler
+		{
+			WheelsContact[] = {};
+			EnginePOS[] = {};
+		};
+		class EventHandlers
+		{
+			class AAE_EH: AAE_EH{};
+		};
+	};
+	//FIRs
+	class Plane_CAS_01_base_F;
+	class FIR_A10A_Base : Plane_CAS_01_base_F
+	{
+		class EventHandlers
+		{
+			class AAE_EH: AAE_EH{};
+		};
+	};
+	class FIR_A10C_Base : Plane_CAS_01_base_F
+	{
+		class EventHandlers
+		{
+			class AAE_EH: AAE_EH{};
+		};
+	};
+	class FIR_A10U_Base : Plane_CAS_01_base_F
+	{
+		class EventHandlers
+		{
+			class AAE_EH: AAE_EH{};
+		};
+	};
+	
+	class Plane_Fighter_03_base_F;
+	class FIR_F16_Base : Plane_Fighter_03_base_F
+	{
+		class EventHandlers
+		{
+			class AAE_EH: AAE_EH{};
+		};
+	};
+	class FIR_F35B_Armaverse_Base : Plane_Fighter_03_base_F
+	{
+		class EventHandlers
+		{
+			class AAE_EH: AAE_EH{};
+		};
+	};
+	class FIR_AV8B_Base : Plane_Fighter_03_base_F
+	{
+		class EventHandlers
+		{
+			class AAE_EH: AAE_EH{};
+		};
+	};
+	class FIR_AV8B_NA_Base : Plane_Fighter_03_base_F
+	{
+		class EventHandlers
+		{
+			class AAE_EH: AAE_EH{};
+		};
+	};
+	class FIR_AV8B_GR7_Base : Plane_Fighter_03_base_F
+	{
+		class EventHandlers
+		{
+			class AAE_EH: AAE_EH{};
+		};
+	};
+	class FIR_F15_Base : Plane_Fighter_03_base_F
+	{
+		class EventHandlers
+		{
+			class AAE_EH: AAE_EH{};
+		};
+	};
+	class FIR_F15A_Base : Plane_Fighter_03_base_F
+	{
+		class EventHandlers
+		{
+			class AAE_EH: AAE_EH{};
+		};
+	};
+	class FIR_F15B_Base : Plane_Fighter_03_base_F
+	{
+		class EventHandlers
+		{
+			class AAE_EH: AAE_EH{};
+		};
+	};
+	class FIR_F15E_Base : Plane_Fighter_03_base_F
+	{
+		class EventHandlers
+		{
+			class AAE_EH: AAE_EH{};
+		};
+	};
+	class FIR_F15E_Demo_Base : Plane_Fighter_03_base_F
+	{
+		class EventHandlers
+		{
+			class AAE_EH: AAE_EH{};
+		};
+	};
+	class FIR_F15B_Civ_Base : Plane_Fighter_03_base_F
+	{
+		class EventHandlers
+		{
+			class AAE_EH: AAE_EH{};
+		};
+	};
+	class FIR_F15D_Base : Plane_Fighter_03_base_F
+	{
+		class EventHandlers
+		{
+			class AAE_EH: AAE_EH{};
+		};
+	};
+	class FIR_F15SE_Base : Plane_Fighter_03_base_F
+	{
+		class EventHandlers
+		{
+			class AAE_EH: AAE_EH{};
+		};
+	};
+	class FIR_F22_Base : Plane_Fighter_03_base_F
+	{
+		class EventHandlers
+		{
+			class AAE_EH: AAE_EH{};
+		};
+	};
+	class FIR_F23A_Base : Plane_Fighter_03_base_F
+	{
+		class EventHandlers
+		{
+			class AAE_EH: AAE_EH{};
+		};
+	};
+	
+	//F/A-18 Super Hornets
+	class Plane_Base_F;
+	class JS_JC_FA18E: Plane_Base_F
+	{
+		class EventHandlers
+		{
+			class AAE_EH: AAE_EH{};
+		};
+	};
+	class JS_JC_FA18F: Plane_Base_F
+	{
+		class EventHandlers
+		{
+			class AAE_EH: AAE_EH{};
+		};
+	};
+	
+	//Sab Military
+	class sab_militaryaviation_baseplane: Plane_Base_F
+	{
+		class EventHandlers
+		{
+			class AAE_EH: AAE_EH{};
+		};
+	};
+	
+	//Unsung
+	class uns_plane: Plane_Base_F
+	{
+		class EventHandlers
+		{
+			class AAE_EH: AAE_EH{};
+		};
+	};
