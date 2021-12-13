@@ -20,6 +20,9 @@ if (_Engine_State) then {
   lastUpdateTime = 0;
   oldVel = [0,0,0];
 
+  //Gound Effect
+  Ground_Paricles = [];
+
   //Sonic Settings
   _SpeedSet = 1195;
   _sonicboom_speed_01 = _SpeedSet - 20;//1175
@@ -144,6 +147,9 @@ if (_Engine_State) then {
       //Ground
       if (!(isTouchingGround _plane) and ((_AGL_POS # 2) < groundP_sdr) and (ground_fn)) then {
         [_plane,_engine1,_engine2,_AGL_POS,_ASL_POS,_ATL_POS,_ASLW_POS,_velocity,_speed] Spawn AAE_fnc_ground;
+        _plane setVariable ["AAE_Ground_Activated", true];
+      } else {
+        _plane setVariable ["AAE_Ground_Activated", false];
       };
     };
   },
