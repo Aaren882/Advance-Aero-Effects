@@ -194,7 +194,7 @@ class ExhaustsEffectPlaneHP
 #include "Wing_Effect\Fighter02.hpp"
 #include "Wing_Effect\Fighter04.hpp"
 
-class AAE_Dust
+/*class AAE_Dust
 {
 	class AAE_Dust02
 	{
@@ -220,4 +220,4 @@ class AAE_Dust
 		type = "AAE_Dust05";
 		qualityLevel = 1;
 	};
-};
+};*/

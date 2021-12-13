@@ -55,17 +55,7 @@ class CfgVehicles
 	class Air: AllVehicles
 	{
 		class Eventhandlers: DefaultEventHandlers {};
-		AAE_Alarm_Int[] = {"MG8\AVDAVFX\snd\Alarm.ogg", "AAE_Alarm"};
-		AAE_Rumble_Int[] = {"AAE_Rumble"};
-		AAE_GBreathe[] = {"AAE_GBreathe"};
-		AAE_Rumble_Taxing[] = {"AAE_RumbleG"};
-		AAE_Touchdown_Int[] = {"MG8\AVDAVFX\snd\touchdown_int.ogg", 5, 1};
-		AAE_Touchdown_Ext[] = {"MG8\AVDAVFX\snd\touchdown.ogg", 1, 1, 1500};
-		class AAE_Config_Handler
-		{
-			WheelsContact[] = {};
-			EnginePOS[] = {};
-		};
+		#include "Configs\AAE_Settings.hpp"
 	};
 	
 	class Plane: Air {};
@@ -109,96 +99,55 @@ class CfgFunctions
 {
 	class AAE
 	{
-		class AVDAVFXFn
+		class MainInit
 		{
 			file="MG8\AVDAVFX\Functions";
-			class Init
-			{
-				//postInit=1;
-			};
-			class engineEH
-			{
-			};
+			class Init;
+		};
+		//Eventhandlers
+		class Eventhandlers
+		{
+			file="MG8\AVDAVFX\Functions\Eventhanders";
+			class engineEH;
+			class SurfaceTypeEH;
 		};
 		//Sound Handler
 		class SoundFn
 		{
 			file="MG8\AVDAVFX\Functions\Sound";
-			class PlaySound
-			{
-			};
-			class PlaySound3D
-			{
-			};
-			class PlayAlarm
-			{
-			};
-			class PlayBreathing
-			{
-			};
-			class PlayRumA
-			{
-			};
-			class PlayRumB
-			{
-			};
+			class PlaySound;
+			class PlaySound3D;
+			class PlayAlarm;
+			class PlayBreathing;
+			class PlayRumA;
+			class PlayRumB;
 		};
 		class GeneralFn
 		{
 			file="MG8\AVDAVFX\Functions\General";
-			class ground
-			{
-			};
-			class sonicboom
-			{
-			};
-			class sonicboom2
-			{
-			};
-			class vapor
-			{
-			};
-			class camshake
-			{
-			};
-			class gForces
-			{
-			};
-			class gearFactor
-			{
-			};
+			class ground;
+			class sonicboom;
+			class sonicboom2;
+			class vapor;
+			class camshake;
+			class gForces;
+			class gearFactor;
 		};
 		class WheelsFn
 		{
 			file="MG8\AVDAVFX\Functions\Wheels";
-			class wheels
-			{
-			};
-			class landingEH
-			{
-			};
-			class landed
-			{
-			};
-			class execution
-			{
-			};
-			class taxing
-			{
-			};
+			class wheels;
+			class landingEH;
+			class landed;
+			class execution;
+			class taxing;
 		};
 		class TurbulentFn
 		{
 			file="MG8\AVDAVFX\Functions\Turbulent";
-			class turbulent
-			{
-			};
-			class turbulentW
-			{
-			};
-			class turbulentSnd
-			{
-			};
+			class turbulent;
+			class turbulentW;
+			class turbulentSnd;
 		};
 	};
 };
