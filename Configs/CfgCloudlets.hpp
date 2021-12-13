@@ -34,47 +34,7 @@ class CfgCloudlets
 		interval = 0.0003;
 		colorCoef[] = {1,1,1,"(accelY interpolate [30,250,0,1]) * ((altitude*altitude) interpolate [400,40000,2,0.5])"};
 	};
-	//AAE
-	class AAE_Vapor_Trail: Default
-	{
-		interval=0.003;
-		particleShape="\A3\Data_F\ParticleEffects\Universal\Universal";
-		particleFSNtieth=16;
-		particleFSIndex=12;
-		particleFSFrameCount=8;
-		particleFSLoop=0;
-		particleType="Billboard";
-		animationName="";
-		animationSpeed[]={1000};
-		timerPeriod=0;
-		lifeTime=10;
-		position[]={0,0,-5};
-		moveVelocity[]={0,0,0};
-		rotationVelocity=1;
-		weight=1.25;
-		volume=1;
-		rubbing=0.0099999998;
-		size[]={4,8};
-		color[]=
-		{
-			{0.69999999,0.80000001,1,0},
-			{0.69999999,0.80000001,1,0.029999999},
-			{0.69999999,0.80000001,1,0.059999999},
-			{0.69999999,0.80000001,1,0.1},
-			{0.69999999,0.80000001,1,0.050000001},
-			{0.69999999,0.80000001,1,0.0099999998},
-			{0.69999999,0.80000001,1,0}
-		};
-		lifeTimeVar=2;
-		positionVar[]={3,0.1,3};
-		positionVarConst[]={3,0.1,3};
-		MoveVelocityVar[]={0.40000001,0.40000001,0.40000001};
-		sizeVar=1;
-		MoveVelocityVarConst[]={0,0,0};
-		randomDirectionPeriod=0;
-		randomDirectionIntensity=0;
-		angleVar=1;
-	};
+	
 	//Wing
 	class AAE_BodyTrail_FighterJet: Default
 	{
@@ -233,6 +193,47 @@ class CfgCloudlets
 		randomDirectionIntensityVar = 0;
 	};
 	
+	//AAE
+	class AAE_Vapor_Trail: Default
+	{
+		interval=0.003;
+		particleShape="\A3\Data_F\ParticleEffects\Universal\Universal";
+		particleFSNtieth=16;
+		particleFSIndex=12;
+		particleFSFrameCount=8;
+		particleFSLoop=0;
+		particleType="Billboard";
+		animationName="";
+		animationSpeed[]={1000};
+		timerPeriod=0;
+		lifeTime=10;
+		position[]={0,0,-5};
+		moveVelocity[]={0,0,0};
+		rotationVelocity=1;
+		weight=1.25;
+		volume=1;
+		rubbing=0.0099999998;
+		size[]={4,8};
+		color[]=
+		{
+			{0.69999999,0.80000001,1,0},
+			{0.69999999,0.80000001,1,0.029999999},
+			{0.69999999,0.80000001,1,0.059999999},
+			{0.69999999,0.80000001,1,0.1},
+			{0.69999999,0.80000001,1,0.050000001},
+			{0.69999999,0.80000001,1,0.0099999998},
+			{0.69999999,0.80000001,1,0}
+		};
+		lifeTimeVar=2;
+		positionVar[]={3,0.1,3};
+		positionVarConst[]={3,0.1,3};
+		MoveVelocityVar[]={0.40000001,0.40000001,0.40000001};
+		sizeVar=1;
+		MoveVelocityVarConst[]={0,0,0};
+		randomDirectionPeriod=0;
+		randomDirectionIntensity=0;
+		angleVar=1;
+	};
 	//For Scripts
 	class HDust1;
 	class AAE_Dust01: HDust1
