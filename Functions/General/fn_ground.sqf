@@ -91,12 +91,3 @@ if ((_seaH >= 5) and (_seaH <= groundP_sdr)) then {
 		};
 	};
 };
-
-//Other Effect
-/* if ((_groundH >= 5) and (_groundH <= groundP_sdr)) then {
-	if (surfaceType _Depos == "#GdtConcrete") then {
-		SurfaceType_Pick = _Default;
-		spawn _effect;
-
-	};
-}; */
