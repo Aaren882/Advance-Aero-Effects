@@ -42,7 +42,7 @@ if (_Engine_State and (alive _plane)) then {
     if !(isGamePaused) then {
       _plane = _thisArgs # 0;
       _planePlayer = vehicle player;
-      
+
       _plane setVariable ["AAE_Actived", true];
       _plane setVariable ["AAE_EachFrame_Handler", AAE_handler_Engine];
 
@@ -122,7 +122,6 @@ if (_Engine_State and (alive _plane)) then {
       //Ground
       if (!(isTouchingGround _plane) and ((_AGL_POS # 2) < groundP_sdr) and (ground_fn) and !(isNull _plane)) then {
         _type = _plane getVariable ["AAE_Ground_Type","Default"];
-
         [_plane,_engine1,_engine2,_AGL_POS,_ASL_POS,_ATL_POS,_ASLW_POS,_velocity,_speed,_type] Spawn AAE_fnc_ground;
         _plane setVariable ["AAE_Ground_Activated", true];
       } else {
