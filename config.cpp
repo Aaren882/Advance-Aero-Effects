@@ -108,8 +108,15 @@ class CfgFunctions
 		class Eventhandlers
 		{
 			file="MG8\AVDAVFX\Functions\Eventhanders";
-			class engineEH;
+			class EngineEH;
 			class SurfaceTypeEH;
+			class DeletedEH;
+		};
+		//Counter
+		class Counters
+		{
+			file="MG8\AVDAVFX\Functions\General\Counters";
+			class Ground_Counter;
 		};
 		//Sound Handler
 		class SoundFn
@@ -127,7 +134,7 @@ class CfgFunctions
 			file="MG8\AVDAVFX\Functions\General";
 			class ground;
 			class sonicboom;
-			class sonicboom2;
+			//class sonicboom2;
 			class vapor;
 			class camshake;
 			class gForces;
