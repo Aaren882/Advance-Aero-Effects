@@ -4,7 +4,7 @@ params ["_plane","_engine1","_engine2","_AGL_POS","_ASL_POS","_ATL_POS","_ASLW_P
 
 _particles = {
 	params["_plane","_SurfaceType_Pick","_Depos","_velocity","_speed","_ParticleShape","_engine1","_Particle00_Setups","_Particle01_Setups"];
-	//Definations
+	//Definitions
 	_Particle00_Time = _Particle00_Setups # 0;
 	_Particle01_Time = _Particle01_Setups # 0;
 
@@ -86,7 +86,7 @@ _effect = {
 };
 ////////////////////////////////////////////////////////////////////////////////
 
-//Definations
+//Definitions
 /* _beach = "Beach";
 _dust = "Dust";
 _Default = "Default";
