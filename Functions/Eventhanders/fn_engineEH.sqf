@@ -1,8 +1,11 @@
 params ["_plane","_Engine_State"];
 
+[_plane] spawn AAE_fnc_Ground_counter;
+
 if !(_plane isKindOf "plane") exitWith {};
+
 HaveACE = isClass (configFile >> "CfgPatches" >> "ace_main");
-if (_Engine_State) then {
+if (_Engine_State and (alive _plane)) then {
   _engine1_Name = "HitEngine";
   _engine2_Name = "HitEngine2";
 
@@ -20,14 +23,11 @@ if (_Engine_State) then {
   lastUpdateTime = 0;
   oldVel = [0,0,0];
 
-  //Gound Effect
-  Ground_Paricles = [];
-
   //Sonic Settings
-  _SpeedSet = 1195;
-  _sonicboom_speed_01 = _SpeedSet - 20;//1175
-  _sonicboom_speed_02 = _SpeedSet - 10;//1185
-  _sonicboom_speed_03 = _SpeedSet + 10;//1205
+  AAE_SpeedSet = 1195;
+  AAE_sonicboom_speed_01 = AAE_SpeedSet - 20;//1175
+  AAE_sonicboom_speed_02 = AAE_SpeedSet - 10;//1185
+  AAE_sonicboom_speed_03 = AAE_SpeedSet + 10;//1205
 
   GForces_Filter = ppEffectCreate ["ColorCorrections", 6500];
   GForces_Filter ppEffectForceInNVG true;
@@ -42,43 +42,34 @@ if (_Engine_State) then {
     if !(isGamePaused) then {
       _plane = _thisArgs # 0;
       _planePlayer = vehicle player;
+      
       _plane setVariable ["AAE_Actived", true];
+      _plane setVariable ["AAE_EachFrame_Handler", AAE_handler_Engine];
 
       //Engine
       _engines = _thisArgs # 1;
       _engine1 = _engines # 0;
       _engine2 = _engines # 1;
 
-      //SonicBoom
-      _sonicboom_Setting = _thisArgs # 2;
-      _sonicboom_speed_01 = _sonicboom_Setting # 0;
-      _sonicboom_speed_02 = _sonicboom_Setting # 1;
-      _sonicboom_speed_03 = _sonicboom_Setting # 2;
-
-      //BackUp objects
-      /* _objects = _thisArgs # 3;
-      _source00 = _objects # 0;
-      _source01 = _objects # 1; */
-
       //Turbulent Settings
       _source00 = _plane modelToWorldVisual [(_engine1 # 0), (_engine1 # 1)+(-10-turbulent_sdr),(_engine1 # 2)];
       _source01 = _plane modelToWorldVisual [(_engine2 # 0), (_engine2 # 1)+(-10-turbulent_sdr),(_engine2 # 2)];
 
       //POS
-      _AGL_POS= _plane getVariable ["AAE_veh_AGL", (getPos _plane)];
-      _ASL_POS= _plane getVariable ["AAE_veh_ASL", (getPosASL _plane)];
-      _ATL_POS= _plane getVariable ["AAE_veh_ATL", (getPosATL _plane)];
-      _ASLW_POS= _plane getVariable ["AAE_veh_ASLW", (getPosASLW _plane)];
+      _AGL_POS = getPos _plane;
+      _ASL_POS = getPosASL _plane;
+      _ATL_POS = getPosATL _plane;
+      _ASLW_POS = getPosASLW _plane;
 
       //Speeds
       _velocity = velocity _plane;
       _speed = speed _plane;
 
-      //Vars
+      //Vapor
       _Vapor_Activated = _plane getVariable ["AAE_Vapor_Activated", false];
+
+      //Ground
       _Ground_Activated = _plane getVariable ["AAE_Ground_Activated", false];
-      _Sonic_MC = _plane getVariable ["SonicBoom_Main_Activated", false];
-      _Sonic_SC = _plane getVariable ["SonicBoom_Second_Activated", false];
 
       //Player only
       if (_planePlayer isKindOf "plane") then {
@@ -109,9 +100,9 @@ if (_Engine_State) then {
       };
 
       //Vapor Trail
-      if ((_ASL_POS # 2 > (vapor_sdr + random 20)) and (vapor_fn) and (alive _plane)) then {
+      if ((_ASL_POS # 2 > (vapor_sdr + random 20)) and (vapor_fn) and !(isNull _plane)) then {
         if (!_Vapor_Activated) then {
-          [_plane,_engine1,_engine2,_AGL_POS,_ASL_POS] Spawn AAE_fnc_vapor;
+          [_plane,_engine1,_engine2] Spawn AAE_fnc_vapor;
           _plane setVariable ["AAE_Vapor_Activated", true];
         };
       } else {
@@ -119,34 +110,20 @@ if (_Engine_State) then {
       };
 
       //Camshake
-      if ((isTouchingGround player) and (_speed >=150) and !(player in _plane) and (camshake_fn)) then {
+      if ((isTouchingGround player) and (_speed >= 150) and !(player in _plane) and (camshake_fn)and !(isNull _plane)) then {
         [_plane] Spawn AAE_fnc_camshake;
       };
 
       //Sonic
       if (sonicboom_fn) then {
-        if ((_speed >= _sonicboom_speed_01) and (_speed <= _sonicboom_speed_02)) then {
-          if (!_Sonic_SC) then {
-            [_plane,_velocity] Spawn AAE_fnc_sonicboom2;
-            _plane setVariable ["SonicBoom_Second_Activated", true];
-          };
-        } else {
-          _plane setVariable ["SonicBoom_Second_Activated", false];
-        };
-
-        if ((_speed > _sonicboom_speed_02) and (_speed <= _sonicboom_speed_03)) then {
-          if (!_Sonic_MC) then {
-            [_plane,_velocity] Spawn AAE_fnc_sonicboom;
-            _plane setVariable ["SonicBoom_Main_Activated", true];
-          };
-        } else {
-          _plane setVariable ["SonicBoom_Main_Activated", false];
-        };
+        [_plane,_velocity,_speed] Spawn AAE_fnc_sonicboom;
       };
 
       //Ground
-      if (!(isTouchingGround _plane) and ((_AGL_POS # 2) < groundP_sdr) and (ground_fn)) then {
-        [_plane,_engine1,_engine2,_AGL_POS,_ASL_POS,_ATL_POS,_ASLW_POS,_velocity,_speed] Spawn AAE_fnc_ground;
+      if (!(isTouchingGround _plane) and ((_AGL_POS # 2) < groundP_sdr) and (ground_fn) and !(isNull _plane)) then {
+        _type = _plane getVariable ["AAE_Ground_Type","Default"];
+
+        [_plane,_engine1,_engine2,_AGL_POS,_ASL_POS,_ATL_POS,_ASLW_POS,_velocity,_speed,_type] Spawn AAE_fnc_ground;
         _plane setVariable ["AAE_Ground_Activated", true];
       } else {
         _plane setVariable ["AAE_Ground_Activated", false];
@@ -155,14 +132,43 @@ if (_Engine_State) then {
   },
   [
     _plane,
-    [_Engine_Offset1,_Engine_Offset2],
-    [_sonicboom_speed_01,_sonicboom_speed_02,_sonicboom_speed_03]
+    [_Engine_Offset1,_Engine_Offset2]
   ]];
 } else {
   if (_plane getVariable ["AAE_Actived", false]) then {
-    removeMissionEventHandler ["EachFrame", AAE_handler_Engine];
+    //Engine EH
+    _plane setVariable ["AAE_Actived", false];
+    //Loop Remove
+    removeMissionEventHandler ["EachFrame", (_plane getVariable ["AAE_EachFrame_Handler", -1])];
+
+    //G Forces
     GForces_Filter ppEffectEnable false;
     ppEffectDestroy GForces_Filter;
-    _plane setVariable ["AAE_Actived", false];
+
+    //Vars
+    _Vapor_Paricles = _plane getVariable ["AAE_Vapor_Paricles",[]];
+    _Sonic_Paricles = _plane getVariable ["AAE_Sonic_Paricles",[]];
+    _Ground_Paricles = _plane getVariable ["AAE_Ground_Paricles",[]];
+
+    //Vapor
+    _plane setVariable ["AAE_Vapor_Activated", false];
+    if (count (_plane getVariable "AAE_Vapor_Paricles") > 0) then {
+      {deleteVehicle _x} foreach _Vapor_Paricles;
+  		_plane setVariable ["AAE_Vapor_Paricles", []];
+  	};
+
+    //SonicBoom
+    _plane setVariable ["AAE_SonicBoom_Main_Activated", false];
+    _plane setVariable ["AAE_SonicBoom_Small_Activated", false];
+    _Sonic_source00 = _plane getVariable ["AAE_SonicBoom_Small_Particle",objNull];
+    _Sonic_source01 = _plane getVariable ["AAE_SonicBoom_Main_Particle",objNull];
+
+    //Ground
+    _plane setVariable ["AAE_Ground_Type_Changed",false];
+    _plane setVariable ["AAE_Ground_Activated", false];
+    if (count _Ground_Paricles > 0) then {
+      {deleteVehicle _x} foreach _Ground_Paricles;
+  		_plane setVariable ["AAE_Ground_Paricles", []];
+  	};
   };
 };
