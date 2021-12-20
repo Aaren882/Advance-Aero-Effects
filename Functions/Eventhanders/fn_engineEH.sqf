@@ -42,7 +42,7 @@ if (_Engine_State and (alive _plane)) then {
     if !(isGamePaused) then {
       _plane = _thisArgs # 0;
       _planePlayer = vehicle player;
-      
+
       _plane setVariable ["AAE_Actived", true];
       _plane setVariable ["AAE_EachFrame_Handler", AAE_handler_Engine];
 

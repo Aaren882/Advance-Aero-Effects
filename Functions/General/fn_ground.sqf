@@ -1,7 +1,6 @@
 params ["_plane","_engine1","_engine2","_AGL_POS","_ASL_POS","_ATL_POS","_ASLW_POS","_velocity","_speed","_Surfacetype"];
 
 //////////////////////////////Functions/////////////////////////////////////////
-
 _particles = {
 	params["_plane","_SurfaceType_Pick","_Depos","_velocity","_speed","_ParticleShape","_engine1","_Particle00_Setups","_Particle01_Setups"];
 	//Definitions
@@ -86,12 +85,6 @@ _effect = {
 };
 ////////////////////////////////////////////////////////////////////////////////
 
-//Definitions
-/* _beach = "Beach";
-_dust = "Dust";
-_Default = "Default";
-_water = "Water"; */
-
 _Particle_Pick = _Surfacetype;
 
 _ParticleShape = ["\A3\Data_F\ParticleEffects\Universal\Universal", 16, 12, 13, 0];
@@ -108,7 +101,6 @@ _Height = _AGL_POS # 2;
 _groundH = _ATL_POS # 2;
 _seaH = _ASLW_POS # 2;
 
-//_backPos = _plane modelToWorld [0,(_engine1 # 1),0];
 _backPos = [0,(_engine1 # 1),0];
 
 _Depos = [((_AGL_POS select 0) + (_backPos select 0)), ((_AGL_POS select 1) + (_backPos select 1)), 0];
