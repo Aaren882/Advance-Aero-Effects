@@ -2,11 +2,16 @@ params ["_plane","_engine1","_engine2","_AGL_POS","_ASL_POS","_ATL_POS","_ASLW_P
 
 //////////////////////////////Functions/////////////////////////////////////////
 _particles = {
+<<<<<<< HEAD
 	params["_plane","_SurfaceType_Pick","_Depos","_velocity","_speed","_ParticleShape","_Particle_Settings","_Particle00_Setups","_Particle01_Setups"];
 	//Definitions
 	_weight = _Particle_Settings # 0;
 	_volume = _Particle_Settings # 1;
 
+=======
+	params["_plane","_SurfaceType_Pick","_Depos","_velocity","_speed","_ParticleShape","_engine1","_Particle00_Setups","_Particle01_Setups"];
+	//Definitions
+>>>>>>> a1dd407d09cf04407577f44ea3dd062bcef16442
 	_Particle00_Time = _Particle00_Setups # 0;
 	_Particle01_Time = _Particle01_Setups # 0;
 
@@ -104,8 +109,12 @@ _Height = _AGL_POS # 2;
 _groundH = _ATL_POS # 2;
 _seaH = _ASLW_POS # 2;
 
+<<<<<<< HEAD
 _weight = 2.2;
 _volume = 0.8;
+=======
+_backPos = [0,(_engine1 # 1),0];
+>>>>>>> a1dd407d09cf04407577f44ea3dd062bcef16442
 
 _Depos = _plane modelToWorld [0,(_engine1 # 1),0];
 
