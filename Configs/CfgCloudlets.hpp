@@ -1,7 +1,12 @@
 //WingTrails FX
 class CfgCloudlets
 {
-	class FX_WingTrail_FighterJet;
+	class Default;
+	class FX_WingTrail_FighterJet: Default
+	{
+		/*lifeTime = 0.25;
+		lifeTimeVar = 0.5;*/
+	};
 	class FX_WingTrail_FighterJet_Slow : FX_WingTrail_FighterJet
 	{
 		randomDirectionPeriod = 2;
@@ -11,7 +16,6 @@ class CfgCloudlets
 		rotationVelocity = 0;
 		rotationVelocityVar = 0;
 	};
-	class Default;
 	class WingTrail: Default
 	{
 		interval = 0.0003;
@@ -34,11 +38,22 @@ class CfgCloudlets
 		interval = 0.0003;
 		colorCoef[] = {1,1,1,"(accelY interpolate [30,250,0,1]) * ((altitude*altitude) interpolate [400,40000,2,0.5])"};
 	};
+	class FX_BodyTrail_FighterJet: Default
+	{
+		size[] = {0.5,0.8,1.2,1.2,1.8};
+		colorCoef[] = 
+		{
+			1,
+			1,
+			1,
+			"(accelY interpolate [70,250,0,0.2]) * ((altitude*altitude) interpolate [400,40000,2,0.5])"
+		};
+	};
 	
 	//Wing
 	class AAE_BodyTrail_FighterJet: Default
 	{
-		interval = 0.0003;
+		interval = "0.0001 * (speed interpolate [70,70.0001,-1,1])";
 		circleRadius = 0;
 		circleVelocity[] = {0,0,0};
 		particleShape = "\A3\data_f\ParticleEffects\Universal\Universal";
@@ -52,6 +67,7 @@ class CfgCloudlets
 		particleType = "Billboard";
 		timerPeriod = 1;
 		lifeTime = 0.01;
+		lifeTimeVar = 0.1;
 		moveVelocity[] = {0,0,0};
 		rotationVelocity = 1;
 		weight = 1.274;
@@ -65,7 +81,7 @@ class CfgCloudlets
 			1,
 			1,
 			1,
-			"(accelY interpolate [60,250,0,1]) * ((altitude*altitude) interpolate [400,40000,1,0.5])"
+			"(accelY interpolate [75,100,0,0.045]) * ((altitude*altitude) interpolate [400,40000,1,0.5])"
 		};
 		animationSpeed[] = {1000};
 		animationSpeedCoef = 1;
@@ -73,7 +89,6 @@ class CfgCloudlets
 		randomDirectionIntensity = 0;
 		onTimerScript = "";
 		beforeDestroyScript = "";
-		lifeTimeVar = 0.2;
 		position[] = {"positionX","positionY","positionZ"};
 		positionVar[] = {0,0,0};
 		MoveVelocityVar[] = {0,0,0};
@@ -86,72 +101,158 @@ class CfgCloudlets
 	class AAE_BodyTrail_FighterJet_Short: AAE_BodyTrail_FighterJet
 	{
 		color[] = {{1,1,1,0.2},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0}};
-		lifeTime = 0.005;
+		lifeTime = 0.008;
+		lifeTimeVar = 0.1;
+		colorCoef[]=
+		{
+			1,
+			1,
+			1,
+			"(accelY interpolate [75,100,0,0.002])"
+		};
+	};
+	//Vanilla
+	class AAE_BodyTrail_FighterJet_A164: FX_BodyTrail_FighterJet
+	{
+		color[] = {{1,1,1,0.2},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0}};
+		
+		size[] = {1.2};
+		sizeCoef = 1;
+		
+		colorCoef[]=
+		{
+			1,
+			1,
+			1,
+			"(accelY interpolate [30,100,0,0.01])"
+		};
+	};
+	class AAE_BodyTrail_FighterJet_Mid: FX_BodyTrail_FighterJet
+	{
+		color[] = {{1,1,1,0.2},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0}};
+		
+		size[] = {1.2};
+		sizeCoef = 1;
+		
+		colorCoef[]=
+		{
+			1,
+			1,
+			1,
+			"(accelY interpolate [50,100,0,0.01])"
+		};
+	};
+	class AAE_BodyTrail_FighterJet_Short_Vanilla: AAE_BodyTrail_FighterJet_A164
+	{
+		lifeTime = 0.025;
 		lifeTimeVar = 0;
+		
+		colorCoef[]=
+		{
+			1,
+			1,
+			1,
+			"(accelY interpolate [30,250,0,0.02])"
+		};
+	};
+	//FIR
+	class AAE_WingTrail_FighterJet_FIR: AAE_BodyTrail_FighterJet
+	{
+		lifeTime = 0.008;
+		lifeTimeVar = 0.1;
+		colorCoef[]=
+		{
+			1,
+			1,
+			1,
+			"(accelY interpolate [80,100,0,0.08]) * ((altitude*altitude) interpolate [400,40000,1,0.5])"
+		};
 	};
 	//Weapons
 	class MachineGun2: Default
 	{
+		particleShape = "\A3\data_f\ParticleEffects\Universal\Universal";
 		particleFSNtieth = 16;
 		particleFSIndex = 12;
 		particleFSFrameCount = 8;
-		particleFSLoop = 1;
-		size[] = {1,1.5};
+		particleFSLoop = 0;
+		size[] = {2.4,3};
 		rubbing = 0.45;
-		color[] = {{1,1,1,0.08},{1,1,1,0.1},{1,1,1,0.15},{1,1,1,0.07},{1,1,1,0.04}};
+		color[] = {{1,1,1,0.15},{1,1,1,0.06},{1,1,1,0.02},{1,1,1,0}};
 		sizeCoef = 1;
 		lifeTime = 3;
 		sizeVar = 0.15;
 		interval = 0.003;
+		animationSpeed[] = {1000};
 		moveVelocity[]=
 		{
-			"directionX + vehicleSpeedLocalX",
-			"directionY + vehicleSpeedLocalY",
-			"directionZ + vehicleSpeedLocalZ"
+			"directionX",
+			"directionY",
+			"directionZ"
 		};
 		positionVar[]=
 		{
-			"0.1*(vehicleSpeedSize interpolate [0,250,1,5])",
-			"0.1*(vehicleSpeedSize interpolate [0,250,1,5])",
-			"0.1*(vehicleSpeedSize interpolate [0,250,1,5])"
+			{0,0,0}
 		};
 		MoveVelocityVar[]=
 		{
-			"1*(vehicleSpeedSize interpolate [0,250,1,5])",
-			"1*(vehicleSpeedSize interpolate [0,250,1,5])",
-			"1*(vehicleSpeedSize interpolate [0,250,1,5])"
+			{0,0,0}
 		};
+		rotationVelocity = 1;
+		rotationVelocityVar = 20;
+		colorVar[] = {0,0,0,0};
+		randomDirectionPeriodVar = 0;
+		randomDirectionIntensityVar = 0;
+		colorCoef[] = {1,1,1,0.75};
+		animationSpeedCoef = 1;
+		randomDirectionPeriod = 0.1;
+		randomDirectionIntensity = 0.1;
 	};
 	class MachineGun3: Default
 	{
+		particleShape = "\A3\data_f\ParticleEffects\Universal\Universal";
 		particleFSNtieth = 16;
 		particleFSIndex = 12;
 		particleFSFrameCount = 8;
-		particleFSLoop = 1;
-		size[] = {1,1.5};
-		rubbing = 0.45;
-		color[] = {{1,1,1,0.07},{1,1,1,0.1},{1,1,1,0.06},{1,1,1,0.04}};
+		particleFSLoop = 0;
+		size[] = {2.4,3};
+		rubbing = 0.01;
+		color[] = {{0.85,0.85,0.85,0.15},{0.88,0.88,0.88,0.1},{0.9,0.9,0.9,0.08},{0.9,0.9,0.9,0.07},{0.9,0.9,0.9,0}};
 		lifeTime = 3;
-		sizeVar = 0.15;
-		interval = 0.0003;
+		sizeVar = 0.2;
+		//interval = 0.0003;
+		interval = "0.01/(vehicleSpeedSize interpolate [0,250,1,3])";
+		animationSpeed[] = {1000};
+		angleVar = 1;
+		position[] = {"positionX","positionY","positionZ"};
 		moveVelocity[]=
 		{
-			"directionX + vehicleSpeedLocalX",
-			"directionY + vehicleSpeedLocalY",
-			"directionZ + vehicleSpeedLocalZ"
+			"directionX",
+			"directionY",
+			"directionZ"
 		};
 		positionVar[]=
 		{
-			"0.1*(vehicleSpeedSize interpolate [0,250,1,5])",
-			"0.1*(vehicleSpeedSize interpolate [0,250,1,5])",
-			"0.1*(vehicleSpeedSize interpolate [0,250,1,5])"
+			0.1,
+			0.1,
+			0.1
 		};
 		MoveVelocityVar[]=
 		{
-			"1*(vehicleSpeedSize interpolate [0,250,1,5])",
-			"1*(vehicleSpeedSize interpolate [0,250,1,5])",
-			"1*(vehicleSpeedSize interpolate [0,250,1,5])"
+			0,
+			0,
+			0
 		};
+		rotationVelocity = 1;
+		rotationVelocityVar = 20;
+		colorVar[] = {0,0,0,0};
+		randomDirectionPeriodVar = 0;
+		randomDirectionIntensityVar = 0;
+		sizeCoef = 1;
+		colorCoef[] = {1,1,1,0.75};
+		animationSpeedCoef = 1;
+		randomDirectionPeriod = 0.1;
+		randomDirectionIntensity = 0.1;
 	};
 	
 	//Missile
@@ -165,7 +266,7 @@ class CfgCloudlets
 		particleShape = "\A3\data_f\ParticleEffects\Universal\Universal";
 		particleFSNtieth = 16;
 		particleFSIndex = 12;
-		particleFSFrameCount = 8;
+		particleFSFrameCount = 16;
 		animationName = "";
 		particleType = "Billboard";
 		timerPeriod = 1;

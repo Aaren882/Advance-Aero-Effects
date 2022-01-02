@@ -1,13 +1,3 @@
-class Plane_CAS_01_base_F: Plane_Base_F
-{
-};
-class Plane_CAS_02_base_F: Plane_Base_F
-{
-};
-class Plane_Fighter_03_base_F: Plane_Base_F
-{
-};
-
 //FIR
 class FIR_A10A_Base : Plane_CAS_01_base_F
 {

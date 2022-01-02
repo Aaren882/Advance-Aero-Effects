@@ -1,32 +1,22 @@
 //Jets DLC
+class FX_FuselageVapour_FighterJet
+{
+	delete FX_Plane_BodyTrail_low;
+	delete FX_Plane_BodyTrail_medium;
+	delete FX_Plane_BodyTrail_high;
+	class FX_Plane_BodyTrail
+	{
+		simulation = "particles";
+		type = "FX_BodyTrail_FighterJet";
+		enabled = "accelY interpolate [69.99,70,-1,1]";
+	};
+};
 class FX_WingVortices_FighterJet
 {
-	class FX_Plane_WingTrail_low
-	{
-		simulation = "particles";
-		type = "FX_WingTrail_FighterJet";
-		qualityLevel = 0;
-		enabled = "accelY interpolate [39.99,40,-1,1]";
-	};
-	class FX_Plane_WingTrail_medium
-	{
-		simulation = "particles";
-		type = "FX_WingTrail_FighterJet";
-		qualityLevel = 1;
-		enabled = "accelY interpolate [39.99,40,-1,1]";
-	};
-	class FX_Plane_WingTrail_high
-	{
-		simulation = "particles";
-		type = "FX_WingTrail_FighterJet";
-		qualityLevel = 2;
-		enabled = "accelY interpolate [39.99,40,-1,1]";
-	};
 	class FX_Plane_WingTrail_slow
 	{
 		simulation = "particles";
 		type = "FX_WingTrail_FighterJet_Slow";
-		qualityLevel = 1;
 		enabled = "(speed interpolate [62.49,62.5,-1,1])";
 	};
 };
@@ -34,25 +24,18 @@ class FX_WingVortices_FighterJet
 //Vanilla
 class WingVortices
 {
-	class WingTrail1
+	delete WingTrail1;
+	delete WingTrail1Med;
+	class FX_Plane_WingTrail
 	{
 		simulation = "particles";
-		type = "WingTrail";
-		qualityLevel = 0;
-		enabled = "accelY interpolate [19.99,20,-1,1]";
-	};
-	class WingTrail1Med
-	{
-		simulation = "particles";
-		type = "WingTrailMed";
-		qualityLevel = 1;
-		enabled = "accelY interpolate [19.99,20,-1,1]";
+		type = "FX_WingTrail_FighterJet";
+		enabled = "accelY interpolate [29.99,30,-1,1]";
 	};
 	class FX_Plane_WingTrail_slow
 	{
 		simulation = "particles";
 		type = "FX_WingTrail_FighterJet_Slow";
-		qualityLevel = 1;
 		enabled = "(speed interpolate [55.99,56,-1,1])";
 	};
 };
@@ -102,7 +85,6 @@ class FX_FA18_WingVortices
 	{
 		simulation = "particles";
 		type = "FX_WingTrail_FighterJet_Slow";
-		qualityLevel = 1;
 		enabled = "(speed interpolate [62.49,62.5,-1,1])";
 	};
 };
@@ -110,7 +92,7 @@ class FX_FA18_WingVortices
 //FIR
 class FIR_WingVortices
 {
-	class FIR_WingTrail1
+	/*class FIR_WingTrail1
 	{
 		simulation="particles";
 		type="FIR_WingTrail";
@@ -123,15 +105,90 @@ class FIR_WingVortices
 		type="FIR_WingTrailMed";
 		qualityLevel=1;
 		enabled="accelY interpolate [39.99,40,-1,1]";
+	};*/
+	delete FIR_WingTrail1;
+	delete FIR_WingTrail1Med;
+	class FX_Plane_WingTrail
+	{
+		simulation = "particles";
+		type = "FX_WingTrail_FighterJet";
+		enabled = "accelY interpolate [29.99,30,-1,1]";
 	};
 	class FX_Plane_WingTrail_slow
 	{
 		simulation = "particles";
 		type = "FX_WingTrail_FighterJet_Slow";
-		qualityLevel = 1;
 		enabled = "(speed interpolate [55.99,56,-1,1])";
 	};
 };
+class FIR_BodyVortices
+{
+	/*class FIR_BodyTrail1
+	{
+		simulation = "particles";
+		type = "FIR_BodyTrail";
+		qualityLevel = 2;
+		enabled = "accelY interpolate [70,160,0,1]";
+	};
+	class FIR_BodyTrail1Med
+	{
+		simulation = "particles";
+		type = "FIR_BodyTrailMed";
+		qualityLevel = 1;
+		enabled = "accelY interpolate [70,160,0,1]";
+	};*/
+	delete FIR_BodyTrail1;
+	delete FIR_BodyTrail1Med;
+	class BodyTrail
+	{
+		simulation = "particles";
+		type = "FX_BodyTrail_FighterJet";
+		enabled = "accelY interpolate [69.99,70,-1,1]";
+	};
+};
+class FIR_WingTrails_top
+{
+	/*class FIR_wingTrails_top1
+	{
+		simulation = "particles";
+		type = "FIR_WingTrail_top";
+		qualityLevel = 2;
+		enabled = "accelY interpolate [70,240,0,1]";
+	};*/
+	delete FIR_wingTrails_top1;
+	class wingTrails
+	{
+		simulation = "particles";
+		type = "AAE_WingTrail_FighterJet_FIR";
+		enabled = "accelY interpolate [79.99,80,-1,1]";
+		position[] = {0,-0.2,0};
+	};
+};
+//FIR Weapons
+class FIR_m61_cloud
+{
+	/*class FIR_Gau8_cloud2
+	{
+		simulation = "particles";
+		type = "FIR_Gau8_cloud2";
+		position[] = {0,0,0};
+		intensity = 1;
+		interval = 1;
+		lifeTime = 0.05;
+	};*/
+	delete FIR_Gau8_cloud2;
+	class MachineGun3
+	{
+		simulation = "particles";
+		type = "MachineGun3";
+		position[] = {0,0,0};
+		intensity = 1;
+		interval = 1;
+		lifeTime = 0.05;
+	};
+};
+
+//Lights
 class CfgLights
 {
 	class RocketLight
@@ -193,6 +250,13 @@ class ExhaustsEffectPlaneHP
 #include "Wing_Effect\Fighter01.hpp"
 #include "Wing_Effect\Fighter02.hpp"
 #include "Wing_Effect\Fighter04.hpp"
+
+//CAS_01
+#include "Wing_Effect\CAS_01.hpp"
+//CAS_02
+#include "Wing_Effect\CAS_02.hpp"
+//CAS_03
+#include "Wing_Effect\CAS_03.hpp"
 
 /*class AAE_Dust
 {
