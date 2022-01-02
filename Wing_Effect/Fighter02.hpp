@@ -1,171 +1,63 @@
-class To201_FuselageVapour_FighterJet
+class To201_FuselageVapour_FighterJet_L
 {
-	class FX_Plane_BodyTrail_low
+	class FX_Plane_BodyTrail
 	{
 		simulation = "particles";
 		type = "FX_BodyTrail_FighterJet";
-		qualityLevel = 0;
-		enabled = "accelY interpolate [59.99,60,-1,1]";
-	};
-	class FX_Plane_BodyTrail_medium
-	{
-		simulation = "particles";
-		type = "FX_BodyTrail_FighterJet";
-		qualityLevel = 1;
-		enabled = "accelY interpolate [59.99,60,-1,1]";
-	};
-	class FX_Plane_BodyTrail_high
-	{
-		simulation = "particles";
-		type = "FX_BodyTrail_FighterJet";
-		qualityLevel = 2;
-		enabled = "accelY interpolate [59.99,60,-1,1]";
+		enabled = "accelY interpolate [69.99,70,-1,1]";
 	};
 	
 	//LWing
 	//1
-	class 1FX_Plane_WingTrail_lowL
+	class 1FX_Plane_WingTrail
 	{
 		simulation = "particles";
 		type = "AAE_BodyTrail_FighterJet";
 		position[] = {-1,0.2,-2};
-		qualityLevel = 0;
-		enabled = "accelY interpolate [79.99,80,-1,1]";
-	};
-	class 1FX_Plane_WingTrail_mediumL: 1FX_Plane_WingTrail_lowL
-	{
-		qualityLevel = 1;
-		enabled = "accelY interpolate [79.99,80,-1,1]";
-	};
-	class 1FX_Plane_WingTrail_highL: 1FX_Plane_WingTrail_lowL
-	{
-		qualityLevel = 2;
-		enabled = "accelY interpolate [79.99,80,-1,1]";
+		enabled = "accelY interpolate [74.99,75,-1,1]";
 	};
 	//2
-	class 2FX_Plane_WingTrail_lowL: 1FX_Plane_WingTrail_lowL
+	class 2FX_Plane_WingTrail: 1FX_Plane_WingTrail
 	{
 		position[] = {-2,0.2,-3};
-		qualityLevel = 0;
-		enabled = "accelY interpolate [79.99,80,-1,1]";
-	};
-	class 2FX_Plane_WingTrail_mediumL: 2FX_Plane_WingTrail_lowL
-	{
-		qualityLevel = 1;
-		enabled = "accelY interpolate [79.99,80,-1,1]";
-	};
-	class 2FX_Plane_WingTrail_highL: 2FX_Plane_WingTrail_lowL
-	{
-		qualityLevel = 2;
-		enabled = "accelY interpolate [79.99,80,-1,1]";
 	};
 	//3
-	class 3FX_Plane_WingTrail_lowL: 1FX_Plane_WingTrail_lowL
-	{
-		position[] = {-3,0.2,-4};
-		qualityLevel = 0;
-		enabled = "accelY interpolate [79.99,80,-1,1]";
-	};
-	class 3FX_Plane_WingTrail_mediumL: 3FX_Plane_WingTrail_lowL
-	{
-		qualityLevel = 1;
-		enabled = "accelY interpolate [79.99,80,-1,1]";
-	};
-	class 3FX_Plane_WingTrail_highL: 3FX_Plane_WingTrail_lowL
-	{
-		qualityLevel = 2;
-		enabled = "accelY interpolate [79.99,80,-1,1]";
-	};
-	//4
-	class 4FX_Plane_WingTrail_lowL: 1FX_Plane_WingTrail_lowL
+	class 3FX_Plane_WingTrail: 1FX_Plane_WingTrail
 	{
 		type = "AAE_BodyTrail_FighterJet_Short";
+		position[] = {-3,0.2,-4};
+	};
+	//4
+	class 4FX_Plane_WingTrail: 3FX_Plane_WingTrail
+	{
 		position[] = {-4,0.2,-5};
-		qualityLevel = 0;
-		enabled = "accelY interpolate [79.99,80,-1,1]";
 	};
-	class 4FX_Plane_WingTrail_mediumLL: 4FX_Plane_WingTrail_lowL
-	{
-		qualityLevel = 1;
-		enabled = "accelY interpolate [79.99,80,-1,1]";
-	};
-	class 4FX_Plane_WingTrail_highL: 4FX_Plane_WingTrail_lowL
-	{
-		qualityLevel = 2;
-		enabled = "accelY interpolate [79.99,80,-1,1]";
-	};
-	
-	//RWing
+};
+//RWing
+class To201_FuselageVapour_FighterJet_R: To201_FuselageVapour_FighterJet_L
+{
 	//1
-	class 1FX_Plane_WingTrail_lowR
+	class 1FX_Plane_WingTrail
 	{
 		simulation = "particles";
 		type = "AAE_BodyTrail_FighterJet";
 		position[] = {1,0.2,-2};
-		qualityLevel = 0;
-		enabled = "accelY interpolate [79.99,80,-1,1]";
-	};
-	class 1FX_Plane_WingTrail_mediumR: 1FX_Plane_WingTrail_lowR
-	{
-		qualityLevel = 1;
-		enabled = "accelY interpolate [79.99,80,-1,1]";
-	};
-	class 1FX_Plane_WingTrail_highR: 1FX_Plane_WingTrail_lowR
-	{
-		qualityLevel = 2;
-		enabled = "accelY interpolate [79.99,80,-1,1]";
+		enabled = "accelY interpolate [74.99,75,-1,1]";
 	};
 	//2
-	class 2FX_Plane_WingTrail_lowR: 1FX_Plane_WingTrail_lowR
+	class 2FX_Plane_WingTrail: 1FX_Plane_WingTrail
 	{
 		position[] = {2,0.2,-3};
-		qualityLevel = 0;
-		enabled = "accelY interpolate [79.99,80,-1,1]";
-	};
-	class 2FX_Plane_WingTrail_mediumR: 2FX_Plane_WingTrail_lowR
-	{
-		qualityLevel = 1;
-		enabled = "accelY interpolate [79.99,80,-1,1]";
-	};
-	class 2FX_Plane_WingTrail_highR: 2FX_Plane_WingTrail_lowR
-	{
-		qualityLevel = 2;
-		enabled = "accelY interpolate [79.99,80,-1,1]";
 	};
 	//3
-	class 3FX_Plane_WingTrail_lowR: 1FX_Plane_WingTrail_lowR
+	class 3FX_Plane_WingTrail: 1FX_Plane_WingTrail
 	{
 		type = "AAE_BodyTrail_FighterJet_Short";
 		position[] = {3,0.2,-4};
-		qualityLevel = 0;
-		enabled = "accelY interpolate [79.99,80,-1,1]";
-	};
-	class 3FX_Plane_WingTrail_mediumR: 3FX_Plane_WingTrail_lowR
-	{
-		qualityLevel = 1;
-		enabled = "accelY interpolate [79.99,80,-1,1]";
-	};
-	class 3FX_Plane_WingTrail_highR: 3FX_Plane_WingTrail_lowR
-	{
-		qualityLevel = 2;
-		enabled = "accelY interpolate [79.99,80,-1,1]";
 	};
 	//4
-	class 4FX_Plane_WingTrail_lowR: 1FX_Plane_WingTrail_lowR
+	class 4FX_Plane_WingTrail: 3FX_Plane_WingTrail
 	{
-		type = "AAE_BodyTrail_FighterJet_Short";
 		position[] = {4,0.2,-5};
-		qualityLevel = 0;
-		enabled = "accelY interpolate [79.99,80,-1,1]";
-	};
-	class 4FX_Plane_WingTrail_mediumR: 4FX_Plane_WingTrail_lowR
-	{
-		qualityLevel = 1;
-		enabled = "accelY interpolate [79.99,80,-1,1]";
-	};
-	class 4FX_Plane_WingTrail_highR: 4FX_Plane_WingTrail_lowR
-	{
-		qualityLevel = 2;
-		enabled = "accelY interpolate [79.99,80,-1,1]";
 	};
 };
