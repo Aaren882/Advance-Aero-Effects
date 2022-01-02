@@ -1,5 +1,5 @@
 params ["_plane","_height","_speed"];
-
+if (_plane iskindof "VTOL_Base_F" or _plane iskindof "CUP_B_MV22_USMC") exitWith {};
 //Sound Files
 _config_Alarm = getArray (configFile >> "CfgVehicles" >> typeOf _plane >> "AAE_Alarm_Int");
 
