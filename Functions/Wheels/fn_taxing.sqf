@@ -22,7 +22,7 @@ if ((_speed >= 60) and (_speed < 150)) then {
     _pw = 1;
 };
 if (_speed >= 150) then {
-    _fq = 8;
+    _fq = 6;
     _pw = 1;
 };
 

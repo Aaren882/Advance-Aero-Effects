@@ -1,4 +1,3 @@
-//params [["_plane","_AV8","_lifetime","_vol","_Hvar","_HvarR","_gear0","_gear1","_gear2","_gear3","_offset"],["_effect00","_effect01","_effect02","_effect03"]];
 //Arrays
 _array1 = _this # 0;
 _array2 = _this # 1;
