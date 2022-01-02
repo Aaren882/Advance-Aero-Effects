@@ -15,6 +15,7 @@ class CfgPatches
 			"A3_Data_F_ParticleEffects",
 			"A3_Air_F_Beta_Heli_Transport_01",
 			"A3_Air_F_Heli_Heli_Transport_03",
+			"A3_Air_F_EPC_Plane_CAS_01",
 			"A3_Air_F_Jets_Plane_Fighter_01",
 			"A3_Air_F_Jets_Plane_Fighter_02",
 			"A3_Air_F_Jets_Plane_Fighter_04"
@@ -22,12 +23,12 @@ class CfgPatches
 	};
 };
 
-class AAE_EH
+/*class AAE_EH
 {
-	/*engine="_this execVM 'MG8\AVDAVFX\Functions\fn_init.sqf'";
-	LandedTouchDown="if (TDSound_fn) then {playSound [""touchdown"", true]};";*/
-	//engine="_this execvm 'MG8\AVDAVFX\Functions\Turbulent\fn_turbulentInit.sqf'";
-};
+	engine="_this execVM 'MG8\AVDAVFX\Functions\fn_init.sqf'";
+	LandedTouchDown="if (TDSound_fn) then {playSound [""touchdown"", true]};";
+	engine="_this execvm 'MG8\AVDAVFX\Functions\Turbulent\fn_turbulentInit.sqf'";
+};*/
 
 class DefaultEventHandlers
 {
@@ -48,7 +49,13 @@ class Extended_PostInit_EventHandlers
 		init = "call compile preprocessFileLineNumbers 'MG8\AVDAVFX\XEH_postInit.sqf'";
 	};
 };
-
+/*class Extended_PreStart_EventHandlers
+{
+	class AAE_EH
+	{
+		init = "call compile preprocessFileLineNumbers 'MG8\AVDAVFX\addons\AVDAVFX\XEH_preStart.sqf'";
+	};
+};*/
 class CfgVehicles
 {
 	class AllVehicles;
@@ -60,11 +67,11 @@ class CfgVehicles
 	
 	class Plane: Air {};
 	class Plane_Base_F: Plane {};
-	//Plane MOD
-	#include "MOD_EH.hpp"
-	
 	//Vapor Effects
 	#include "Wing_Effect\Jet_Configs.hpp"
+	
+	//Plane MODs
+	#include "MOD_EH.hpp"
 	
 	//Helis
 	class Helicopter_Base_H;
@@ -95,69 +102,9 @@ class CfgMagazines
 	};
 };
 ////////////////////////////////////
-class CfgFunctions
-{
-	class AAE
-	{
-		class MainInit
-		{
-			file="MG8\AVDAVFX\Functions";
-			class Init;
-		};
-		//Eventhandlers
-		class Eventhandlers
-		{
-			file="MG8\AVDAVFX\Functions\Eventhanders";
-			class EngineEH;
-			class SurfaceTypeEH;
-			class DeletedEH;
-		};
-		//Counter
-		class Counters
-		{
-			file="MG8\AVDAVFX\Functions\General\Counters";
-			class Ground_Counter;
-		};
-		//Sound Handler
-		class SoundFn
-		{
-			file="MG8\AVDAVFX\Functions\Sound";
-			class PlaySound;
-			class PlaySound3D;
-			class PlayAlarm;
-			class PlayBreathing;
-			class PlayRumA;
-			class PlayRumB;
-		};
-		class GeneralFn
-		{
-			file="MG8\AVDAVFX\Functions\General";
-			class ground;
-			class sonicboom;
-			//class sonicboom2;
-			class vapor;
-			class camshake;
-			class gForces;
-			class gearFactor;
-		};
-		class WheelsFn
-		{
-			file="MG8\AVDAVFX\Functions\Wheels";
-			class wheels;
-			class landingEH;
-			class landed;
-			class execution;
-			class taxing;
-		};
-		class TurbulentFn
-		{
-			file="MG8\AVDAVFX\Functions\Turbulent";
-			class turbulent;
-			class turbulentW;
-			class turbulentSnd;
-		};
-	};
-};
+//CfgFunctions
+#include "Configs\CfgFunctions.hpp"
+
 //CfgWeapons
 #include "Configs\CfgWeapons.hpp"
 
