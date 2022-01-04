@@ -1,10 +1,7 @@
 params ["_plane","_Engine_State"];
 
-[_plane] spawn AAE_fnc_Ground_counter;
-
 if !(_plane isKindOf "plane") exitWith {};
 
-HaveACE = isClass (configFile >> "CfgPatches" >> "ace_main");
 if (_Engine_State and (alive _plane)) then {
   _engine1_Name = "HitEngine";
   _engine2_Name = "HitEngine2";
@@ -15,20 +12,6 @@ if (_Engine_State and (alive _plane)) then {
   _Engine_Offset1= _plane getVariable ["AAE_veh_Engine_Offset1", _engine1];
   _Engine_Offset2= _plane getVariable ["AAE_veh_Engine_Offset2", _engine2];
 
-  //ACE Vars
-  GForces = [];
-  GForces resize 30;
-  GForces = GForces apply {1};
-  GForces_Index = 0;
-  lastUpdateTime = 0;
-  oldVel = [0,0,0];
-
-  //Sonic Settings
-  AAE_SpeedSet = 1195;
-  AAE_sonicboom_speed_01 = AAE_SpeedSet - 20;//1175
-  AAE_sonicboom_speed_02 = AAE_SpeedSet - 10;//1185
-  AAE_sonicboom_speed_03 = AAE_SpeedSet + 10;//1205
-
   GForces_Filter = ppEffectCreate ["ColorCorrections", 6500];
   GForces_Filter ppEffectForceInNVG true;
   GForces_Filter ppEffectAdjust [1,1,0,[0,0,0,0],[0,0,0,0],[1,1,1,1],[10,10,0,0,0,0.1,0.5]];
@@ -37,6 +20,9 @@ if (_Engine_State and (alive _plane)) then {
   if (player in _plane) then {
     GForces_Filter ppEffectEnable true;
   };
+
+  //Add Counter
+  //[_plane] spawn AAE_fnc_Ground_counter;
 
   AAE_handler_Engine = addMissionEventHandler ["EachFrame", {
     if !(isGamePaused) then {
