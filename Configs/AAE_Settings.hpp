@@ -1,4 +1,4 @@
-AAE_Alarm_Int[] = {"MG8\AVDAVFX\snd\Alarm.ogg", "AAE_Alarm"};
+AAE_Alarm_Int[] = {"AAE_Alarm"};
 AAE_Rumble_Int[] = {"AAE_Rumble"};
 AAE_GBreathe[] = {"AAE_GBreathe"};
 AAE_Rumble_Taxing[] = {"AAE_RumbleG"};
@@ -43,10 +43,10 @@ class AAE_Config_Handler
 	Water[] =
 	{
 		{0.7,0.8,1,0},
-		{0.7,0.8,1,0.18},
-		{0.7,0.8,1,0.14},
-		{0.7,0.8,1,0.1},
+		{0.7,0.8,1,0.01},
 		{0.7,0.8,1,0.08},
+		{0.7,0.8,1,0.1},
+		{0.7,0.8,1,0.05},
 		{0.7,0.8,1,0.03},
 		{0.7,0.8,1,0}
 	};

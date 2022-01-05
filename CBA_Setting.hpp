@@ -1,24 +1,27 @@
-/*[
-	"server_fn","CHECKBOX",
-	["[AS Server Settings]","Need to Restart"],
-	["Advance Aero Effects", "Ganeral"],
-	false,
-	true,
-	{
-		if (server_fn) then {
-			AAE_server = 0;
-		} else {
-			AAE_server = 0;
-		};
-		hint "Need to Restart!!";
-	},
-	true
-] call CBA_fnc_addSetting;*/
-
 [
 	"ground_fn","CHECKBOX",
-	["Ground Effect (CBA Slider)","Spawn Ground Effect at 100m or lower"],
-	["Advance Aero Effects", "Ganeral"],
+	["Ground Effect (CBA Slider)","Spawn Ground Effect at 250m or lower"],
+	["Advance Aero Effects", "Ground Effect"],
+	false
+] call CBA_fnc_addSetting;
+
+[
+	"wingspan_fn","CHECKBOX",
+	["Auto Detection","Auto Detects Trigger Height by Wingspan"],
+	["Advance Aero Effects", "Ground Effect"],
+	true
+] call CBA_fnc_addSetting;
+
+[
+	"burner_fn","CHECKBOX",
+	["AfterBurner Effect","Add AfterBurner Light"],
+	["Advance Aero Effects", "AfterBurner Effect Settings"],
+	true
+] call CBA_fnc_addSetting;
+[
+	"burner_flare_fn","CHECKBOX",
+	["AfterBurner Flare Effect","Active AfterBurner Light Flare"],
+	["Advance Aero Effects", "AfterBurner Effect Settings"],
 	false
 ] call CBA_fnc_addSetting;
 
@@ -174,7 +177,7 @@
 [
 	"groundP_sdr", "SLIDER",
 	["Ground Effects Active Range Slider","The Active Height of Ground Effects (5m~)"],
-	["Advance Aero Effects", "Settings"],
+	["Advance Aero Effects", "Ground Effect"],
 	[2, 250, 50, 0]
 ] call CBA_fnc_addSetting;
 

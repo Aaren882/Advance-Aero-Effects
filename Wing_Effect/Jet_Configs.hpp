@@ -1,6 +1,8 @@
 //Fighter 01
 class Plane_Fighter_01_Base_F: Plane_Base_F
 {
+	Aircraft_Wingspan = 13.56;
+	AAE_Have_AB = 1;
 	class WingVortices
 	{
 		class WingTipLeft
@@ -48,6 +50,8 @@ class Plane_Fighter_01_Base_F: Plane_Base_F
 //Fighter02
 class Plane_Fighter_02_Base_F: Plane_Base_F
 {
+	Aircraft_Wingspan = 14.1;
+	AAE_Have_AB = 1;
 	class WingVortices
 	{
 		class WingTipLeft
@@ -86,6 +90,8 @@ class Plane_Fighter_02_Base_F: Plane_Base_F
 //Fighter04
 class Plane_Fighter_04_Base_F: Plane_Base_F
 {
+	Aircraft_Wingspan = 8.6;
+	AAE_Have_AB = 1;
 	class WingVortices
 	{
 		class WingTipLeft
@@ -112,6 +118,7 @@ class Plane_Fighter_04_Base_F: Plane_Base_F
 //CAS_01
 class Plane_CAS_01_base_F: Plane_Base_F
 {
+	Aircraft_Wingspan = 17.53;
 	class WingVortices
 	{
 		class BodyLeft
@@ -139,6 +146,7 @@ class Plane_CAS_01_base_F: Plane_Base_F
 //CAS_02
 class Plane_CAS_02_base_F: Plane_Base_F
 {
+	Aircraft_Wingspan = 13.62;
 	class WingVortices
 	{
 		class BodyLeft
@@ -167,6 +175,7 @@ class Plane_CAS_02_base_F: Plane_Base_F
 //Fighter_03 (A-143)
 class Plane_Fighter_03_base_F: Plane_Base_F
 {
+	Aircraft_Wingspan = 9.46;
 	class WingVortices
 	{
 		class BodyLeft

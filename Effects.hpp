@@ -56,28 +56,100 @@ class BodyVortices
 		enabled = "accelY interpolate [29.99,30,-1,1]";
 	};
 };
-
+////////////////////////////////////////////////////////////
 //Super Hornets
+class FX_FA18_WingVapour
+{
+	class FX_FA18_WingOverVapour_LOW
+	{
+		simulation="particles";
+		type="AAE_BodyTrail_FighterJet_Short";
+		qualityLevel=0;
+		enabled="accelY interpolate [59.99,60,-1,1]";
+	};
+	class FX_FA18_WingOverVapour_MD
+	{
+		simulation="particles";
+		type="AAE_BodyTrail_FighterJet_Short";
+		qualityLevel=1;
+		enabled="accelY interpolate [59.99,60,-1,1]";
+	};
+	class FX_FA18_WingOverVapour_HD
+	{
+		simulation="particles";
+		type="AAE_BodyTrail_FighterJet_Short";
+		qualityLevel=2;
+		enabled="accelY interpolate [59.99,60,-1,1]";
+	};
+};
+class FX_FA18_Fuselagevapour
+{
+	class FX_FA18_BodyTrail_LOW
+	{
+		simulation="particles";
+		type="FX_BodyTrail_FighterJet";
+		qualityLevel=0;
+		enabled="accelY interpolate [39.99,40,-1,1]";
+	};
+	class FX_FA18_BodyTrail_MD
+	{
+		simulation="particles";
+		type="FX_BodyTrail_FighterJet";
+		qualityLevel=1;
+		enabled="accelY interpolate [39.99,40,-1,1]";
+	};
+	class FX_FA18_BodyTrail_HD
+	{
+		simulation="particles";
+		type="FX_BodyTrail_FighterJet";
+		qualityLevel=2;
+		enabled="accelY interpolate [39.99,40,-1,1]";
+	};
+};
+class FX_FA18_Fuselagevapour2
+{
+	class FX_FA18_BodyTrail2_LOW
+	{
+		simulation="particles";
+		type="FX_FA18_BodyTrail";
+		qualityLevel=0;
+		enabled="accelY interpolate [39.99,40,-1,1]";
+	};
+	class FX_FA18_BodyTrail2_MD
+	{
+		simulation="particles";
+		type="FX_FA18_BodyTrail";
+		qualityLevel=1;
+		enabled="accelY interpolate [39.99,40,-1,1]";
+	};
+	class FX_FA18_BodyTrail2_HD
+	{
+		simulation="particles";
+		type="FX_FA18_BodyTrail";
+		qualityLevel=2;
+		enabled="accelY interpolate [39.99,40,-1,1]";
+	};
+};
 class FX_FA18_WingVortices
 {
 	class FX_FA18_WingTrail_LOW
 	{
 		simulation="particles";
-		type="FX_FA18_WingTrail";
+		type="FX_WingTrail_FighterJet";
 		qualityLevel=0;
 		enabled="accelY interpolate [39.99,40,-1,1]";
 	};
 	class FX_FA18_WingTrail_MD
 	{
 		simulation="particles";
-		type="FX_FA18_WingTrail";
+		type="FX_WingTrail_FighterJet";
 		qualityLevel=1;
 		enabled="accelY interpolate [39.99,40,-1,1]";
 	};
 	class FX_FA18_WingTrail_HD
 	{
 		simulation="particles";
-		type="FX_FA18_WingTrail";
+		type="FX_WingTrail_FighterJet";
 		qualityLevel=2;
 		enabled="accelY interpolate [39.99,40,-1,1]";
 	};
@@ -85,27 +157,14 @@ class FX_FA18_WingVortices
 	{
 		simulation = "particles";
 		type = "FX_WingTrail_FighterJet_Slow";
+		qualityLevel = 1;
 		enabled = "(speed interpolate [62.49,62.5,-1,1])";
 	};
 };
-
+////////////////////////////////////////////////////////////
 //FIR
 class FIR_WingVortices
 {
-	/*class FIR_WingTrail1
-	{
-		simulation="particles";
-		type="FIR_WingTrail";
-		qualityLevel=2;
-		enabled="accelY interpolate [39.99,40,-1,1]";
-	};
-	class FIR_WingTrail1Med
-	{
-		simulation="particles";
-		type="FIR_WingTrailMed";
-		qualityLevel=1;
-		enabled="accelY interpolate [39.99,40,-1,1]";
-	};*/
 	delete FIR_WingTrail1;
 	delete FIR_WingTrail1Med;
 	class FX_Plane_WingTrail
@@ -123,20 +182,6 @@ class FIR_WingVortices
 };
 class FIR_BodyVortices
 {
-	/*class FIR_BodyTrail1
-	{
-		simulation = "particles";
-		type = "FIR_BodyTrail";
-		qualityLevel = 2;
-		enabled = "accelY interpolate [70,160,0,1]";
-	};
-	class FIR_BodyTrail1Med
-	{
-		simulation = "particles";
-		type = "FIR_BodyTrailMed";
-		qualityLevel = 1;
-		enabled = "accelY interpolate [70,160,0,1]";
-	};*/
 	delete FIR_BodyTrail1;
 	delete FIR_BodyTrail1Med;
 	class BodyTrail
@@ -148,13 +193,6 @@ class FIR_BodyVortices
 };
 class FIR_WingTrails_top
 {
-	/*class FIR_wingTrails_top1
-	{
-		simulation = "particles";
-		type = "FIR_WingTrail_top";
-		qualityLevel = 2;
-		enabled = "accelY interpolate [70,240,0,1]";
-	};*/
 	delete FIR_wingTrails_top1;
 	class wingTrails
 	{
@@ -167,15 +205,6 @@ class FIR_WingTrails_top
 //FIR Weapons
 class FIR_m61_cloud
 {
-	/*class FIR_Gau8_cloud2
-	{
-		simulation = "particles";
-		type = "FIR_Gau8_cloud2";
-		position[] = {0,0,0};
-		intensity = 1;
-		interval = 1;
-		lifeTime = 0.05;
-	};*/
 	delete FIR_Gau8_cloud2;
 	class MachineGun3
 	{
@@ -185,6 +214,46 @@ class FIR_m61_cloud
 		intensity = 1;
 		interval = 1;
 		lifeTime = 0.05;
+	};
+};
+class FIR_Gau8_cloud
+{
+	delete FIR_Gau8_cloud;
+	delete FIR_Gau8_cloud2;
+	class MachineGun3
+	{
+		simulation = "particles";
+		type = "MachineGun3";
+		position[] = {0,0,0};
+		intensity = 1;
+		interval = 1;
+		lifeTime = 0.05;
+	};
+};
+class FIR_MissileEffect
+{
+	delete FIR_MissileEffect;
+	class Missile3
+	{
+		simulation = "particles";
+		type = "Missile3";
+		position[] = {0,0,0};
+		intensity = 1;
+		interval = 1;
+		lifeTime = 1;
+	};
+};
+class FIR_MissileEffect2
+{
+	delete FIR_MissileEffect2;
+	class Missile3
+	{
+		simulation = "particles";
+		type = "Missile3";
+		position[] = {0,0,0};
+		intensity = 1;
+		interval = 1;
+		lifeTime = 1;
 	};
 };
 
@@ -257,31 +326,3 @@ class ExhaustsEffectPlaneHP
 #include "Wing_Effect\CAS_02.hpp"
 //CAS_03
 #include "Wing_Effect\CAS_03.hpp"
-
-/*class AAE_Dust
-{
-	class AAE_Dust02
-	{
-		simulation = "particles";
-		type = "AAE_Dust02";
-		qualityLevel = 1;
-	};
-	class AAE_Dust03
-	{
-		simulation = "particles";
-		type = "AAE_Dust03";
-		qualityLevel = 0;
-	};
-	class AAE_Dust04
-	{
-		simulation = "particles";
-		type = "AAE_Dust04";
-		qualityLevel = 2;
-	};
-	class AAE_Dust05
-	{
-		simulation = "particles";
-		type = "AAE_Dust05";
-		qualityLevel = 1;
-	};
-};*/
