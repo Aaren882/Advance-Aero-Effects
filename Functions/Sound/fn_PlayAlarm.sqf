@@ -1,6 +1,7 @@
-params ["_plane","_sound","_file_path"];
+params ["_plane","_sound"];
 
 _duration = getNumber (configFile >> "CfgSounds" >> _sound >> "EndTime");
+_file_Alarm = (getArray (configFile >> "CfgSounds" >> _sound >> "sound")) # 0;
 
 if (isNil {_duration}) then {
   _duration = 0;

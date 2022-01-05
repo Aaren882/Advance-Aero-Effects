@@ -85,7 +85,6 @@ _particles = {
 		_source01 = _Ground_Paricles # 1;
 		_source00 attachTo [_plane, [0, (-5 + _Engine_Offset),0]];
 		_source01 attachTo [_plane, [0, (-5 + _Engine_Offset),0]];
-		hintSilent str [(-5 + _Engine_Offset),time];
 
 		if (_SurfaceChanged) then {
 			[_plane,

@@ -21,8 +21,8 @@ if (_Engine_State and (alive _plane)) then {
     GForces_Filter ppEffectEnable true;
   };
 
-  //Add Counter
-  //[_plane] spawn AAE_fnc_Ground_counter;
+  //Wingspan
+  _Wingspan = getNumber (configFile >> "CfgVehicles" >> typeOf _plane >> "Aircraft_Wingspan");
 
   AAE_handler_Engine = addMissionEventHandler ["EachFrame", {
     if !(isGamePaused) then {
@@ -36,6 +36,9 @@ if (_Engine_State and (alive _plane)) then {
       _engines = _thisArgs # 1;
       _engine1 = _engines # 0;
       _engine2 = _engines # 1;
+
+      //Wing Span
+      _Wingspan = _thisArgs # 2;
 
       //Turbulent Settings
       _source00 = _plane modelToWorldVisual [(_engine1 # 0), (_engine1 # 1)+(-10-turbulent_sdr),(_engine1 # 2)];
@@ -56,6 +59,7 @@ if (_Engine_State and (alive _plane)) then {
 
       //Ground
       _Ground_Activated = _plane getVariable ["AAE_Ground_Activated", false];
+      _pitchBank = _plane getVariable ["AAE_Vehicle_PitchBank",(_plane call BIS_fnc_getPitchBank)];
 
       //Player only
       if (_planePlayer isKindOf "plane") then {
@@ -105,8 +109,23 @@ if (_Engine_State and (alive _plane)) then {
         [_plane,_velocity,_speed] Spawn AAE_fnc_sonicboom;
       };
 
+      //https://www.desmos.com/calculator/mjsmezw9px
+      //offset variables setup
+      _pitch = _pitchbank # 0;
+      if (_pitch > 90) then {
+        _pitch = 90;
+      };
+      if (_pitch < 0) then {
+        _pitch = 0;
+      };
+      _ground_result_var = 1 * _pitch;
+      _ground_result = groundP_sdr + _ground_result_var;
+      if (Wingspan_fn) then {
+        _ground_result = _Wingspan + _ground_result_var;
+      };
+      hintSilent str _ground_result;
       //Ground
-      if (!(isTouchingGround _plane) and ((_AGL_POS # 2) < groundP_sdr) and (ground_fn) and !(isNull _plane)) then {
+      if (!(isTouchingGround _plane) and ((_AGL_POS # 2) < _ground_result) and (ground_fn) and !(isNull _plane)) then {
         _type = _plane getVariable ["AAE_Ground_Type","Default"];
         [_plane,_engine1,_engine2,_AGL_POS,_ASL_POS,_ATL_POS,_ASLW_POS,_velocity,_speed,_type] Spawn AAE_fnc_ground;
         _plane setVariable ["AAE_Ground_Activated", true];
@@ -117,7 +136,8 @@ if (_Engine_State and (alive _plane)) then {
   },
   [
     _plane,
-    [_Engine_Offset1,_Engine_Offset2]
+    [_Engine_Offset1,_Engine_Offset2],
+    _Wingspan
   ]];
 } else {
   if (_plane getVariable ["AAE_Actived", false]) then {
