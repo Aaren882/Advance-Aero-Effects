@@ -1,6 +1,7 @@
 params ["_plane"];
 
 _offset = 0;
+_OffsetF = 0;
 
 _selection = getArray (configFile >> "CfgVehicles" >> typeOf _plane >> "driveOnComponent");
 
@@ -15,6 +16,7 @@ if (_selection isEqualTo  []) then {
     //Others
     if (_plane isKindOf "Plane_Fighter_01_Base_F") then {
       _selection = ["gear_f" , _selection select 1, _selection select 2];
+      _OffsetF = -1;
     };
     if (_plane isKindOf "VTOL_01_base_F") then {
       _selection = ["wheel_1_1" , "wheel_2_2", "wheel_3_2"];
@@ -57,7 +59,7 @@ _AV8 = (_plane isKindOf "FIR_AV8B_Base") or (_plane isKindOf "FIR_AV8B_NA_Base")
 _gearF = _selection select 0;
 _gearL = _selection select 1;
 _gearR = _selection select 2;
-_gearA = "0";
+_gearA = "";
 
 _gear0 = _plane selectionPosition _gearF;
 _gear1 = _plane selectionPosition _gearL;
@@ -69,8 +71,8 @@ if (_AV8) then {
   _gear3 = _plane selectionPosition _gearA;
 };
 
-_lifetime = 0.5;
-_vol = [2,2];
+_lifetime = 3;
+_size = [2,4,6,10,12];
 
 //Mass
 _mass = getMass _plane;
@@ -78,40 +80,40 @@ _mass = getMass _plane;
 //Vehicle Detail
 if ((driver _plane) != player) then {
   if (_mass >= 100000) then {
-      _lifetime = 3;
-      _vol = [2,5,8];
+      _lifetime = 5;
+      _size = [2,5,8,10,12];
   } else {
     if (_mass <= 1500) then {
-      _lifetime = 0.1;
+      _lifetime = 3;
     };
     if (_mass >= 10000) then {
-      _lifetime = 0.5;
+      _lifetime = 3;
     };
     if (_mass >= 16200) then {
-      _lifetime = 1;
+      _lifetime = 3;
     };
     if (_mass >= 20000) then {
       _lifetime = 3;
-      _vol = [2,4,6];
+      _size = [2,4,6,10,12];
     };
   };
 } else {
   if (_mass >= 100000) then {
-      _lifetime = 3;
-      _vol = [2,5,8];
+      _lifetime = 5;
+      _size = [2,5,8,10,12];
   } else {
     if (_mass <= 1500) then {
-      _lifetime = 0.1;
+      _lifetime = 3;
     };
     if (_mass >= 10000) then {
-      _lifetime = 0.5;
+      _lifetime = 3;
     };
     if (_mass >= 16200) then {
-      _lifetime = 1;
+      _lifetime = 3;
     };
     if (_mass >= 20000) then {
       _lifetime = 3;
-      _vol = [2,4,6];
+      _size = [2,4,6,10,12];
     };
   };
 };
@@ -138,19 +140,6 @@ if (((getpos _plane) select 2) <= 1) then {
 	_HvarR = 0.84;
 }; */
 
-//Surface
-if (surfaceIsWater (getpos _plane)) then {
-  _Hvar = 25.56;
-  _HvarR = 25.56;
-  _gearoffsetF = 0;
-  _gearoffsetRR = 0;
-  _gearoffsetRL = 0;
-};
-
-execution = true;
-
-_returns = [_plane,_AV8,_lifetime,_vol,_Hvar,_HvarR,_gear0,_gear1,_gear2,_gear3,_offset];
-//_plane setVariable ["AAE_Wheels_Selections",_returns];
-
+_returns = [_plane,_AV8,_lifetime,_size,_Hvar,_HvarR,_gear0,_gear1,_gear2,_gear3,_offset,_OffsetF];
 
 _returns

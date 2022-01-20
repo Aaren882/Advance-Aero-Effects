@@ -22,58 +22,58 @@ if (TDSound_fn) then {
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//Handler
-execution = false;
 
+if !(landingVEF_fn) exitWith {};
 //Gear POS
-_vars = [_plane] call AAE_fnc_wheels;
+_vars = _plane getvariable "AAE_Wheels_Selections";
 
-_AV8 = _vars # 1;
+_vars params [
+  "_plane",["_AV8",false],["_lifetime",10],["_vol",[2,2]],
+  ["_Hvar",0.84],["_HvarR",0.84],
+  ["_gear0",[0,0,0]],["_gear1",[0,0,0]],["_gear2",[0,0,0]],["_gear3",[0,0,0]],
+  ["_offset",0],["_OffsetF",0]
+];
 
-//Gears
-_gear0 = _vars # 6;
-_gear1 = _vars # 7;
-_gear2 = _vars # 8;
+_POS = [0,0,0];
 
-//POS
-_PlanePOS = getpos _plane;
-
-//Objects
-_effect00 = "#particlesource" createVehicleLocal _PlanePOS;
+//Particle Sources
+_effect00 = "#particlesource" createVehicleLocal _POS;
 _effect00 attachTo [_plane, _gear0];
 
-_effect01 = "#particlesource" createVehicleLocal _PlanePOS;
+_effect01 = "#particlesource" createVehicleLocal _POS;
 _effect01 attachTo [_plane, _gear1];
 
-_effect02 = "#particlesource" createVehicleLocal _PlanePOS;
+_effect02 = "#particlesource" createVehicleLocal _POS;
 _effect02 attachTo [_plane, _gear2];
 
 _effect03 = objNull;
 
 if (_AV8) then {
-  _gear3 = _vars # 9;
-  _effect03 = "#particlesource" createVehicleLocal _PlanePOS;
+  _effect03 = "#particlesource" createVehicleLocal _POS;
   _effect03 attachTo [_plane, _gear3];
 };
 
-//Handler
-[_plane] spawn AAE_fnc_execution;
+_plane setVariable ["AAE_Landed_Sources",[_effect00,_effect01,_effect02,_effect03]];
+_plane setvariable ["AAE_Landed_Counter",true];
 
-AAE_Langing_handler = addMissionEventHandler ["EachFrame", {
+AAE_Langed_handler = addMissionEventHandler ["EachFrame", {
   if !(isGamePaused) then {
     //Get Variables
-    _Setting_vars = _thisArgs # 0;
-    _objects_vars = _thisArgs # 1;
+    _plane = _thisArgs # 0;
+    _vars = _thisArgs # 1;
+    _objects_vars = _thisArgs # 2;
 
-    _vars = _Setting_vars # 0;
-    _plane = _vars # 0;
+    _plane setVariable ["AAE_Landed_Handler", AAE_Langed_handler];
+
+    //Handler
+    _execution = _plane getvariable "AAE_Landed_Counter";
 
     //Vars
     _Landing_Activated = _plane getVariable ["AAE_Landing_Activated", false];
 
-    if (execution and landingVEF_fn) then {
-      if (!_Landing_Activated) then {
-        [_vars,_objects_vars] spawn AAE_fnc_landed;
+    if (_execution and landingVEF_fn) then {
+      if !(_Landing_Activated) then {
+        [_vars,_objects_vars,_execution] Spawn AAE_fnc_landed;
         _plane setVariable ["AAE_Landing_Activated", true];
       };
     } else {
@@ -81,7 +81,10 @@ AAE_Langing_handler = addMissionEventHandler ["EachFrame", {
     };
   };
 },[
-    [_vars],
-    [_effect00,_effect01,_effect02,_effect03]
+    _plane,
+    _vars,
+    (_plane getVariable "AAE_Landed_Sources")
   ]
 ];
+//Cut Off Handler
+[_plane] Spawn AAE_fnc_execution;

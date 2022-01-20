@@ -1,16 +1,12 @@
 params ["_plane","_Engine_State"];
 
-if !(_plane isKindOf "plane") exitWith {};
+if (alive _plane and _Engine_State) then {
+  _plane call AAE_fnc_InitEH;
 
-if (_Engine_State and (alive _plane)) then {
-  _engine1_Name = "HitEngine";
-  _engine2_Name = "HitEngine2";
-
-  _engine1 = _plane selectionPosition _engine1_Name;
-  _engine2 = _plane selectionPosition _engine2_Name;
-
-  _Engine_Offset1= _plane getVariable ["AAE_veh_Engine_Offset1", _engine1];
-  _Engine_Offset2= _plane getVariable ["AAE_veh_Engine_Offset2", _engine2];
+  _Engine_Offsets = _plane getVariable "AAE_veh_Engine_Offset";
+  _Exhausts_count = _plane getVariable "AAE_Exhausts_Count";
+  _Exhausts_POS = _plane getVariable "AAE_Exhaust_POS";
+  _plane setvariable ["AAE_Vapor_toggle",vapor_sdr + random 20];
 
   GForces_Filter = ppEffectCreate ["ColorCorrections", 6500];
   GForces_Filter ppEffectForceInNVG true;
@@ -22,7 +18,8 @@ if (_Engine_State and (alive _plane)) then {
   };
 
   //Wingspan
-  _Wingspan = getNumber (configFile >> "CfgVehicles" >> typeOf _plane >> "Aircraft_Wingspan");
+  _Wingspan = _plane getVariable "AAE_Wingspan";
+  _have_AB = _plane getVariable "AAE_Have_AB";
 
   AAE_handler_Engine = addMissionEventHandler ["EachFrame", {
     if !(isGamePaused) then {
@@ -30,19 +27,19 @@ if (_Engine_State and (alive _plane)) then {
       _planePlayer = vehicle player;
 
       _plane setVariable ["AAE_Actived", true];
-      _plane setVariable ["AAE_EachFrame_Handler", AAE_handler_Engine];
+      _plane setVariable ["AAE_EachFrame_Engine", AAE_handler_Engine];
 
       //Engine
-      _engines = _thisArgs # 1;
-      _engine1 = _engines # 0;
-      _engine2 = _engines # 1;
+      _engine_offsets = _thisArgs # 1;
+      _Exhausts_count = _thisArgs # 2;
+      _Exhausts_POS =_thisArgs # 3;
+
+      _engine_offsets params [["_engine1",[0,0,0]],["_engine2",[0,0,0]],["_engine3",[0,0,0]],["_engine4",[0,0,0]]];
 
       //Wing Span
-      _Wingspan = _thisArgs # 2;
-
-      //Turbulent Settings
-      _source00 = _plane modelToWorldVisual [(_engine1 # 0), (_engine1 # 1)+(-10-turbulent_sdr),(_engine1 # 2)];
-      _source01 = _plane modelToWorldVisual [(_engine2 # 0), (_engine2 # 1)+(-10-turbulent_sdr),(_engine2 # 2)];
+      _Wingspan = _thisArgs # 4;
+      //Have AB
+      _have_AB = _thisArgs # 5;
 
       //POS
       _AGL_POS = getPos _plane;
@@ -53,127 +50,26 @@ if (_Engine_State and (alive _plane)) then {
       //Speeds
       _velocity = velocity _plane;
       _speed = speed _plane;
+      _speed_Player = speed _planePlayer;
 
       //Vapor
       _Vapor_Activated = _plane getVariable ["AAE_Vapor_Activated", false];
 
       //Ground
       _Ground_Activated = _plane getVariable ["AAE_Ground_Activated", false];
-      _pitchBank = _plane getVariable ["AAE_Vehicle_PitchBank",(_plane call BIS_fnc_getPitchBank)];
+      _pitchBank = _plane call BIS_fnc_getPitchBank;
 
-      //Player only
-      if (_planePlayer isKindOf "plane") then {
-        //Gear Factor
-        if (!(isTouchingGround _plane) and (cameraView == "internal") and (gear_fn)) then {
-          [_planePlayer,(speed _planePlayer)] Spawn AAE_fnc_gearFactor;
-        };
-
-        //Turbulent Plane       //It's Flying
-        if (((speed _planePlayer) > 200) and !(isTouchingGround _planePlayer) and (turbulentP_fn)) then {
-          [_planePlayer,_source00,_source01] Spawn AAE_fnc_turbulent;
-        };
-
-        //Turbulent World
-        if (!(isTouchingGround _planePlayer) and (cameraView == "internal") and (turbulentS_fn)) then {
-          [_planePlayer,((getpos _planePlayer) # 2),(speed _planePlayer)] Spawn AAE_fnc_turbulentW;
-        };
-
-        //Taxing
-        if ((isTouchingGround _planePlayer) and (cameraView == "internal") and (taxing_fn)) then {
-          [_planePlayer,(speed _planePlayer)] Spawn AAE_fnc_taxing;
-        };
-
-        //GForces
-        if !(isTouchingGround _planePlayer) then {
-          [_planePlayer] Spawn AAE_fnc_gforces;
-        };
-      };
-
-      //Vapor Trail
-      if ((_ASL_POS # 2 > (vapor_sdr + random 20)) and (vapor_fn) and !(isNull _plane)) then {
-        if (!_Vapor_Activated) then {
-          [_plane,_engine1,_engine2] Spawn AAE_fnc_vapor;
-          _plane setVariable ["AAE_Vapor_Activated", true];
-        };
-      } else {
-        _plane setVariable ["AAE_Vapor_Activated", false];
-      };
-
-      //Camshake
-      if ((isTouchingGround player) and (_speed >= 150) and !(player in _plane) and (camshake_fn)and !(isNull _plane)) then {
-        [_plane] Spawn AAE_fnc_camshake;
-      };
-
-      //Sonic
-      if (sonicboom_fn) then {
-        [_plane,_velocity,_speed] Spawn AAE_fnc_sonicboom;
-      };
-
-      //https://www.desmos.com/calculator/mjsmezw9px
-      //offset variables setup
-      _pitch = _pitchbank # 0;
-      if (_pitch > 90) then {
-        _pitch = 90;
-      };
-      if (_pitch < 0) then {
-        _pitch = 0;
-      };
-      _ground_result_var = 1 * _pitch;
-      _ground_result = groundP_sdr + _ground_result_var;
-      if (Wingspan_fn) then {
-        _ground_result = _Wingspan + _ground_result_var;
-      };
-      hintSilent str _ground_result;
-      //Ground
-      if (!(isTouchingGround _plane) and ((_AGL_POS # 2) < _ground_result) and (ground_fn) and !(isNull _plane)) then {
-        _type = _plane getVariable ["AAE_Ground_Type","Default"];
-        [_plane,_engine1,_engine2,_AGL_POS,_ASL_POS,_ATL_POS,_ASLW_POS,_velocity,_speed,_type] Spawn AAE_fnc_ground;
-        _plane setVariable ["AAE_Ground_Activated", true];
-      } else {
-        _plane setVariable ["AAE_Ground_Activated", false];
-      };
+      call AAE_fnc_Fast_process;
+      call AAE_fnc_Main_process;
     };
-  },
-  [
+  },[
     _plane,
-    [_Engine_Offset1,_Engine_Offset2],
-    _Wingspan
+    _Engine_Offsets,
+    _Exhausts_count,
+    _Exhausts_POS,
+    _Wingspan,
+    _have_AB
   ]];
 } else {
-  if (_plane getVariable ["AAE_Actived", false]) then {
-    //Engine EH
-    _plane setVariable ["AAE_Actived", false];
-    //Loop Remove
-    removeMissionEventHandler ["EachFrame", (_plane getVariable ["AAE_EachFrame_Handler", -1])];
-
-    //G Forces
-    GForces_Filter ppEffectEnable false;
-    ppEffectDestroy GForces_Filter;
-
-    //Vars
-    _Vapor_Paricles = _plane getVariable ["AAE_Vapor_Paricles",[]];
-    _Sonic_Paricles = _plane getVariable ["AAE_Sonic_Paricles",[]];
-    _Ground_Paricles = _plane getVariable ["AAE_Ground_Paricles",[]];
-
-    //Vapor
-    _plane setVariable ["AAE_Vapor_Activated", false];
-    if (count (_plane getVariable "AAE_Vapor_Paricles") > 0) then {
-      {deleteVehicle _x} foreach _Vapor_Paricles;
-  		_plane setVariable ["AAE_Vapor_Paricles", []];
-  	};
-
-    //SonicBoom
-    _plane setVariable ["AAE_SonicBoom_Main_Activated", false];
-    _plane setVariable ["AAE_SonicBoom_Small_Activated", false];
-    _Sonic_source00 = _plane getVariable ["AAE_SonicBoom_Small_Particle",objNull];
-    _Sonic_source01 = _plane getVariable ["AAE_SonicBoom_Main_Particle",objNull];
-
-    //Ground
-    _plane setVariable ["AAE_Ground_Type_Changed",false];
-    _plane setVariable ["AAE_Ground_Activated", false];
-    if (count _Ground_Paricles > 0) then {
-      {deleteVehicle _x} foreach _Ground_Paricles;
-  		_plane setVariable ["AAE_Ground_Paricles", []];
-  	};
-  };
+  call AAE_fnc_DeleteEH;
 };
