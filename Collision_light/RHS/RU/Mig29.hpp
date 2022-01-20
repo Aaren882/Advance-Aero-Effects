@@ -1,5 +1,6 @@
 class rhs_mig29s_base: Plane_Base_F
 {
+	AAE_Have_AB = 1;
 	class MarkerLights
 	{
 		class PositionRed

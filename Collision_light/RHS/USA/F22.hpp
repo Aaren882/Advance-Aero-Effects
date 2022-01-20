@@ -1,5 +1,6 @@
 class rhsusf_f22: Plane_Fighter_03_base_F
 {
+	AAE_Have_AB = 1;
 	class MarkerLights
 	{
 		class PositionLeft

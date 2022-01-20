@@ -1,5 +1,6 @@
 class RHS_T50_base: Plane_Base_F
 {
+	AAE_Have_AB = 1;
 	class MarkerLights
 	{
 		class PositionRed

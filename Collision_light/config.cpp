@@ -25,6 +25,19 @@ class CfgPatches
 				"rhsgref_c_air",
 				"RHSGREF_c_A29",
 			#endif
+			//////////////////////////////////////////////////////////
+			//Super Hornet
+			#if __has_include("\js_jc_fa18\config.bin")
+				"JS_JC_FA18",
+			#endif
+			//////////////////////////////////////////////////////////
+			//F-16
+			#if __has_include("\FIR_F16_Cfg\config.bin")
+				"FIR_F16_F",
+			#endif
+			#if __has_include("\FIR_F16D_Cfg\config.bin")
+				"FIR_F16D_F",
+			#endif
 			"A3_Air_F",
 			"A3_Air_F_Jets_Plane_Fighter_01",
 			"A3_Air_F_Jets_Plane_Fighter_02",

@@ -10,8 +10,8 @@ class Land_NavigLight: House
 			intensity = 70;
 			name = "Light_1_pos";
 			drawLight = 1;
-			drawLightSize = 1.0;
-			drawLightCenterSize = 0.1;
+			drawLightSize = 0.5;
+			drawLightCenterSize = 0.3;
 			activeLight = 1;
 			blinking = 0;
 			dayLight = 0;
@@ -21,10 +21,10 @@ class Land_NavigLight: House
 			{
 				start = 0;
 				constant = 0;
-				linear = 2;
+				linear = 1;
 				quadratic = 0.5;
-				hardLimitStart = 1;
-				hardLimitEnd = 25;
+				hardLimitStart = 100;
+				hardLimitEnd = 1000;
 			};
 		};
 	};
@@ -89,15 +89,15 @@ class Land_runway_edgelight: Land_NavigLight
 		{
 			color[] = {9.5,9.5,9.5};
 			ambient[] = {1,0.95,0.85};
-			class Attenuation
+			/*class Attenuation
 			{
 				start = 0;
 				constant = 0;
-				linear = 2;
+				linear = 1;
 				quadratic = 0.5;
-				hardLimitStart = 1;
-				hardLimitEnd = 25;
-			};
+				hardLimitStart = 100;
+				hardLimitEnd = 1000;
+			};*/
 		};
 	};
 };
@@ -126,8 +126,8 @@ class Land_Runway_PAPI: Land_VASICore
 			intensity = 60;
 			name = "Light_red_pos";
 			drawLight = 1;
-			drawLightSize = 1.0;
-			drawLightCenterSize = 0.1;
+			drawLightSize = 0.5;
+			drawLightCenterSize = 0.4;
 			activeLight = 1;
 			blinking = 0;
 			dayLight = 1;
@@ -152,8 +152,8 @@ class Land_Runway_PAPI: Land_VASICore
 			intensity = 60;
 			name = "Light_red_pos";
 			drawLight = 1;
-			drawLightSize = 1.5;
-			drawLightCenterSize = 0.1;
+			drawLightSize = 0.7;
+			drawLightCenterSize = 0.3;
 			cone = 15;
 			slope = 5.4;
 			angleLimitV[] = {-85,5.4};

@@ -646,7 +646,7 @@ class Plane_Fighter_01_Base_F: Plane_Base_F
 			intensity = 50;
 			name = "pos_collision_light_red_1";
 			drawLight = 1;
-			drawLightSize = 0.25;
+			drawLightSize = 0.15;
 			drawLightCenterSize = 0.05;
 			activeLight = 1;
 			blinking = 0;
@@ -895,4 +895,29 @@ class O_Plane_CAS_02_F;
 	#include "RHS\GREF\AN2.hpp"
 	#include "RHS\GREF\L159.hpp"
 	#include "RHS\GREF\UH1H.hpp"
+#endif
+/////////////////Super Hornet///////////////
+#if __has_include("\js_jc_fa18\config.bin")
+	class JS_JC_FA18E: Plane_Base_F
+	{
+		#include "SuperHornet\FA18.hpp"
+	};
+	class JS_JC_FA18F: Plane_Base_F
+	{
+		#include "SuperHornet\FA18.hpp"
+	};
+#endif
+////////////////////FIR////////////////////
+//F-16
+#if __has_include("\FIR_F16_Cfg\config.bin")
+	class FIR_F16_Base : Plane_Fighter_03_base_F
+	{
+		#include "FIR\F-16.hpp"
+	};
+#endif
+#if __has_include("\FIR_F16D_Cfg\config.bin")
+	class FIR_F16D_Base : Plane_Fighter_03_base_F
+	{
+		#include "FIR\F-16.hpp"
+	};
 #endif
