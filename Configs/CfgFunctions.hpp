@@ -16,7 +16,7 @@ class CfgFunctions
 			class InitEH;
 			class SurfaceTypeEH;
 			class DeleteEH;
-			class landingEH;
+			class landedEH;
 		};
 		//Components
 		class ComponentsFn
