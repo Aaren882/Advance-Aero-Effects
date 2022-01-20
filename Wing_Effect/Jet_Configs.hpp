@@ -159,7 +159,7 @@ class Plane_CAS_02_base_F: Plane_Base_F
 			effectName = "To199_FuselageVapour_FighterJet_R";
 			position = "Vapour_body_right_pos";
 		};
-		
+
 		class WingTipLeft
 		{
 			effectName = "WingVortices";

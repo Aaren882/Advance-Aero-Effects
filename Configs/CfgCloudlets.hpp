@@ -6,6 +6,7 @@ class CfgCloudlets
 	{
 		/*lifeTime = 0.25;
 		lifeTimeVar = 0.5;*/
+		color[] = {{1,1,1,0.05},{1,1,1,0.1},{1,1,1,0.2},{1,1,1,0.2},{1,1,1,0.1},{1,1,1,0}};
 	};
 	class FX_WingTrail_FighterJet_Slow : FX_WingTrail_FighterJet
 	{
@@ -155,6 +156,161 @@ class CfgCloudlets
 			"(accelY interpolate [30,250,0,0.02])"
 		};
 	};
+	/////////////////////////////////////////////////////////////
+	//Super Hornet
+	class FX_FA18_BodyTrail: Default
+	{
+		interval = 0.0003;
+		circleRadius = 0;
+		circleVelocity[] = {0,0,0};
+		particleShape = "\A3\data_f\ParticleEffects\Universal\Universal";
+		particleFSNtieth = 16;
+		particleFSIndex = 12;
+		particleFSFrameCount = 13;
+		particleFSLoop = 0;
+		angleVar = 360;
+		ignoreWind = 1;
+		animationName = "";
+		particleType = "Billboard";
+		timerPeriod = 1;
+		lifeTime = 0.01;
+		moveVelocity[] = {0,0,0};
+		rotationVelocity = 1;
+		weight = 1.274;
+		volume = 1;
+		rubbing = 0.18;
+		size[] = {1.2};
+		sizeCoef = 1;
+		color[] = {{1,1,1,0.1},{1,1,1,0.2},{1,1,1,0.1},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0}};
+		colorCoef[]=
+		{
+			1,
+			1,
+			1,
+			"(accelY interpolate [50,250,0,1]) * ((altitude*altitude) interpolate [400,40000,1.2,0.5])"
+		};
+		animationSpeed[] = {1000};
+		animationSpeedCoef = 0.01;
+		randomDirectionPeriod = 0;
+		randomDirectionIntensity = 0;
+		onTimerScript = "";
+		beforeDestroyScript = "";
+		lifeTimeVar = 0.2;
+		position[] = {"positionX","positionY","positionZ"};
+		positionVar[] = {0,0,0};
+		MoveVelocityVar[] = {0,0,0};
+		rotationVelocityVar = 0;
+		sizeVar = 0.5;
+		colorVar[] = {0,0,0,0};
+		randomDirectionPeriodVar = 0;
+		randomDirectionIntensityVar = 0;
+	};
+	class FX_FA18_BodyTrail2: Default
+	{
+		interval = 0.0003;
+		circleRadius = 0;
+		circleVelocity[] = {0,0,0};
+		particleShape = "\A3\data_f\ParticleEffects\Universal\Universal";
+		particleFSNtieth = 16;
+		particleFSIndex = 12;
+		particleFSFrameCount = 13;
+		particleFSLoop = 0;
+		angleVar = 360;
+		ignoreWind = 1;
+		animationName = "";
+		particleType = "Billboard";
+		timerPeriod = 1;
+		lifeTime = 0.01;
+		moveVelocity[] = {0,0,0};
+		rotationVelocity = 1;
+		weight = 1.274;
+		volume = 1;
+		rubbing = 0.18;
+		size[] = {1.2};
+		sizeCoef = 1;
+		color[] = {{1,1,1,0.1},{1,1,1,0.2},{1,1,1,0.1},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0}};
+		colorCoef[]=
+		{
+			1,
+			1,
+			1,
+			"(accelY interpolate [50,250,0,1]) * ((altitude*altitude) interpolate [400,40000,1.2,0.5])"
+		};
+		animationSpeed[] = {1000};
+		animationSpeedCoef = 0.01;
+		randomDirectionPeriod = 0;
+		randomDirectionIntensity = 0;
+		onTimerScript = "";
+		beforeDestroyScript = "";
+		lifeTimeVar = 0.2;
+		position[] = {"positionX","positionY","positionZ"};
+		positionVar[] = {0,0,0};
+		MoveVelocityVar[] = {0,0,0};
+		rotationVelocityVar = 0;
+		sizeVar = 0.5;
+		colorVar[] = {0,0,0,0};
+		randomDirectionPeriodVar = 0;
+		randomDirectionIntensityVar = 0;
+	};
+	class FX_FA18_WingOverVapour: Default
+	{
+		interval = 0.0003;
+		circleRadius = 0;
+		circleVelocity[] = {0,0,0};
+		particleShape = "\A3\data_f\ParticleEffects\Universal\Universal";
+		particleFSNtieth = 16;
+		particleFSIndex = 12;
+		particleFSFrameCount = 16;
+		particleFSLoop = 0;
+		angleVar = 360;
+		ignoreWind = 1;
+		animationName = "";
+		particleType = "Billboard";
+		timerPeriod = 1;
+		lifeTime = 0.01;
+		moveVelocity[] = {0,0,0};
+		rotationVelocity = 1;
+		weight = 1.274;
+		volume = 1;
+		rubbing = 0.18;
+		size[] = {1.2};
+		sizeCoef = 1;
+		color[] = {{1,1,1,0.01},{1,1,1,0}};
+		colorCoef[]=
+		{
+			1,
+			1,
+			1,
+			"(accelY interpolate [60,250,0,1]) * ((altitude*altitude) interpolate [400,40000,1,0.5])"
+		};
+		animationSpeed[] = {1000};
+		animationSpeedCoef = 1;
+		randomDirectionPeriod = 0;
+		randomDirectionIntensity = 0;
+		onTimerScript = "";
+		beforeDestroyScript = "";
+		lifeTimeVar = 0.2;
+		position[] = {"positionX","positionY","positionZ"};
+		positionVar[] = {0,0,0};
+		MoveVelocityVar[] = {0,0,0};
+		rotationVelocityVar = 0;
+		sizeVar = 0.25;
+		colorVar[] = {0,0,0,0};
+		randomDirectionPeriodVar = 0;
+		randomDirectionIntensityVar = 0;
+	};
+	class FX_FA18_WingTrail: Default
+	{
+		interval = 0.0003;
+		colorCoef[]=
+		{
+			1,
+			1,
+			1,
+			"(accelY interpolate [50,250,0,1]) * ((altitude*altitude) interpolate [400,40000,2,0.5])"
+		};
+	};
+	/////////////////////////////////////////////////////////////
 	//FIR
 	class AAE_WingTrail_FighterJet_FIR: AAE_BodyTrail_FighterJet
 	{
@@ -168,7 +324,59 @@ class CfgCloudlets
 			"(accelY interpolate [80,100,0,0.08]) * ((altitude*altitude) interpolate [400,40000,1,0.5])"
 		};
 	};
+	//Exhaust Effects
+	class ExhaustSmoke1PlaneHP: Default
+	{
+		color[] = {{0.06,0.06,0.06,0.2},{0.1,0.1,0.1,0.04},{0.2,0.2,0.2,0.01},{0.3,0.3,0.3,0.001}};
+		colorCoef[] = {"15","15","15","intensity/2 * (engineDamage interpolate [0.3,0.4,1,6]))"};
+		size[] = {0.5,3};
+	};
 	//Weapons
+	class MachineGun1: Default
+	{
+		particleShape = "\A3\data_f\ParticleEffects\Universal\Universal";
+		particleFSNtieth = 16;
+		particleFSIndex = 12;
+		particleFSFrameCount = 8;
+		particleFSLoop = 0;
+		size[] = {2.4,3};
+		rubbing = 0.01;
+		color[] = {{0.85,0.85,0.85,0.15},{0.88,0.88,0.88,0.1},{0.9,0.9,0.9,0.08},{0.9,0.9,0.9,0.07},{0.9,0.9,0.9,0}};
+		lifeTime = 3;
+		sizeVar = 0.2;
+		interval = "0.01/(vehicleSpeedSize interpolate [0,250,1,3])";
+		animationSpeed[] = {1000};
+		angleVar = 1;
+		position[] = {"positionX","positionY","positionZ"};
+		moveVelocity[]=
+		{
+			"directionX",
+			"directionY",
+			"directionZ"
+		};
+		positionVar[]=
+		{
+			0.1,
+			0.1,
+			0.1
+		};
+		MoveVelocityVar[]=
+		{
+			0,
+			0,
+			0
+		};
+		rotationVelocity = 1;
+		rotationVelocityVar = 20;
+		colorVar[] = {0,0,0,0};
+		randomDirectionPeriodVar = 0;
+		randomDirectionIntensityVar = 0;
+		sizeCoef = 1;
+		colorCoef[] = {1,1,1,0.75};
+		animationSpeedCoef = 1;
+		randomDirectionPeriod = 0.1;
+		randomDirectionIntensity = 0.1;
+	};
 	class MachineGun2: Default
 	{
 		particleShape = "\A3\data_f\ParticleEffects\Universal\Universal";
@@ -266,7 +474,7 @@ class CfgCloudlets
 		particleShape = "\A3\data_f\ParticleEffects\Universal\Universal";
 		particleFSNtieth = 16;
 		particleFSIndex = 12;
-		particleFSFrameCount = 16;
+		particleFSFrameCount = 2;
 		animationName = "";
 		particleType = "Billboard";
 		timerPeriod = 1;
@@ -276,9 +484,18 @@ class CfgCloudlets
 		weight = 1;
 		volume = 0.8;
 		rubbing = 0.5;
-		size[] = {1,2,2.8};
-		color[] = {{0.5,0.5,0.5,0.1},{0.6,0.6,0.6,0.05},{0.7,0.7,0.7,0.02},{0.8,0.8,0.8,0.005},{0.9,0.9,0.9,0.003}};
-		animationSpeed[] = {1000};
+		size[] = {1,2,2.8,4,6,8,12,15};
+		color[] = 
+		{
+			{0.9,0.9,0.9,0.003},
+			{0.5,0.5,0.5,0.04},
+			{0.5,0.5,0.5,0.3},
+			{0.6,0.6,0.6,0.15},
+			{0.7,0.7,0.7,0.1},
+			{0.7,0.7,0.7,0.02},
+			{0.8,0.8,0.8,0.005}
+		};
+		animationSpeed[] = {5};
 		randomDirectionPeriod = 0.1;
 		randomDirectionIntensity = 0.1;
 		onTimerScript = "";
@@ -297,7 +514,7 @@ class CfgCloudlets
 	//AAE
 	class AAE_Vapor_Trail: Default
 	{
-		interval=0.003;
+		interval=0.01;
 		particleShape="\A3\Data_F\ParticleEffects\Universal\Universal";
 		particleFSNtieth=16;
 		particleFSIndex=12;
@@ -307,70 +524,32 @@ class CfgCloudlets
 		animationName="";
 		animationSpeed[]={1000};
 		timerPeriod=0;
-		lifeTime=10;
+		lifeTime=20;
 		position[]={0,0,-5};
 		moveVelocity[]={0,0,0};
 		rotationVelocity=1;
 		weight=1.25;
 		volume=1;
-		rubbing=0.0099999998;
-		size[]={4,8};
+		rubbing=0.01;
+		size[]={6,15,25,30,40};
 		color[]=
 		{
-			{0.69999999,0.80000001,1,0},
-			{0.69999999,0.80000001,1,0.029999999},
-			{0.69999999,0.80000001,1,0.059999999},
-			{0.69999999,0.80000001,1,0.1},
-			{0.69999999,0.80000001,1,0.050000001},
-			{0.69999999,0.80000001,1,0.0099999998},
-			{0.69999999,0.80000001,1,0}
+			{0.7,0.8,1,0},
+			{0.7,0.8,1,0.3},
+			{0.7,0.8,1,0.5},
+			{0.7,0.8,1,0.3},
+			{0.7,0.8,1,0.2},
+			{0.7,0.8,1,0.1},
+			{0.7,0.8,1,0}
 		};
 		lifeTimeVar=2;
-		positionVar[]={3,0.1,3};
-		positionVarConst[]={3,0.1,3};
-		MoveVelocityVar[]={0.40000001,0.40000001,0.40000001};
-		sizeVar=1;
+		positionVar[]={2,0.5,2};
+		positionVarConst[]={1,0.1,1};
+		MoveVelocityVar[]={0.4,0.4,0.4};
+		sizeVar=0.5;
 		MoveVelocityVarConst[]={0,0,0};
 		randomDirectionPeriod=0;
 		randomDirectionIntensity=0;
 		angleVar=1;
-	};
-	//For Scripts
-	class HDust1;
-	class AAE_Dust01: HDust1
-	{
-		interval = 0.01;
-		particleEffects = "AAE_Dust";
-		color[]={{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0.02},{1,1,0.8,0.06},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0}};
-	};
-	class HDust1M;
-	class AAE_Dust02: HDust1M
-	{
-		interval = 0.02;
-		color[]={{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0.02},{1,1,0.8,0.06},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0}};
-	};
-	class HDust1L;
-	class AAE_Dust03: HDust1L
-	{
-		interval = 0.03;
-		color[]={{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0.02},{1,1,0.8,0.06},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0}};
-	};
-	class HDust1LongBig;
-	class AAE_Dust04: HDust1LongBig
-	{
-		interval = 0.05;
-		color[]={{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0.02},{1,1,0.8,0.06},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0}};
-	};
-	class HDust1LongBigM;
-	class AAE_Dust05: HDust1LongBigM
-	{
-		interval = 0.05;
-		color[]={{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0.02},{1,1,0.8,0.06},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0},{1,1,0.8,0}};
-	};
-	//Water
-	class HWater1;
-	class AAE_Water01: HWater1
-	{
-		color[]={{0.7,0.8,1,0},{0.7,0.8,1,0},{0.7,0.8,1,0.02},{0.7,0.8,1,0.06},{0.7,0.8,1,0},{0.7,0.8,1,0},{0.7,0.8,1,0},{0.7,0.8,1,0},{0.7,0.8,1,0},{0.7,0.8,1,0},{0.7,0.8,1,0},{0.7,0.8,1,0}};
 	};
 };

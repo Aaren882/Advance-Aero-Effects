@@ -44,14 +44,14 @@ class DefaultEventHandlers
 	//class AAE_EH: AAE_EH{};
 };
 
-class Extended_PreInit_EventHandlers 
+class Extended_PreInit_EventHandlers
 {
 	class AAE_EH
 	{
 		init = "call compile preprocessFileLineNumbers 'MG8\AVDAVFX\XEH_preInit.sqf'";
 	};
 };
-class Extended_PostInit_EventHandlers 
+class Extended_PostInit_EventHandlers
 {
 	class AAE_EH
 	{
@@ -75,21 +75,21 @@ class CfgVehicles
 		class Eventhandlers: DefaultEventHandlers {};
 		#include "Configs\AAE_Settings.hpp"
 	};
-	
+
 	class Plane: Air {};
 	class Plane_Base_F: Plane {};
 	//Vapor Effects
 	#include "Wing_Effect\Jet_Configs.hpp"
-	
+
 	//Plane MODs
 	#include "Configs\CfgVehicles.hpp"
-	
+
 	//Helis
 	class Helicopter_Base_H;
-	
+
 	#include "Configs\Skins.hpp"
 	#include "Configs\Heli_Settings.hpp"
-	
+
 	///////////////////////////After Burner///////////////////////////////
 	class Reflector_Base_F;
 	class Reflector_Cone_01_base_F: Reflector_Base_F
@@ -144,7 +144,7 @@ class CfgVehicles
 					hardLimitEnd = 4;
 				};
 			};
-			
+
 		};
 	};
 	class AAE_AfterBurner_Reflector_Flare: AAE_AfterBurner_Reflector
@@ -160,7 +160,7 @@ class CfgVehicles
 				innerAngle = 60;
 				outerAngle = 120;
 				coneFadeCoef = 4;
-				
+
 				useFlare = 1;
 				flareSize = 5;
 				flareMaxDistance = 15000;

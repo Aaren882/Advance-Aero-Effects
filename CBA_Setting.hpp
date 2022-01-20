@@ -26,6 +26,13 @@
 ] call CBA_fnc_addSetting;
 
 [
+	"wingspan_fn","CHECKBOX",
+	["Auto Detection","Auto Detects Trigger Height by Wingspan"],
+	["Advance Aero Effects", "Ground Effect"],
+	true
+] call CBA_fnc_addSetting;
+
+[
 	"vapor_fn","CHECKBOX",
 	["Vapor Trail Effect (CBA Slider)","Spawn Vapor Trail"],
 	["Advance Aero Effects", "Ganeral"],
