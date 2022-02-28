@@ -8,10 +8,9 @@ class Land_NavigLight: House
 			color[] = {0.95,0.85,0.15};
 			ambient[] = {0.95,0.85,0.15};
 			intensity = 70;
-			name = "Light_1_pos";
 			drawLight = 1;
-			drawLightSize = 0.5;
-			drawLightCenterSize = 0.3;
+			drawLightSize = 0.8;
+			drawLightCenterSize = 0.4;
 			activeLight = 1;
 			blinking = 0;
 			dayLight = 0;
@@ -35,8 +34,8 @@ class Land_NavigLight_3_F: Land_NavigLight
 	{
 		class Light_1: Light_1
 		{
-			color[] = {9,0,0};
-			ambient[] = {0.9,0,0};
+			color[] = {0.9,0,0};
+			ambient[] = {0.09,0,0};
 		};
 		class Light_2: Light_1
 		{
@@ -54,8 +53,20 @@ class Land_Flush_Light_green_F: Land_NavigLight
 	{
 		class Light_1: Light_1
 		{
-			color[] = {0.5,6.5,0.5};
+			color[] = {0.05,0.65,0.05};
 			ambient[] = {0.05,0.65,0.05};
+			flareSize = 0.8;
+			drawLightSize = 0.6;
+			drawLightCenterSize = 0.3;
+			class Attenuation
+			{
+				start = 0;
+				constant = 0;
+				linear = 1;
+				quadratic = 1;
+				hardLimitStart = 10;
+				hardLimitEnd = 100;
+			};
 		};
 	};
 };
@@ -65,8 +76,8 @@ class Land_Flush_Light_red_F: Land_Flush_Light_green_F
 	{
 		class Light_1: Light_1
 		{
-			color[] = {0.9,0,0};
-			ambient[] = {0.09,0,0};
+			color[] = {5,0,0};
+			ambient[] = {0.1,0,0};
 		};
 	};
 };
@@ -76,7 +87,7 @@ class Land_Flush_Light_yellow_F: Land_Flush_Light_green_F
 	{
 		class Light_1: Light_1
 		{
-			color[] = {8.5,8.5,0.5};
+			color[] = {0.85,0.85,0.05};
 			ambient[] = {0.85,0.85,0.05};
 		};
 	};
@@ -87,8 +98,9 @@ class Land_runway_edgelight: Land_NavigLight
 	{
 		class Light_1: Light_1
 		{
-			color[] = {9.5,9.5,9.5};
+			color[] = {1,0.95,0.85};
 			ambient[] = {1,0.95,0.85};
+			flareSize = 0.5;
 			/*class Attenuation
 			{
 				start = 0;
@@ -107,7 +119,7 @@ class Land_runway_edgelight_blue_F: Land_runway_edgelight
 	{
 		class Light_1: Light_1
 		{
-			color[] = {1,1,6.5};
+			color[] = {0.1,0.1,0.65};
 			ambient[] = {0.1,0.1,0.65};
 		};
 	};

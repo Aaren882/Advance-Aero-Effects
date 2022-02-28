@@ -8,10 +8,10 @@ class Land_Destroyer_01_hull_base_F: House_F
 			name = "empty";
 			color[] = {0.95,0.85,0.15};
 			ambient[] = {0.0,0.0,0.0};
-			intensity = 30;
+			intensity = 70;
 			drawLight = 1;
-			drawLightSize = 1.0;
-			drawLightCenterSize = 0.1;
+			drawLightSize = 0.4;
+			drawLightCenterSize = 0.2;
 			activeLight = 1;
 			blinking = 0;
 			dayLight = 0;

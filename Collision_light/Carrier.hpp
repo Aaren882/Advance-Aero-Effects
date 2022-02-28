@@ -10,7 +10,7 @@ class Land_Carrier_01_hull_base_F: House_F
 			ambient[] = {0.95,0.85,0.15};
 			intensity = 30;
 			drawLight = 1;
-			drawLightSize = 1.0;
+			drawLightSize = 0.2;
 			drawLightCenterSize = 0.1;
 			activeLight = 1;
 			blinking = 0;

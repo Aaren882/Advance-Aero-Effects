@@ -861,11 +861,41 @@ class Plane_Fighter_04_Base_F: Plane_Base_F
 		};
 	};
 };
+class UAV;
+class UAV_05_Base_F: UAV
+{
+	class MarkerLights
+	{
+		class CollisionLightRed1
+		{
+			color[] = {10,0,0};
+			ambient[] = {0.1,0,0};
+			intensity = 50;
+			drawLight = 1;
+			drawLightSize = 0.15;
+			drawLightCenterSize = 0.1;
+			activeLight = 1;
+			brightness = 1;
+			useFlare = 1;
+			FlareSize = 0.8;
+			class Attenuation
+			{
+				start = 0;
+				constant = 0;
+				linear = 5;
+				quadratic = 5;
+				hardLimitStart = 1;
+				hardLimitEnd = 8;
+			};
+		};
+	};
+};
 class Heli_Transport_02_base_F;
 class Heli_Light_03_base_F;
 class Plane_Fighter_03_base_F;
 class Heli_Attack_02_base_F;
 class O_Plane_CAS_02_F;
+class Plane_CAS_02_base_F;
 //RHSUSAF
 #if __has_include("\rhsusf\addons\rhsusf_c_a2port_air\config.bin")
 	#include "RHS\USA\A10.hpp"
@@ -896,6 +926,15 @@ class O_Plane_CAS_02_F;
 	#include "RHS\GREF\L159.hpp"
 	#include "RHS\GREF\UH1H.hpp"
 #endif
+//USAF
+//- AC-130
+//#if __has_include("\USAF_AC130U_C\config.bin")
+	class USAF_AC130U_base;
+	class USAF_AC130U: USAF_AC130U_base
+	{
+		#include "USAF\AC130.hpp"
+	};
+//#endif
 /////////////////Super Hornet///////////////
 #if __has_include("\js_jc_fa18\config.bin")
 	class JS_JC_FA18E: Plane_Base_F
@@ -908,16 +947,186 @@ class O_Plane_CAS_02_F;
 	};
 #endif
 ////////////////////FIR////////////////////
+//A-10
+#if __has_include("\FIR_A10A_Cfg\config.bin")
+	class FIR_A10A_Base: Plane_CAS_01_base_F
+	{
+		#include "FIR\A-10.hpp"
+	};
+#endif
+#if __has_include("\FIR_A10C\config.bin")
+	class FIR_A10C_Base: Plane_CAS_01_base_F
+	{
+		#include "FIR\A-10.hpp"
+	};
+#endif
+#if __has_include("\FIR_A10U_Cfg\config.bin")
+	class FIR_A10U_Base: Plane_CAS_01_base_F
+	{
+		#include "FIR\A-10.hpp"
+	};
+#endif
+
+//AV-8B
+#if __has_include("\FIR_AV8B_Cfg\config.bin")
+	class FIR_AV8B_Base: Plane_Fighter_03_base_F
+	{
+		#include "FIR\AV-8B.hpp"
+	};
+	class FIR_AV8B_NA_Base: Plane_Fighter_03_base_F
+	{
+		#include "FIR\AV-8B.hpp"
+	};
+	class FIR_AV8B_GR7_Base: Plane_Fighter_03_base_F
+	{
+		#include "FIR\AV-8B.hpp"
+	};
+#endif
+
+//F-14
+#if __has_include("\FIR_F14_Cfg\config.bin")
+	class FIR_F14D_Base: Plane_Fighter_03_base_F
+	{
+		#include "FIR\F-14.hpp"
+	};
+#endif
+
+//F-15
+#if __has_include("\FIR_F15_Cfg\config.bin")
+	class FIR_F15_Base: Plane_Fighter_03_base_F
+	{
+		#include "FIR\F-15.hpp"
+	};
+	class FIR_F15D_Base: Plane_Fighter_03_base_F
+	{
+		#include "FIR\F-15.hpp"
+	};
+	class FIR_F15E_Base: Plane_Fighter_03_base_F
+	{
+		#include "FIR\F-15.hpp"
+	};
+#endif
+#if __has_include("\FIR_F15SE_Cfg\config.bin")
+	class FIR_F15SE_Base: Plane_Fighter_03_base_F
+	{
+		#include "FIR\F-15.hpp"
+	};
+#endif
+#if __has_include("\FIR_F15_Legacy_Cfg\config.bin")
+	class FIR_F15A_Base: Plane_Fighter_03_base_F
+	{
+		#include "FIR\F-15.hpp"
+	};
+	class FIR_F15B_Base: Plane_Fighter_03_base_F
+	{
+		#include "FIR\F-15.hpp"
+	};
+	class FIR_F15E_Demo_Base: Plane_Fighter_03_base_F
+	{
+		#include "FIR\F-15.hpp"
+	};
+	class FIR_F15B_Civ_Base: Plane_Fighter_03_base_F
+	{
+		#include "FIR\F-15.hpp"
+	};
+#endif
+
 //F-16
 #if __has_include("\FIR_F16_Cfg\config.bin")
-	class FIR_F16_Base : Plane_Fighter_03_base_F
+	class FIR_F16_Base: Plane_Fighter_03_base_F
 	{
 		#include "FIR\F-16.hpp"
 	};
 #endif
 #if __has_include("\FIR_F16D_Cfg\config.bin")
-	class FIR_F16D_Base : Plane_Fighter_03_base_F
+	class FIR_F16D_Base: Plane_Fighter_03_base_F
 	{
 		#include "FIR\F-16.hpp"
+	};
+#endif
+
+//F-2
+#if __has_include("\FIR_F2A_Cfg\config.bin")
+	class FIR_F2A_Base: Plane_Fighter_03_base_F
+	{
+		#include "FIR\F-2.hpp"
+	};
+	class FIR_F2B_Base: Plane_Fighter_03_base_F
+	{
+		#include "FIR\F-2.hpp"
+	};
+#endif
+
+//F/A-18CD
+#if __has_include("\FIR_F2A_Cfg\config.bin")
+	class FIR_FA18_Base: Plane_Fighter_03_base_F
+	{
+		#include "FIR\F-18CD.hpp"
+	};
+#endif
+#if __has_include("\FIR_FA18D_Cfg\config.bin")
+	class FIR_FA18D_Base: Plane_Fighter_03_base_F
+	{
+		#include "FIR\F-18CD.hpp"
+	};
+#endif
+
+//F/A-18EF
+#if __has_include("\FIR_FA18EF_Cfg\config.bin")
+	class FIR_FA18F_Base: Plane_Fighter_03_base_F
+	{
+		#include "FIR\F-18EF.hpp"
+	};
+	class FIR_FA18E_Base: Plane_Fighter_03_base_F
+	{
+		#include "FIR\F-18EF.hpp"
+	};
+#endif
+
+//E/A-18G
+#if __has_include("\FLAN_EA18G_Cfg\config.bin")
+	class FLAN_EA18G_Base: Plane_Fighter_03_base_F
+	{
+		#include "FIR\F-18EF.hpp"
+	};
+#endif
+
+//F-22
+#if __has_include("\FIR_F22_Cfg\config.bin")
+	class FIR_F22_Base: Plane_Fighter_03_base_F
+	{
+		#include "FIR\F-22.hpp"
+	};
+#endif
+
+//YF-23A
+#if __has_include("\FIR_F23A_Cfg\config.bin")
+	class FIR_F23A_Base : Plane_Fighter_03_base_F
+	{
+		#include "FIR\YF-23A.hpp"
+	};
+#endif
+
+//F-35
+#if __has_include("\FIR_F35B_Armaverse_Cfg\config.bin")
+	class FIR_F35B_Armaverse_Base: Plane_Fighter_03_base_F
+	{
+		#include "FIR\F-35.hpp"
+	};
+#endif
+
+//Tornado
+#if __has_include("\Tornado_AWS\config.bin")
+	class Tornado_AWS_BASE: Plane_Fighter_03_base_F
+	{
+		#include "FIR\Tornado.hpp"
+	};
+#endif
+
+//Su-25
+#if __has_include("\FIR_Su25SM3_Cfg\config.bin")
+	class FIR_Su25sm3_base: Plane_CAS_02_base_F
+	{
+		#include "FIR\Su-25.hpp"
 	};
 #endif
