@@ -15,6 +15,7 @@ class CfgFunctions
 			class GearEH;
 			class InitEH;
 			class SurfaceTypeEH;
+			class VolumeChangedEH;
 			class DeleteEH;
 			class landedEH;
 		};
@@ -23,10 +24,10 @@ class CfgFunctions
 		{
 			file="MG8\AVDAVFX\Functions\Components";
 			class Main_process;
-			class Fast_process;
-			class Exhaust_Dir;
 			class Find_engine;
 			class Exhaust_Offsets;
+			class ChangeVolume;
+			class wheels;
 		};
 		//Sound Handler
 		class SoundFn
@@ -49,23 +50,23 @@ class CfgFunctions
 			class gForces;
 			class gearFactor;
 			class Burner;
+			class taxiing;
 		};
 		class LandedFn
 		{
-			file="MG8\AVDAVFX\Functions\Wheels";
-			class wheels;
+			file="MG8\AVDAVFX\Functions\Landed";
 			class landed;
-			class execution;
-			class taxing;
+			class Cooldown;
 		};
-		class TurbulentFn
+		class TurbulenceFn
 		{
-			file="MG8\AVDAVFX\Functions\Turbulent";
-			class turbulent;
-			class turbulentW;
-			class turbulentSnd;
+			file="MG8\AVDAVFX\Functions\Turbulence";
+			class turbulence;
+			class turbulenceW;
+			class turbulenceSnd;
 		};
 	};
+	//Catapult FX
 	class A3_Jets
 	{
 		class AircrfatCarrier
@@ -76,6 +77,18 @@ class CfgFunctions
 		{
 			file="MG8\AVDAVFX\Functions\Carrier";
 			class Carrier01CatapultActionAdd;
+		};
+	};
+	class TTT
+	{
+		class CatapultEvents
+		{
+			delete launchPlane;
+		};
+		class AAE
+		{
+			file="MG8\AVDAVFX\Functions\Carrier";
+			class launchPlane;
 		};
 	};
 };

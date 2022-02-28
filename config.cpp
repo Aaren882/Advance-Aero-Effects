@@ -17,8 +17,10 @@ class CfgPatches
 			"A3_Air_F",
 			"A3_Data_F",
 			"A3_Data_F_Jets",
+			"A3_Data_F_Sams",
 			"A3_Weapons_F",
 			"A3_Weapons_F_Jets",
+			"A3_Weapons_F_Sams",
 			"A3_Data_F_ParticleEffects",
 			"A3_Air_F_Beta_Heli_Transport_01",
 			"A3_Air_F_Heli_Heli_Transport_03",
@@ -78,6 +80,8 @@ class CfgVehicles
 
 	class Plane: Air {};
 	class Plane_Base_F: Plane {};
+	class UAV;
+	
 	//Vapor Effects
 	#include "Wing_Effect\Jet_Configs.hpp"
 
@@ -113,7 +117,7 @@ class CfgVehicles
 				ambient[] = {0.8,0.2,0};
 				intensity = 5000;
 				innerAngle = 0;
-				outerAngle = 80;
+				outerAngle = 120;
 				coneFadeCoef = 3;
 				class Attenuation
 				{
@@ -121,7 +125,7 @@ class CfgVehicles
 					constant = 0;
 					linear = 5;
 					quadratic = 1;
-					hardLimitStart = 1;
+					hardLimitStart = 0.1;
 					hardLimitEnd = 10;
 				};
 			};
@@ -130,25 +134,25 @@ class CfgVehicles
 				useFlare = 0;
 				color[] = {0.07,0.06,1};
 				ambient[] = {0.07,0.06,1};
-				intensity = 10000;
-				innerAngle = 20;
-				outerAngle = 30;
+				intensity = 60000;
+				innerAngle = 5;
+				outerAngle = 60;
 				coneFadeCoef = 8;
 				class Attenuation
 				{
-					start = 0;
+					start = 0.2;
 					constant = 0;
-					linear = 1;
+					linear = 5;
 					quadratic = 1;
 					hardLimitStart = 0.1;
-					hardLimitEnd = 4;
+					hardLimitEnd = 3;
 				};
 			};
-
 		};
 	};
 	class AAE_AfterBurner_Reflector_Flare: AAE_AfterBurner_Reflector
 	{
+		displayName = "After Burner Flare (Advance Aero Effects)";
 		class Reflectors: Reflectors
 		{
 			class Light_1_Flare: Light_1_Flare
@@ -163,7 +167,7 @@ class CfgVehicles
 
 				useFlare = 1;
 				flareSize = 5;
-				flareMaxDistance = 15000;
+				flareMaxDistance = 20000;
 				drawLight=1;
 				dayLight=1;
 				brightness=2;
@@ -181,15 +185,6 @@ class CfgVehicles
 	};
 };
 ////////////////////////////////////
-class CfgAmmo
-{
-	class MissileBase;
-	class ammo_Missile_MediumRangeAABase: MissileBase
-	{
-		initTime = 0.3;
-		thrust = 400;
-	};
-};
 class CfgMagazines
 {
 	class VehicleMagazine;
@@ -208,6 +203,9 @@ class CfgMagazines
 
 //CfgWeapons
 #include "Configs\CfgWeapons.hpp"
+
+//CfgAmmo
+#include "Configs\CfgAmmo.hpp"
 
 //CfgCloudlets
 #include "Configs\CfgCloudlets.hpp"

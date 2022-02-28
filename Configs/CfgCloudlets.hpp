@@ -4,8 +4,7 @@ class CfgCloudlets
 	class Default;
 	class FX_WingTrail_FighterJet: Default
 	{
-		/*lifeTime = 0.25;
-		lifeTimeVar = 0.5;*/
+		lifeTime = "0.2 + (accelY interpolate [70,200,0,0.2])";
 		color[] = {{1,1,1,0.05},{1,1,1,0.1},{1,1,1,0.2},{1,1,1,0.2},{1,1,1,0.1},{1,1,1,0}};
 	};
 	class FX_WingTrail_FighterJet_Slow : FX_WingTrail_FighterJet
@@ -101,9 +100,9 @@ class CfgCloudlets
 	};
 	class AAE_BodyTrail_FighterJet_Short: AAE_BodyTrail_FighterJet
 	{
-		color[] = {{1,1,1,0.2},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0}};
+		color[] = {{1,1,1,0.5},{1,1,1,0.3},{1,1,1,0.2},{1,1,1,0.2},{1,1,1,0.2},{1,1,1,0.2},{1,1,1,0.1},{1,1,1,0},{1,1,1,0},{1,1,1,0}};
 		lifeTime = 0.008;
-		lifeTimeVar = 0.1;
+		lifeTimeVar = 0.03;
 		colorCoef[]=
 		{
 			1,
@@ -115,17 +114,20 @@ class CfgCloudlets
 	//Vanilla
 	class AAE_BodyTrail_FighterJet_A164: FX_BodyTrail_FighterJet
 	{
-		color[] = {{1,1,1,0.2},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0},{1,1,1,0}};
+		color[] = {{1,1,1,0.5},{1,1,1,0.3},{1,1,1,0.2},{1,1,1,0.2},{1,1,1,0.2},{1,1,1,0.2},{1,1,1,0.1},{1,1,1,0},{1,1,1,0},{1,1,1,0}};
 		
 		size[] = {1.2};
 		sizeCoef = 1;
+		
+		lifeTime = 0.008;
+		lifeTimeVar = 0.03;
 		
 		colorCoef[]=
 		{
 			1,
 			1,
 			1,
-			"(accelY interpolate [30,100,0,0.01])"
+			"(accelY interpolate [30,100,0,0.003])"
 		};
 	};
 	class AAE_BodyTrail_FighterJet_Mid: FX_BodyTrail_FighterJet
@@ -155,6 +157,49 @@ class CfgCloudlets
 			1,
 			"(accelY interpolate [30,250,0,0.02])"
 		};
+	};
+	class ExpSparks1;
+	class AAE_TailHook_Landed_Spark: ExpSparks1
+	{
+		animationSpeed[] = {-2};
+		size[]={0.1};
+		sizeVar=0.5;
+		interval = 0.01;
+		rubbing=0.15;
+		moveVelocity[]={0,0,2};
+		moveVelocityVar[] = {3,3,3};
+		
+		position[]={0,0,0};
+		positionVar[]={0,0,0};
+		
+		angleVar = 360;
+		
+		color[]=
+		{
+			{0.8,0.6,0.16,-1},
+			{0.8,0.6,0.16,0}
+		};
+		
+		colorVar[] = {0.05,0.05,0.05,0};
+		
+		rotationVelocity = 1;
+		lifeTime=3;
+		lifeTimeVar=0.2;
+		
+		randomDirectionPeriod=0.2;
+		randomDirectionIntensity=0.2;
+		
+		bounceOnSurface = 0.1;
+		bounceOnSurfaceVar = 0.12;
+		
+		weight=1.8;
+		volume=1;
+		
+		emissiveColor[]=
+		{
+			{10000,6000,1600,0.5}
+		};
+		particleEffects="AAE_TailHook_Sprak";
 	};
 	/////////////////////////////////////////////////////////////
 	//Super Hornet
@@ -325,11 +370,27 @@ class CfgCloudlets
 		};
 	};
 	//Exhaust Effects
-	class ExhaustSmoke1PlaneHP: Default
+	/*class ExhaustSmoke1PlaneHP: Default
 	{
 		color[] = {{0.06,0.06,0.06,0.2},{0.1,0.1,0.1,0.04},{0.2,0.2,0.2,0.01},{0.3,0.3,0.3,0.001}};
 		colorCoef[] = {"15","15","15","intensity/2 * (engineDamage interpolate [0.3,0.4,1,6]))"};
 		size[] = {0.5,3};
+	};*/
+	class ExhaustSmokeRefractPlane: Default
+	{
+		interval = 0.1;
+		colorCoef[] = {1,1,1,"(vehicleSpeedSize interpolate [0,60,0.2,1])*(vehicleSpeedSize interpolate [60,150,1,0])"};
+		moveVelocity[] = {"speedX * 0.1","speedY * 0.1","speedZ * 0.1"};
+		MoveVelocityVar[] = {1,1,1};
+		size[] = {0.3,5,12,20,25,25,25};
+		lifeTime = 5;
+		weight = 1.8;
+		volume = 1.1;
+		//color[] = {{0.06,0.06,0.06,0.8},{0.3,0.3,0.3,0.7},{0.3,0.3,0.3,0.6},{0.3,0.3,0.3,0.65},{0.3,0.3,0.3,0.5},{0.3,0.3,0.3,0.4},{0.3,0.3,0.3,0}};
+		color[] = {{0.3,0.3,0.3,0.8},{0.3,0.3,0.3,0.5},{0.3,0.3,0.3,0.3},{0.3,0.3,0.3,0.3},{0.3,0.3,0.3,0.25},{0.3,0.3,0.3,0.2},{0.3,0.3,0.3,0.16},{0.3,0.3,0.3,0.08},{0.3,0.3,0.3,0.02},{0.3,0.3,0.3,0}};
+		bounceOnSurface = 0.1;
+		bounceOnSurfaceVar = 0.01;
+		rotationVelocity = 20;
 	};
 	//Weapons
 	class MachineGun1: Default
@@ -463,18 +524,34 @@ class CfgCloudlets
 		randomDirectionIntensity = 0.1;
 	};
 	
+	//SAM
+	class FX_MissileTrail_SAM_LongRange: Default
+	{
+		interval = 0.002;
+		lifeTime = 12;
+		size[] = {3,18,20,21,22,23,24,25,30,40};
+		color[] = {{0.5,0.5,0.5,0.5},{0.6,0.6,0.6,0.3},{0.7,0.7,0.7,0.1},{0.8,0.8,0.8,0.04},{0.9,0.9,0.9,0.01},{0.9,0.9,0.9,0}};
+		positionVarConst[] = {0.5,0.5,0.5};
+		MoveVelocityVar[] = {0.4,0.4,0.4};
+		rotationVelocity = 20;
+		
+		particleFSFrameCount=8;
+	};
+	
 	//Missile
 	class Missile3: Default
 	{
-		interval = 0.001;
+		interval = 0.002;
 		circleRadius = 0;
 		circleVelocity[] = {0,0,0};
 		angleVar = 1;
-		particleFSLoop = 0;
+		
 		particleShape = "\A3\data_f\ParticleEffects\Universal\Universal";
 		particleFSNtieth = 16;
 		particleFSIndex = 12;
-		particleFSFrameCount = 2;
+		particleFSFrameCount = 8;
+		particleFSLoop = 0;
+		
 		animationName = "";
 		particleType = "Billboard";
 		timerPeriod = 1;
@@ -484,18 +561,17 @@ class CfgCloudlets
 		weight = 1;
 		volume = 0.8;
 		rubbing = 0.5;
-		size[] = {1,2,2.8,4,6,8,12,15};
+		size[] = {2.8,4,6,8,12,15,25};
 		color[] = 
 		{
 			{0.9,0.9,0.9,0.003},
 			{0.5,0.5,0.5,0.04},
-			{0.5,0.5,0.5,0.3},
-			{0.6,0.6,0.6,0.15},
-			{0.7,0.7,0.7,0.1},
-			{0.7,0.7,0.7,0.02},
-			{0.8,0.8,0.8,0.005}
+			{0.6,0.6,0.6,0.1},
+			{0.7,0.7,0.7,0.05},
+			{0.7,0.7,0.7,0.01},
+			{0.8,0.8,0.8,0}
 		};
-		animationSpeed[] = {5};
+		animationSpeed[] = {1};
 		randomDirectionPeriod = 0.1;
 		randomDirectionIntensity = 0.1;
 		onTimerScript = "";
@@ -510,11 +586,30 @@ class CfgCloudlets
 		randomDirectionPeriodVar = 0;
 		randomDirectionIntensityVar = 0;
 	};
+	class AAE_Short_Missile: Missile3
+	{
+		lifeTime = 3;
+	};
+	class Missile4: Default
+	{
+		lifeTime = 4;
+		size[] = {0.8,1.5,2,3};
+		color[] = 
+		{
+			{0.9,0.9,0.9,0.003},
+			{0.5,0.5,0.5,0.04},
+			{0.7,0.7,0.7,0.08},
+			{0.7,0.7,0.7,0.03},
+			{0.7,0.7,0.7,0.01},
+			{0.8,0.8,0.8,0}
+		};
+		rotationVelocityVar = 20;
+	};
 	
 	//AAE
-	class AAE_Vapor_Trail: Default
+	/*class AAE_Vapor_Trail: Default
 	{
-		interval=0.01;
+		interval=0.025;
 		particleShape="\A3\Data_F\ParticleEffects\Universal\Universal";
 		particleFSNtieth=16;
 		particleFSIndex=12;
@@ -551,5 +646,5 @@ class CfgCloudlets
 		randomDirectionPeriod=0;
 		randomDirectionIntensity=0;
 		angleVar=1;
-	};
+	};*/
 };

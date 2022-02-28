@@ -35,8 +35,20 @@
 [
 	"vapor_fn","CHECKBOX",
 	["Vapor Trail Effect (CBA Slider)","Spawn Vapor Trail"],
-	["Advance Aero Effects", "Ganeral"],
+	["Advance Aero Effects", "Vapor Trail Effect"],
 	false
+] call CBA_fnc_addSetting;
+
+[
+	"vapor_sim_fn","CHECKBOX",
+	["Affect By Amibient Factor (reach -20°C ,-4°F)","Temp - ((ASL / 100) * 0.98) reach Active altitude (Slider)"],
+	["Advance Aero Effects", "Vapor Trail Effect"],
+	false,0,
+	{
+		if !(_this) then {
+			Vapor_sim = true;
+		};
+	}
 ] call CBA_fnc_addSetting;
 
 [
@@ -61,10 +73,32 @@
 ] call CBA_fnc_addSetting;
 
 [
+	"Gforces_Vol_fn","CHECKBOX",
+	["Lower Ambient Volume","Lower Ambient Sound Effects"],
+	["Advance Aero Effects", "G-Forces"],
+	true
+] call CBA_fnc_addSetting;
+
+[
 	"sonicboom_fn","CHECKBOX",
-	["SonicBoom Effect","Spawn Sonic Boom Effect at 1185km/hr ~ 1205km/hr"],
-	["Advance Aero Effects", "Ganeral"],
+	["SonicBoom Effect","Spawn Sonic Boom Vapor Effect"],
+	["Advance Aero Effects", "Sonic Boom Effect"],
 	false
+] call CBA_fnc_addSetting;
+
+[
+	"sonicboom_tmp_fn","CHECKBOX",
+	["SonicBoom Ambient Factor","Affect by air temperture: 331 + (0.6 * Temp)"],
+	["Advance Aero Effects", "Sonic Boom Effect"],
+	false,0,
+	{
+		if !(_this) then {
+			AAE_SpeedSet = 1195;
+			AAE_sonicboom_speed_01 = AAE_SpeedSet - 20;//1175
+			AAE_sonicboom_speed_02 = AAE_SpeedSet - 10;//1185
+			AAE_sonicboom_speed_03 = AAE_SpeedSet + 10;//1205
+		};
+	}
 ] call CBA_fnc_addSetting;
 
 [
@@ -177,7 +211,7 @@
 [
 	"vapor_sdr", "SLIDER",
 	["Vapor Trail Active Range Slider","The Active Height of Vapor Trail"],
-	["Advance Aero Effects", "Settings"],
+	["Advance Aero Effects", "Vapor Trail Effect"],
 	[2000, 10000, 3000, 0]
 ] call CBA_fnc_addSetting;
 
@@ -221,4 +255,11 @@
 	["Adjustment for G-Forces Slider"],
 	["Advance Aero Effects", "G-Forces"],
 	[0, 1, 1, 1]
+] call CBA_fnc_addSetting;
+
+[
+	"gforces_Vol_sdr", "SLIDER",
+	["Adjustment for volume Slider (%)"],
+	["Advance Aero Effects", "G-Forces"],
+	[0, 100, 30, 0]
 ] call CBA_fnc_addSetting;

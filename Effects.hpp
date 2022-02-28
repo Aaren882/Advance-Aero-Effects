@@ -20,7 +20,6 @@ class FX_WingVortices_FighterJet
 		enabled = "(speed interpolate [62.49,62.5,-1,1])";
 	};
 };
-
 //Vanilla
 class WingVortices
 {
@@ -54,6 +53,43 @@ class BodyVortices
 		type = "BodyTrailMed";
 		qualityLevel = 2;
 		enabled = "accelY interpolate [29.99,30,-1,1]";
+	};
+};
+// Exhaust
+class ExhaustsEffectPlane
+{
+	class ExhaustsEffectRefract01
+	{
+		type = "ExhaustSmokeRefractPlane";
+		enabled = "vehicleSpeedSize interpolate [13.99,14,-1,1]";
+	};
+};
+class ExhaustsEffectPlaneHP
+{
+	class ExhaustsEffectRefract01
+	{
+		type = "ExhaustSmokeRefractPlane";
+		enabled = "vehicleSpeedSize interpolate [13.99,14,-1,1]";
+	};
+};
+class ExhaustsEffectJet
+{
+	class ExhaustsEffectRefract01
+	{
+		type = "ExhaustSmokeRefractPlane";
+		enabled = "vehicleSpeedSize interpolate [13.99,14,-1,1]";
+	};
+};
+// FIR
+class fir_ExhaustsEffectPlane_big
+{
+	class ExhaustsEffect01
+	{
+		type = "ExhaustSmoke1PlaneHP";
+	};
+	class ExhaustsEffectRefract01_big
+	{
+		type = "ExhaustSmokeRefractPlane";
 	};
 };
 ////////////////////////////////////////////////////////////
@@ -256,7 +292,56 @@ class FIR_MissileEffect2
 		lifeTime = 1;
 	};
 };
-
+class AAE_TailHook_Sprak
+{
+	class Sparks
+	{
+		simulation = "Light";
+		//type = "AAE_TailHook_Sprak_Light";
+		type = "AAW_WP_Burst_Trail_Light";
+		position[] = {0,0,0};
+		intensity = 1;
+		interval = 1;
+		lifeTime = 3;
+	};
+};
+//SAM
+class FX_Missile_SAM_LongRange
+{
+	class FX_Missile_SAM_light_01
+	{
+		intensity = 1;
+	};
+	class FX_Plane_Missile_SAM_high
+	{
+		interval = 1;
+	};
+	class FX_Plane_Missile_SAM_medium
+	{
+		interval = 1;
+	};
+	class FX_Plane_Missile_SAM_low
+	{
+		interval = 1;
+	};
+};
+//AA
+class FX_Missile_AA;
+class AAE_Missile_AA_Short: FX_Missile_AA
+{
+	delete FX_Plane_Missile_AA_high;
+	delete FX_Plane_Missile_AA_medium;
+	delete FX_Plane_Missile_AA_low;
+	class Trail
+	{
+		simulation = "particles";
+		type = "AAE_Short_Missile";
+		position[] = {0,0,0};
+		intensity = 1;
+		interval = 1;
+		lifeTime = 1;
+	};
+};
 //Lights
 class CfgLights
 {
@@ -268,9 +353,10 @@ class CfgLights
 		brightness = "18 * fireIntensity";
 		size = 1;
 		intensity = 25000;
-		drawLight = 0;
+		drawLight = 1;
 		blinking = 0;
-		class Attenuation
+		delete Attenuation;
+		/*class Attenuation
 		{
 			start = 0;
 			constant = 0;
@@ -278,42 +364,29 @@ class CfgLights
 			quadratic = 1;
 			hardLimitStart = 100;
 			hardLimitEnd = 200;
-		};
+		};*/
 	};
-	class FighterBurner: RocketLight
+	class AAE_TailHook_Sprak_Light
 	{
-		color[] = {0.98,0.85,0.3};
-		ambient[] = {0.98,0.85,0.3};
-		brightness = 1;
-		intensity = "25000*(vehicleSpeedSize interpolate [167.5,278,0,1])";
-		position[] = {"positionX","positionY","positionZ-2"};
-		class Attenuation: Attenuation
+		intensity=500;
+		flareMaxDistance=500;
+		flareSize=0.2;
+		useFlare=1;
+		brightness = 3;
+		color[]={0.5,0.5,0.5};
+		ambient[]={0.5,0.5,0.5};
+		diffuse[]={1,0.5,0.2};
+		position[]={0,0,0};
+		class Attenuation
 		{
-			hardLimitStart = 50;
-			hardLimitEnd = 1000;
+			start = 0.3;
+			constant = 0;
+			linear = 0;
+			quadratic = 1;
+			hardLimitStart = 1;
+			hardLimitEnd = 150;
 		};
 	};
-};
-
-//AB
-class ExhaustsEffectPlaneHP
-{
-	class ExhaustsEffect01
-	{
-		simulation = "particles";
-		type = "ExhaustSmoke1PlaneHP";
-	};
-	class ExhaustsEffectRefract01
-	{
-		simulation = "particles";
-		type = "ExhaustSmokeRefractPlane";
-	};
-	/*class Light1
-	{
-		simulation = "light";
-		type = "FighterBurner";
-		//lifeTime = "speed interpolate [164.99,165,0,100]";
-	};*/
 };
 
 #include "Wing_Effect\Fighter01.hpp"

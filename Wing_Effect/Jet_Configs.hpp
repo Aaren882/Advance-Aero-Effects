@@ -46,6 +46,38 @@ class Plane_Fighter_01_Base_F: Plane_Base_F
 			position = "pos_body_vapour_R_3";
 		};
 	};
+	class CarrierOpsCompatability
+	{
+		ArrestHookMemoryPoint = "tailhook";
+	};
+	//"hit_glass1"
+	/*hiddenSelections[] = 
+	{
+		"Camo1",
+		"Camo2",
+		"glass1",
+		"camo_cockpit_1",
+		"camo_cockpit_2",
+		"camo_cockpit_3",
+		"camo_cockpit_5",
+		"number_01",
+		"number_02",
+		"number_03",
+		"canopy"
+	};
+	hiddenSelectionsTextures[] = 
+	{
+		"a3\air_f_jets\plane_fighter_01\data\fighter_01_fuselage_01_co.paa",
+		"a3\air_f_jets\plane_fighter_01\data\fighter_01_fuselage_02_co.paa",
+		"",
+		"a3\air_f_jets\plane_fighter_01\data\fighter_01_cockpit_01_co.paa",
+		"a3\air_f_jets\plane_fighter_01\data\fighter_01_cockpit_02_co.paa",
+		"a3\air_f_jets\plane_fighter_01\data\fighter_01_cockpit_03_co.paa",
+		"a3\air_f_jets\plane_fighter_01\data\fighter_01_cockpit_05_co.paa",
+		"a3\air_f_jets\plane_fighter_01\data\Numbers\Fighter_01_01_ca.paa",
+		"a3\air_f_jets\plane_fighter_01\data\Numbers\Fighter_01_00_ca.paa",
+		"a3\air_f_jets\plane_fighter_01\data\Numbers\Fighter_01_01_ca.paa"
+	};*/
 };
 //Fighter02
 class Plane_Fighter_02_Base_F: Plane_Base_F
@@ -142,6 +174,8 @@ class Plane_CAS_01_base_F: Plane_Base_F
 			position = "Vapour_wintip_right_pos";
 		};
 	};
+	//hiddenSelections[] += {"glass_1","glass_2","glass_3"};
+	//hiddenSelectionsTextures[] += {"a3\air_f_epc\plane_cas_01\data\plane_cas_01_glass_ca.paa","a3\air_f_jets\plane_fighter_01\data\fighter_01_glass_01_ca.paa","a3\air_f_jets\plane_fighter_01\data\fighter_01_glass_01_ca.paa"};
 };
 //CAS_02
 class Plane_CAS_02_base_F: Plane_Base_F

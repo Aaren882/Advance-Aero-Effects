@@ -17,3 +17,8 @@ GForces = GForces apply {1};
 GForces_Index = 0;
 lastUpdateTime = 0;
 oldVel = [0,0,0];
+
+SoundVolume_old_time = 0;
+SoundVolume_changed = true;
+last_Sound_Volume = 1;
+SoundVolume_old = getAudioOptionVolumes # 0;
