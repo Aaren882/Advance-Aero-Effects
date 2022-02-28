@@ -1,61 +1,46 @@
-params ["_plane","_Exhausts_count","_engine_offsets"];
-
-_engine_offsets params [["_engine1",[0,0,0]],["_engine2",[0,0,0]],["_engine3",[0,0,0]],["_engine4",[0,0,0]]];
+params ["_plane","_Exhausts_count","_Exhausts_POS"];
 
 _source = "#particlesource";
 _effect = "AAE_Vapor_Trail";
+_Sources = [];
 
 //Vapor Effect
-switch (_Exhausts_count) do
-{
-  case 1: {
-    _particle_source00 = _source createVehicleLocal [0,0,0];
-    _particle_source00 attachTo [_plane, _engine1];
-    _particle_source00 setParticleClass _effect;
-    _plane setVariable ["AAE_Vapor_Paricles",[_particle_source00]];
-  };
-  case 2: {
-    _particle_source00 = _source createVehicleLocal [0,0,0];
-    _particle_source01 = _source createVehicleLocal [0,0,0];
-    _particle_source00 setParticleClass _effect;
-    _particle_source01 setParticleClass _effect;
-    _particle_source00 attachTo [_plane, _engine1];
-    _particle_source01 attachTo [_plane, _engine2];
-    _plane setVariable ["AAE_Vapor_Paricles",[_particle_source00,_particle_source01]];
-  };
-  case 3: {
-    _particle_source00 = _source createVehicleLocal [0,0,0];
-    _particle_source01 = _source createVehicleLocal [0,0,0];
-    _particle_source02 = _source createVehicleLocal [0,0,0];
-    _particle_source00 setParticleClass _effect;
-    _particle_source01 setParticleClass _effect;
-    _particle_source02 setParticleClass _effect;
-    _particle_source00 attachTo [_plane, _engine1];
-    _particle_source01 attachTo [_plane, _engine2];
-    _particle_source02 attachTo [_plane, _engine3];
-    _plane setVariable ["AAE_Vapor_Paricles",[_particle_source00,_particle_source01,_particle_source02]];
-  };
-  case 4: {
-    _particle_source00 = _source createVehicleLocal [0,0,0];
-    _particle_source01 = _source createVehicleLocal [0,0,0];
-    _particle_source02 = _source createVehicleLocal [0,0,0];
-    _particle_source03 = _source createVehicleLocal [0,0,0];
-    _particle_source00 setParticleClass _effect;
-    _particle_source01 setParticleClass _effect;
-    _particle_source02 setParticleClass _effect;
-    _particle_source03 setParticleClass _effect;
-    _particle_source00 attachTo [_plane, _engine1];
-    _particle_source01 attachTo [_plane, _engine2];
-    _particle_source02 attachTo [_plane, _engine3];
-    _particle_source03 attachTo [_plane, _engine4];
-    _plane setVariable ["AAE_Vapor_Paricles",[_particle_source00,_particle_source01,_particle_source02,_particle_source03]];
-  };
+for "_i" from 0 to (_Exhausts_count - 1) step 1 do {
+  _Engine = _Exhausts_POS # _i;
+
+  _particle_source = _source createVehicleLocal [0,0,0];
+
+  //Attach
+  _Particle_source attachTo [_plane, [0,-5,0], _Engine];
+
+  //Particle Effect
+  //_Particle_source setParticleClass _effect;
+
+  _Particle_source setParticleParams [
+	["\A3\Data_F\ParticleEffects\Universal\Universal",16,12,8,0], "", "Billboard",
+	1, 20, [0,0,0], [0, 0, 0], 20, 1.25, 1, 0.01, [8,15,25,30,40],
+	[[0.7,0.8,1,0],[0.7,0.8,1,0.3],[0.7,0.8,1,0.5],[0.7,0.8,1,0.3],[0.7,0.8,1,0.2],[0.7,0.8,1,0.1],[0.7,0.8,1,0]],
+	[1000], 0.1, 0.05, "", "", _Particle_source];
+  _Particle_source setParticleRandom [2,[2,2,0.5],[0.4,0.4,0.4],3,0.4,[0,0,0,0.12],0,0,1];
+
+  //Return
+  _Sources pushBack _Particle_source;
+  _plane setVariable ["AAE_Vapor_Paricles",_Sources];
 };
 
-waituntil {
-  !(_plane getVariable ["AAE_Vapor_Activated",false])
-};
 //Vars
 _Vapor_Paricles = _plane getVariable ["AAE_Vapor_Paricles",[]];
+
+waituntil {
+  //Set Interval
+  {
+    _interval = 0.025-(0.000013*(Speed _plane));
+    if (_interval <= 0.01) then {_interval = 0.01};
+    _x setDropInterval _interval;
+  } forEach _Vapor_Paricles;
+
+  !(_plane getVariable ["AAE_Vapor_Activated",false])
+};
+
 {deleteVehicle _x} foreach _Vapor_Paricles;
 _plane setVariable ["AAE_Vapor_Paricles",[]];

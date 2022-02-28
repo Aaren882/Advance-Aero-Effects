@@ -14,9 +14,9 @@
 	[_trigger,_target] call bis_fnc_carrier01CatapultActionAdd;
 
 
-	////////////////////////////////////////////////////////////
-	EDITED: Aaren
-*/
+	/**//////////////////////////////////////////////////////////**/
+	//** EDITED: Aaren
+	/**//////////////////////////////////////////////////////////**/
 
 #include "\a3\functions_f_jets\Functions\AircraftCarrier\defines.inc"
 
@@ -116,7 +116,7 @@ private _onCompleted =
 	private _catapultData = GET_CATAPULT_DATA; if (count _catapultData == 0) exitWith {};
 
 	SET_CATAPULT_STATE(LAUNCH_COMPLETED);
-	hintSilent str time;
+
 	_catapultData params
 	[
 		["_part", objNull],
@@ -148,28 +148,43 @@ private _onCompleted =
 	//Get Wheels
 	_vars = _plane getvariable "AAE_Wheels_Selections";
 
-	_vars params [
-	  "_plane",["_AV8",false],["_lifetime",10],["_size",[2,2]],
-	  ["_Hvar",0.84],["_HvarR",0.84],
-	  ["_gear0",[0,0,0]],["_gear1",[0,0,0]],["_gear2",[0,0,0]],["_gear3",[0,0,0]],
-	  ["_offset",0],["_OffsetF",0]
-	];
-
 	_color = [[0.7,0.8,1,0.8],[0.7,0.8,1,0.5],[0.7,0.8,1,0.3],[0.7,0.8,1,0.15],[0.7,0.8,1,0.05],[0.7,0.8,1,0.01],[0.7,0.8,1,0.0]];
 	_velocity = velocity _plane;
-	_VelocityFX = [0.4*(_Velocity select 0),0.4*(_Velocity select 1), 0];
+	_VelocityFX = [0,-0.001, 0];
+	_size = [1,3,6,20];
+	_gearArray = _vars # 6;
+	_offset = _vars # 7;
+	_offsetF = _vars # 8;
 
 	//////////////////////////////////////////////////////////////////////////
+	_gear = _gearArray select {(_x # 1)>0};
+	hintSilent str _gear;
 	_effect00 = "#particlesource" createVehicleLocal [0,0,0];
-	_effect00 attachTo [_plane, _gear0];
+	_effect00 attachTo [_plane, _gear # 0];
 
 	_effect00 setParticleParams [
   ["\A3\Data_F\ParticleEffects\Universal\Universal", 16, 12, 16, 0], "", "Billboard",
-  0, _lifetime, [0, _offset, _OffsetF], _VelocityFX, 1.25, 1.2, 1, 0, _size,
+  0, 5, [0, _offset, _OffsetF], _VelocityFX, 2.25, 1, 0.5, 0, _size,
   _color,
   [0], 0.5, 0, "", "", _effect00];
-  _effect00 setDropInterval 0.01;
-  _effect00 setParticleRandom [0.5, [0, 0, 0], [4.5,1,0.01], 0.5, 0.5, [0, 0, 0, 0], 0.1, 0.02, 90];
+  _effect00 setDropInterval 0.05;
+  _effect00 setParticleRandom [3, [0.2,0.2,0], [0,0,0], 0.5, 0.3, [0, 0, 0, 0.25], 0.1, 0.02, 90];
+
+	//internal sound
+	[] spawn {
+		_plane = cameraon;
+		waituntil {
+			!(isTouchingGround _plane)
+		};
+		if ((_plane iskindof "Plane") and (cameraView == "INTERNAL")) then {
+			playsound "Catapult_End";
+		};
+	};
+
+	if ((_plane iskindof "Plane") and (cameraView == "INTERNAL")) then {
+		playsound "Catapult_Start";
+		playsound "Catapult_int";
+	};
 	//////////////////////////////////////////////////////////////////////////
 
 	ATTACHED_TO_CATAPULT(false);

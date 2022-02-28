@@ -1,8 +1,12 @@
-//params ["_plane","_engine_offsets","_Exhausts_count","_Exhausts_POS","_Wingspan"];
-
 //Player only
 if (_planePlayer isKindOf "plane") then {
   _turbulent_Distance_Found = _planePlayer getVariable ["AAE_Turbulent_Source_Distance_Found",false];
+
+  //GForces
+  if !(isTouchingGround _planePlayer) then {
+    _planePlayer Spawn AAE_fnc_gforces;
+  };
+
   if (cameraView == "internal") then {
 
     //Turbulent Settings
@@ -13,24 +17,31 @@ if (_planePlayer isKindOf "plane") then {
       [_planePlayer,_speed_Player] Spawn AAE_fnc_gearFactor;
     };
 
-    //Turbulent Plane       //It's Flying
-    if ((_speed_Player > 200) and !(isTouchingGround _planePlayer) and (turbulentP_fn) and (_turbulent_Distance_Found)) then {
-      [_planePlayer,_Exhausts_count] Spawn AAE_fnc_turbulent;
-    };
+    //It's Flying
+    if !(isTouchingGround _planePlayer) then {
+      //Turbulent Plane
+      if ((_speed_Player > 200) and (turbulentP_fn) and (_turbulent_Distance_Found)) then {
+        [_planePlayer,_Exhausts_count] Spawn AAE_fnc_turbulent;
+      };
 
-    //Turbulent World
-    if (!(isTouchingGround _planePlayer) and (turbulentS_fn)) then {
-      [_planePlayer,((getpos _planePlayer) # 2),_speed_Player] Spawn AAE_fnc_turbulentW;
+      //Turbulent World
+      if ((turbulentS_fn)) then {
+        [_planePlayer,((getpos _planePlayer) # 2),_speed_Player] Spawn AAE_fnc_turbulentW;
+      };
     };
 
     //Taxing
     if ((isTouchingGround _planePlayer) and (taxing_fn)) then {
       [_planePlayer,_speed_Player] Spawn AAE_fnc_taxing;
     };
-  };
-  //GForces
-  if !(isTouchingGround _planePlayer) then {
-    [_planePlayer] Spawn AAE_fnc_gforces;
+
+    if (Gforces_Vol_fn) then {
+      //Volume Changed
+      call AAE_fnc_VolumeChangedEH;
+
+      //Volume fade out
+      call AAE_fnc_ChangeVolume;
+    };
   };
 };
 
@@ -40,9 +51,9 @@ if (sonicboom_fn) then {
 };
 
 //Vapor Trail
-if ((_ASL_POS # 2 > (_plane getVariable "AAE_Vapor_toggle")) and (vapor_fn)) then {
+if ((_ASL_POS # 2 > (_plane getVariable "AAE_Vapor_toggle")) and (Vapor_sim) and (vapor_fn)) then {
   if !(_Vapor_Activated) then {
-    [_plane,_Exhausts_count,_engine_offsets] Spawn AAE_fnc_vapor;
+    [_plane,_Exhausts_count,_Exhausts_POS] Spawn AAE_fnc_vapor;
     _plane setVariable ["AAE_Vapor_Activated", true];
   };
 } else {
@@ -71,7 +82,7 @@ if !(isNull _plane) then {
     _ground_speed_var = 2;
   };
   //Result
-  _ground_result_var = 0.7 *_pitch * _ground_speed_var;
+  _ground_result_var = 0.5 * _pitch * _ground_speed_var;
   _ground_result = groundP_sdr + _ground_result_var;
   if (Wingspan_fn) then {
     _ground_result = _Wingspan + _ground_result_var;
@@ -80,14 +91,25 @@ if !(isNull _plane) then {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   //Ground
-  if (!(isTouchingGround _plane) and ((_AGL_POS # 2) < _ground_result) and (ground_fn)) then {
+  if (!(isTouchingGround _plane) and ((_AGL_POS # 2) < _ground_result) and (ground_fn) and !("Concrete" in (surfaceType (getPos _plane)))) then {
     _type = _plane getVariable ["AAE_Ground_Type","Default"];
-    [_plane,_engine1,_engine2,_AGL_POS,_ASL_POS,_ATL_POS,_ASLW_POS,_velocity,_speed,_type] Spawn AAE_fnc_ground;
+    [_plane,_AGL_POS,_ASL_POS,_ATL_POS,_ASLW_POS,_velocity,_speed,_type] Spawn AAE_fnc_ground;
     _plane setVariable ["AAE_Ground_Activated", true];
   } else {
     _plane setVariable ["AAE_Ground_Activated", false];
   };
+
+  //After Burner      //Else included
+  if ((burner_fn) and (_plane_thrust) and (_have_AB)) then {
+    if !(_Burner_Activated) then {
+      [_plane,_Exhausts_count,_Exhausts_POS] Spawn AAE_fnc_burner;
+      _plane setVariable ["AAE_BurnerActived",true];
+    };
+  } else {
+    _plane setVariable ["AAE_BurnerActived",false];
+  };
 } else {
   _plane setVariable ["AAE_Vapor_Activated", false];
   _plane setVariable ["AAE_Ground_Activated", false];
+  _plane setVariable ["AAE_BurnerActived",false];
 };

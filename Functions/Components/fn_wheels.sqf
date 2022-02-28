@@ -1,13 +1,16 @@
 params ["_plane"];
 
+_GearsArray = [];
 _offset = 0;
 _OffsetF = 0;
 
-_selection = getArray (configFile >> "CfgVehicles" >> typeOf _plane >> "driveOnComponent");
+_config = configFile >> "CfgVehicles" >> typeOf _plane;
+
+_selection = getArray (_config >> "driveOnComponent");
 
 if (_selection isEqualTo  []) then {
 
-  _selection = getArray (configFile >> "CfgVehicles" >> typeOf _plane >> "AAE_Config_Handler" >> "WheelsContact");
+  _selection = getArray (_config >> "AAE_WheelsContact");
 
   if (_selection isEqualTo  []) then {
 
@@ -15,7 +18,7 @@ if (_selection isEqualTo  []) then {
 
     //Others
     if (_plane isKindOf "Plane_Fighter_01_Base_F") then {
-      _selection = ["gear_f" , _selection select 1, _selection select 2];
+      _selection = ["gear_f" , _selection # 1, _selection # 2];
       _OffsetF = -1;
     };
     if (_plane isKindOf "VTOL_01_base_F") then {
@@ -52,13 +55,13 @@ if (_selection isEqualTo  []) then {
   };
 };
 
-if (_selection isEqualTo  []) exitWith {};
+if (_selection isEqualTo []) exitWith {};
 
 _AV8 = (_plane isKindOf "FIR_AV8B_Base") or (_plane isKindOf "FIR_AV8B_NA_Base") or (_plane isKindOf "FIR_AV8B_GR7_Base") or (_plane isKindOf "CUP_AV8B_Base");
 
-_gearF = _selection select 0;
-_gearL = _selection select 1;
-_gearR = _selection select 2;
+/* _gearF = _selection # 0;
+_gearL = _selection # 1;
+_gearR = _selection # 2;
 _gearA = "";
 
 _gear0 = _plane selectionPosition _gearF;
@@ -67,8 +70,14 @@ _gear2 = _plane selectionPosition _gearR;
 _gear3 = [0,0,0];
 
 if (_AV8) then {
-  _gearA = _selection select 3;
+  _gearA = _selection # 3;
   _gear3 = _plane selectionPosition _gearA;
+}; */
+
+for "_i" from 0 to (count _selection - 1) do {
+  _gear = _selection # _i;
+  _Selection_Offset = _plane selectionPosition _gear;
+  _GearsArray pushBack _Selection_Offset;
 };
 
 _lifetime = 3;
@@ -118,28 +127,9 @@ if ((driver _plane) != player) then {
   };
 };
 
-//Gear height
-/* _gearFH = (getpos _source00) select 2;
-_gearRL = (getpos _source01) select 2;
-_gearRR = (getpos _source02) select 2;
-
-_gearoffsetF = (-1*_gearFH);
-_gearoffsetRR = (-1*_gearRR);
-_gearoffsetRL = (-1*_gearRL); */
-
 _Hvar = 0.84;
 _HvarR = 0.84;
 
-/* //Landing Gear Effect
-if (((getpos _plane) select 2) > 1) then {
-	_Hvar = 2.4;
-	_HvarR = 2.48;
-};
-if (((getpos _plane) select 2) <= 1) then {
-	_Hvar = 0.84;
-	_HvarR = 0.84;
-}; */
-
-_returns = [_plane,_AV8,_lifetime,_size,_Hvar,_HvarR,_gear0,_gear1,_gear2,_gear3,_offset,_OffsetF];
+_returns = [_plane,_AV8,_lifetime,_size,_Hvar,_HvarR,_GearsArray,_offset,_OffsetF];
 
 _returns

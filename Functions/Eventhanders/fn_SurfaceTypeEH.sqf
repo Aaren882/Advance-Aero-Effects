@@ -14,7 +14,7 @@ if (surfaceIsWater _Depos) then {
   };
 };
 
-//Return Value : "AAE_Ground_Type_Changed"
+//Return Value : Bool ("AAE_Ground_Type_Changed")
 _plane setVariable ["AAE_Ground_Type_Changed",false];
 waitUntil {
   ((_plane getVariable ["AAE_Ground_Type","Default"]) != _type)

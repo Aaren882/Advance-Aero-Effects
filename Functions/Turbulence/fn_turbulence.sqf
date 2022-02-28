@@ -3,7 +3,6 @@ params ["_plane","_Exhausts_count"];
 enableCamShake true;
 
 //Turbulent Effect
-
 _Source_Distance = _plane getVariable "AAE_Turbulent_Source_Distance";
 _Source_Distance params [["_dis0",-1],["_dis1",-1],["_dis2",-1],["_dis3",-1]];
 

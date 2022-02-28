@@ -4,7 +4,7 @@ params ["_plane","_speed"];
 _config = getArray (configFile >> "CfgVehicles" >> typeOf _plane >> "AAE_Rumble_Taxing");
 
 //Debug
-if (_config isEqualTo []) then {
+if (_config isEqualTo "") then {
   _config = ["AAE_RumbleG"];
 };
 
