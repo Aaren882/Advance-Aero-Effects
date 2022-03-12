@@ -928,13 +928,13 @@ class Plane_CAS_02_base_F;
 #endif
 //USAF
 //- AC-130
-//#if __has_include("\USAF_AC130U_C\config.bin")
+#if __has_include("\USAF_AC130U_C\config.bin")
 	class USAF_AC130U_base;
 	class USAF_AC130U: USAF_AC130U_base
 	{
 		#include "USAF\AC130.hpp"
 	};
-//#endif
+#endif
 /////////////////Super Hornet///////////////
 #if __has_include("\js_jc_fa18\config.bin")
 	class JS_JC_FA18E: Plane_Base_F
