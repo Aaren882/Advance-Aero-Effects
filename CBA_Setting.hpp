@@ -59,9 +59,9 @@
 ] call CBA_fnc_addSetting;
 
 [
-	"taxing_fn","CHECKBOX",
-	["Taxing Cam Shake Effect"],
-	["Advance Aero Effects", "Ganeral"],
+	"taxiing_fn","CHECKBOX",
+	["Taxiing Cam Shake Effect"],
+	["Advance Aero Effects", "Taxiing Settings"],
 	false
 ] call CBA_fnc_addSetting;
 
@@ -103,7 +103,7 @@
 
 [
 	"camshake_fn","CHECKBOX",
-	["Cam-Shake Effect (CBA Slider)","Trigger Cam-Shaking Effect at Distance 5m ~ 200m (For Troopers on The Ground)"],
+	["Cam-Shake Effect (CBA Slider)","Cam-Shaking Effect at Distance 5m ~ 200m (For Troopers on The Ground)"],
 	["Advance Aero Effects", "Ganeral"],
 	false
 ] call CBA_fnc_addSetting;
@@ -115,12 +115,12 @@
 	false
 ] call CBA_fnc_addSetting;
 
-[
-	"landingCam_fn","CHECKBOX",
-	["Taxing CamShake Effect","Trigger CamShaking Effect While TouchDown"],
-	["Advance Aero Effects", "Ganeral"],
-	false
-] call CBA_fnc_addSetting;
+// [
+// 	"landingCam_fn","CHECKBOX",
+// 	["Taxiing CamShake Effect","CamShaking Effect While TouchDown"],
+// 	["Advance Aero Effects", "Ganeral"],
+// 	false
+// ] call CBA_fnc_addSetting;
 
 [
 	"turbulentP_fn","CHECKBOX",
@@ -153,56 +153,63 @@
 
 [
 	"turbulent_snd_rum_fn","CHECKBOX",
-	["Turbulent Rumbling Sound Effect","Trigger Rumbling Sound Effect"],
+	["Turbulent Rumbling Sound Effect","Rumbling Sound Effect"],
 	["Advance Aero Effects", "Rumbling Sound Effects"],
 	false
 ] call CBA_fnc_addSetting;
 
 [
 	"gear_snd_rum_fn","CHECKBOX",
-	["Gear Rumbling Sound Effect","Trigger Rumbling Sound Effect"],
+	["Gear Rumbling Sound Effect","Rumbling Sound Effect"],
 	["Advance Aero Effects", "Rumbling Sound Effects"],
 	false
 ] call CBA_fnc_addSetting;
 
 [
+	"Taxing_sound_fn","CHECKBOX",
+	["Gear Rumbling Sound Effect","Rumbling Sound Effect"],
+	["Advance Aero Effects", "Taxiing Settings"],
+	false
+] call CBA_fnc_addSetting;
+
+[
 	"turbulent_snd_alarm_fn","CHECKBOX",
-	["Turbulent Alarm Sound Effect","Trigger Alarm Sound Effect"],
+	["Turbulent Alarm Sound Effect","Alarm Sound Effect"],
 	["Advance Aero Effects", "Alarm Sound Effects"],
 	false
 ] call CBA_fnc_addSetting;
 
 [
 	"gear_snd_alarm_fn","CHECKBOX",
-	["Gear Alarm Sound Effect","Trigger Alarm Sound Effect"],
+	["Gear Alarm Sound Effect","Alarm Sound Effect"],
 	["Advance Aero Effects", "Alarm Sound Effects"],
 	false
 ] call CBA_fnc_addSetting;
 
 [
 	"turbulentS_snd_alarm_fn","CHECKBOX",
-	["Speed Alarm Sound Effect","Trigger Alarm Sound Effect"],
+	["Speed Alarm Sound Effect","Alarm Sound Effect"],
 	["Advance Aero Effects", "Alarm Sound Effects"],
 	false
 ] call CBA_fnc_addSetting;
 
 [
 	"turbulentH_snd_alarm_fn","CHECKBOX",
-	["Elevation Alarm Sound Effect","Trigger Alarm Sound Effect"],
+	["Elevation Alarm Sound Effect","Alarm Sound Effect"],
 	["Advance Aero Effects", "Alarm Sound Effects"],
 	false
 ] call CBA_fnc_addSetting;
 
 [
 	"TDSound_fn","CHECKBOX",
-	["TouchDown Sound Effect","Trigger TouchDown Sound Effect"],
+	["TouchDown Sound Effect","TouchDown Sound Effect"],
 	["Advance Aero Effects", "Sound Effects"],
 	false
 ] call CBA_fnc_addSetting;
 
 [
-	"Taxing_sound_fn","CHECKBOX",
-	["Taxing Sound Effect","Trigger Taxing Sound Effect"],
+	"Taxiing_sound_fn","CHECKBOX",
+	["Taxiing Sound Effect","Taxiing Sound Effect"],
 	["Advance Aero Effects", "Sound Effects"],
 	false
 ] call CBA_fnc_addSetting;
