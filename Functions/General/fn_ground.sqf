@@ -156,7 +156,7 @@ if (surfaceIsWater _Depos) then {
 	_Particle00_Time = 1;
 	_Particle01_Time = 2;
 
-	//_ParticleShape = ["\A3\data_f\ParticleEffects\Universal\Universal", 16, 13, 10, 0];
+	_ParticleShape = ["\A3\data_f\ParticleEffects\Universal\Universal", 16, 13, 10, 0];
 };
 
 [

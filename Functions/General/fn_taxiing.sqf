@@ -1,14 +1,12 @@
 params ["_plane","_speed"];
 
 //Sound Files
-_config = getArray (configFile >> "CfgVehicles" >> typeOf _plane >> "AAE_Rumble_Taxing");
+_sound = getText (configFile >> "CfgVehicles" >> typeOf _plane >> "AAE_Rumble_Taxiing");
 
 //Debug
-if (_config isEqualTo "") then {
-  _config = ["AAE_RumbleG"];
+if (_sound isEqualTo "") then {
+  _sound = "AAE_RumbleG";
 };
-
-_sound = _config # 0;
 
 _fq = 0;
 _pw = 0;

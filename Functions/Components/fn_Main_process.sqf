@@ -9,7 +9,7 @@ if (_planePlayer isKindOf "plane") then {
 
   if (cameraView == "internal") then {
 
-    //Turbulent Settings
+    //Turbulence Settings
     [_plane,_Exhausts_count,_engine_offsets,_planePlayer] call AAE_fnc_Exhaust_Offsets;
 
     //Gear Factor
@@ -19,20 +19,20 @@ if (_planePlayer isKindOf "plane") then {
 
     //It's Flying
     if !(isTouchingGround _planePlayer) then {
-      //Turbulent Plane
+      //Turbulence Plane
       if ((_speed_Player > 200) and (turbulentP_fn) and (_turbulent_Distance_Found)) then {
-        [_planePlayer,_Exhausts_count] Spawn AAE_fnc_turbulent;
+        [_planePlayer,_Exhausts_count] Spawn AAE_fnc_turbulence;
       };
 
-      //Turbulent World
-      if ((turbulentS_fn)) then {
-        [_planePlayer,((getpos _planePlayer) # 2),_speed_Player] Spawn AAE_fnc_turbulentW;
+      //Turbulence World
+      if (turbulentS_fn) then {
+        [_planePlayer,((getpos _planePlayer) # 2),_speed_Player] Spawn AAE_fnc_turbulenceW;
       };
     };
 
     //Taxing
-    if ((isTouchingGround _planePlayer) and (taxing_fn)) then {
-      [_planePlayer,_speed_Player] Spawn AAE_fnc_taxing;
+    if ((isTouchingGround _planePlayer) and (taxiing_fn)) then {
+      [_planePlayer,_speed_Player] Spawn AAE_fnc_taxiing;
     };
 
     if (Gforces_Vol_fn) then {

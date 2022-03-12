@@ -24,7 +24,7 @@ if (_speed >= 50) then {
       [_plane,_sound_Alarm] call AAE_fnc_PlayAlarm;
     };
   };
-  if ((turbulentH_fn) and (_speed > _Max_speed) and (_height < turbulentT_sdr)) then {
+  if ((turbulentH_fn) and (_speed > 700) and (_height < turbulentT_sdr)) then {
   	addCamShake [1, 2, _fqT];
   	if (((_plane getVariable ["Alarm_execution_time", -1]) < time) and turbulentH_snd_alarm_fn) then {
       [_plane,_sound_Alarm] call AAE_fnc_PlayAlarm;

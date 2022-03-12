@@ -32,5 +32,5 @@ if (
 		((_dis3 > 0) and (_dis3 <= turbulent_sdr))
 	) then {
 	addCamShake [2, 2, _fq];
-	[_plane] call AAE_fnc_turbulentSnd;
+	[_plane] call AAE_fnc_turbulenceSnd;
 };

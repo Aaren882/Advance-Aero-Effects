@@ -1,21 +1,17 @@
 params ["_plane","_speed"];
 
 //Sound Files
-_config_Alarm = getArray (configFile >> "CfgVehicles" >> typeOf _plane >> "AAE_Alarm_Int");
-_config_Rum = getArray (configFile >> "CfgVehicles" >> typeOf _plane >> "AAE_Rumble_Int");
+_sound_Alarm = getText (configFile >> "CfgVehicles" >> typeOf _plane >> "AAE_Alarm_Int");
+_sound_Rum = getText (configFile >> "CfgVehicles" >> typeOf _plane >> "AAE_Rumble_Int");
 
 //Debug
-if (_config_Alarm isEqualTo []) then {
-  _config_Alarm = ["AAE_Alarm"];
+if (_sound_Alarm isEqualTo "") then {
+  _sound_Alarm = "AAE_Alarm";
 };
 
-if (_config_Rum isEqualTo []) then {
-  _config_Rum = ["AAE_Rumble"];
+if (_sound_Rum isEqualTo "") then {
+  _sound_Rum = "AAE_Rumble";
 };
-
-_sound_Alarm = _config_Alarm # 0;
-_sound_Rum = _config_Rum # 0;
-
 
 //Landing Gear
 _gear = _plane getSoundController "gear";
