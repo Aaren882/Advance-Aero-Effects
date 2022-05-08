@@ -1,5 +1,3 @@
-params ["_plane","_velocity","_speed"];
-
 _velocityFX = [0,(0.35*(_velocity select 1)),0];
 _color = [[1, 1, 1, 0],[1, 1, 1, 0.75]];
 

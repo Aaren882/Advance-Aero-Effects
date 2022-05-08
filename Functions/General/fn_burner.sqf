@@ -67,11 +67,11 @@ _Burner_sources = _plane getVariable ["AAE_Burner_Sources",[]];
 _Particle_sources = _plane getVariable ["AAE_Exhaust_Particle_Sources",[]];
 
 //Unhide Lights
-sleep 0.1;
+uisleep 0.1;
 {_x hideObject false} foreach _Burner_sources;
 
 _Particle_sources spawn {
-  sleep 0.3;
+  uisleep 0.3;
   {deleteVehicle _x} foreach _this;
 };
 
@@ -81,7 +81,7 @@ waituntil{
 
 //Delete Objects
 {hideObject _x} foreach _Burner_sources;
-sleep 0.02;
+uisleep 0.02;
 
 {deleteVehicle _x} foreach _Burner_sources;
 _plane setVariable ["AAE_Burner_Sources",[]];

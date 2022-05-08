@@ -1,9 +1,8 @@
-params ["_plane","_AGL_POS","_ASL_POS","_ATL_POS","_ASLW_POS","_velocity","_speed","_Surfacetype"];
+params["_plane"];
 
 //////////////////////////////Functions/////////////////////////////////////////
 _particle_Setups = {
 	params [
-		"_plane",
 		"_source00","_source01",
 		"_ParticleShape",
 		"_Particle00_Time","_Particle01_Time",
@@ -67,7 +66,7 @@ _particles = {
 		_plane setVariable ["AAE_Ground_Paricles", [_source00,_source01]];
 
 		//Particle Effects
-		[_plane,
+		[
 		_source00,_source01,
 		_ParticleShape,
 		_Particle00_Time,_Particle01_Time,
@@ -77,25 +76,13 @@ _particles = {
 		_SurfaceType_Pick] call _particle_Setups;
 	};
 
-	_Ground_Paricles = _plane getVariable ["AAE_Ground_Paricles",[]];
-	_Particle_Count = count _Ground_Paricles;
-
 	if (_Particle_Count > 0) then {
+
 		_source00 = _Ground_Paricles # 0;
 		_source01 = _Ground_Paricles # 1;
 		_source00 attachTo [_plane, [0, (-5 + _Engine_Offset),0]];
 		_source01 attachTo [_plane, [0, (-5 + _Engine_Offset),0]];
 
-		if (_SurfaceChanged) then {
-			[_plane,
-			_source00,_source01,
-			_ParticleShape,
-			_Particle00_Time,_Particle01_Time,
-			_velocity,_speed,
-			_weight,_volume,
-			_Particle00_Size,_Particle01_Size,
-			_SurfaceType_Pick] call _particle_Setups;
-		};
 		//Source00
 		_source00 setParticleCircle [1.2, [(_speed*0.02), (_speed*0.02), 1]];
 		_source00 setParticleRandom [0.8, [0, 0, 0], [0, 0, 0], 10, 0.4, [0, 0, 0, 0], 0.1, 0.05, 0];
@@ -110,6 +97,7 @@ _particles = {
 		if (_Particle_Count > 0) then {
 			{deleteVehicle _x} foreach _Ground_Paricles;
 			_plane setVariable ["AAE_Ground_Paricles", []];
+			_plane setVariable ["AAE_Ground_Activated",false];
 		};
 	};
 };
@@ -120,49 +108,52 @@ _effect = {
 	//Color Picking
 	_SurfaceType_Pick = configFile >> "CfgVehicles">> typeOf _plane >> "AAE_Config_Handler" >> _Particle_Pick;
 
-	[_plane,_SurfaceType_Pick,_Depos,_velocity,_speed,_ParticleShape,_Particle_Settings,_Particle00_Setups,_Particle01_Setups,_particle_Setups] spawn _particles;
+	[_plane,_SurfaceType_Pick,_Depos,_velocity,_speed,_ParticleShape,_Particle_Settings,_Particle00_Setups,_Particle01_Setups,_particle_Setups] call _particles;
 };
 ////////////////////////////////////////////////////////////////////////////////
 
-_Particle_Pick = _Surfacetype;
+_Particle_Pick = _plane getVariable ["AAE_Ground_Type","Default"];
 
-_ParticleShape = ["\A3\Data_F\ParticleEffects\Universal\Universal", 16, 12, 13, 0];
+waitUntil {
+	_ParticleShape = ["\A3\Data_F\ParticleEffects\Universal\Universal", 16, 12, 13, 0];
 
-_Particle00_Time = 2;
-_Particle01_Time = 4;
+	_Particle00_Time = 2;
+	_Particle01_Time = 4;
 
-_Particle00_Size = [4,6];
-_Particle01_Size = [5,10,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15];
+	_Particle00_Size = [4,6];
+	_Particle01_Size = [5,10,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15];
 
-_particle01_CycleSpeed = 0.02;
+	_particle01_CycleSpeed = 0.02;
 
-_Height = _AGL_POS # 2;
-_groundH = _ATL_POS # 2;
-_seaH = _ASLW_POS # 2;
+	_weight = 2.2;
+	_volume = 0.8;
 
-_weight = 2.2;
-_volume = 0.8;
+	_Depos = _plane modelToWorld [0,-5,0];
 
-_Depos = _plane modelToWorld [0,-5,0];
+	_speed = speed _plane;
+	_velocity = velocity _plane;
 
-//SurfaceType Eventhadler
-[_plane,_Surfacetype,_Depos] spawn AAE_fnc_SurfaceTypeEH;
+	//SurfaceType Eventhadler
+	call AAE_fnc_SurfaceTypeEH;
 
-//Activations
-//Water
-if (surfaceIsWater _Depos) then {
-	_Particle01_Size = [3,5,8,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7];
+	//Activations
+	//Water
+	if (surfaceIsWater _Depos) then {
+		_Particle01_Size = [3,5,8,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7];
 
-	_Particle00_Time = 1;
-	_Particle01_Time = 2;
+		_Particle00_Time = 1;
+		_Particle01_Time = 2;
 
-	_ParticleShape = ["\A3\data_f\ParticleEffects\Universal\Universal", 16, 13, 10, 0];
+		_ParticleShape = ["\A3\data_f\ParticleEffects\Universal\Universal", 16, 13, 10, 0];
+	};
+
+	[
+		_plane,_Particle_Pick,_Depos,_velocity,_speed,_particles,_ParticleShape,
+		[_weight,_volume],
+		[_Particle00_Time,_Particle00_Size],
+		[_Particle01_Time,_Particle01_Size,_particle01_CycleSpeed],
+		_particle_Setups
+	] call _effect;
+
+	!(_plane getVariable ["AAE_Ground_Activated",false])
 };
-
-[
-	_plane,_Particle_Pick,_Depos,_velocity,_speed,_particles,_ParticleShape,
-	[_weight,_volume],
-	[_Particle00_Time,_Particle00_Size],
-	[_Particle01_Time,_Particle01_Size,_particle01_CycleSpeed],
-	_particle_Setups
-] call _effect;

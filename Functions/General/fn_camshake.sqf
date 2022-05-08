@@ -1,5 +1,3 @@
-params ["_plane"];
-enableCamShake true;
 if ((_plane iskindof "UAV_02_base_F") or (_plane iskindof "UAV_04_base_F")) exitWith {};
 
 _Distance = player distance _plane;

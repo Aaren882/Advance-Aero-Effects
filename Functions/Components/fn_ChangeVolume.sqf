@@ -1,5 +1,5 @@
 _Fade_Out_F = player getVariable ["AAE_GForce_Sound_Fade_Out_F",true];
-_currentGForce = _plane getVariable "AAE_CurrentGForce";
+_currentGForce = _plane getVariable ["AAE_CurrentGForce",0];
 
 if (_currentGForce >= 0.15) then {
   if (_Fade_Out_F) then {

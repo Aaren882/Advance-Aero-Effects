@@ -11,7 +11,7 @@
 //6. Sound Fade Out
 //Edited by Aaren
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
-params ["_plane"],
+_plane = _this;
 
 _config = configFile >> "CfgVehicles" >> typeOf _plane;
 _sound = getText (_config >> "AAE_GBreathe");
@@ -32,7 +32,7 @@ lastUpdateTime = time;
 //Thanks for ACE team
 _newVel = velocity _plane;
 _accel = (_newVel vectorDiff oldVel) vectorMultiply (1 / _INTERVAL);
-_currentGForce = (((_accel vectorDotProduct (vectorUp _plane)) / 11) max -14) min 10;
+_currentGForce = (((_accel vectorDotProduct (vectorUp _plane)) / 11) max -10) min 10;
 
 if (_currentGForce >= 7) then {
   _sound = _sound_hold;

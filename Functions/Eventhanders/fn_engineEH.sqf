@@ -25,6 +25,7 @@ if (alive _plane and _Engine_State) then {
   //Have Burner
   _have_AB = _plane getVariable ["AAE_Have_AB",false];
 
+  //EachFrame # 41
   _AAE_handler_Engine = addMissionEventHandler ["EachFrame", {
     if !(isGamePaused) then {
       _plane = _thisArgs # 0;
@@ -58,20 +59,11 @@ if (alive _plane and _Engine_State) then {
       _air_Temp = ambientTemperature # 0;
 
       //Vapor
-      _Vapor_Activated = _plane getVariable ["AAE_Vapor_Activated", false];
-
       if (vapor_sim_fn) then {
         Vapor_sim = (_air_Temp - (((_ASL_POS # 2) / 100) * 0.98)) <= -20;
       };
 
-      //Ground
-      _Ground_Activated = _plane getVariable ["AAE_Ground_Activated", false];
-      _pitchBank = _plane call BIS_fnc_getPitchBank;
-
-      //Burner
-      _Burner_Activated = _plane getVariable ["AAE_BurnerActived",false];
-
-      //Source
+      //Burner Source
       _plane_thrust = (_plane getSoundController "thrust") > 0.9;
 
       if (_plane getVariable ["AAE_Have_AB_Source",false]) then {
