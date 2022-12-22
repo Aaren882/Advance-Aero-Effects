@@ -6,6 +6,8 @@ class CfgFunctions
 		{
 			file="MG8\AVDAVFX\Functions";
 			class Init;
+			class ServerPFH;
+			class ClientPFH;
 		};
 		//Eventhandlers
 		class Eventhandlers

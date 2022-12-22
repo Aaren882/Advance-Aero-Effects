@@ -129,6 +129,8 @@
 		{
 			AB_Source = "burner_fire_1_left";
 		};
+		class EventHandlers: EventHandlers
+		{};
 	};
 #endif
 
@@ -265,9 +267,6 @@ class vn_air_f4_base: Plane_Base_F
 	Aircraft_Wingspan = 11.7;
 	//AAE_Have_AB = 1;
 };
-
-//CUP
-
 
 /*//Sab Military
 class sab_militaryaviation_baseplane: Plane_Base_F

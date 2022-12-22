@@ -34,17 +34,7 @@ class CfgPatches
 	};
 };
 
-/*class AAE_EH
-{
-	engine="_this execVM 'MG8\AVDAVFX\Functions\fn_init.sqf'";
-	LandedTouchDown="if (TDSound_fn) then {playSound [""touchdown"", true]};";
-	engine="_this execvm 'MG8\AVDAVFX\Functions\Turbulent\fn_turbulentInit.sqf'";
-};*/
-
-class DefaultEventHandlers
-{
-	//class AAE_EH: AAE_EH{};
-};
+class DefaultEventHandlers;
 
 class Extended_PreInit_EventHandlers
 {
@@ -60,13 +50,6 @@ class Extended_PostInit_EventHandlers
 		init = "call compile preprocessFileLineNumbers 'MG8\AVDAVFX\XEH_postInit.sqf'";
 	};
 };
-/*class Extended_PreStart_EventHandlers
-{
-	class AAE_EH
-	{
-		init = "call compile preprocessFileLineNumbers 'MG8\AVDAVFX\addons\AVDAVFX\XEH_preStart.sqf'";
-	};
-};*/
 class CfgVehicles
 {
 	class AllVehicles;

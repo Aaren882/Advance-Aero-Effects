@@ -225,6 +225,7 @@ class FIR_BodyVortices
 		simulation = "particles";
 		type = "FX_BodyTrail_FighterJet";
 		enabled = "accelY interpolate [69.99,70,-1,1]";
+		qualityLevel = 2;
 	};
 };
 class FIR_WingTrails_top
@@ -236,6 +237,7 @@ class FIR_WingTrails_top
 		type = "AAE_WingTrail_FighterJet_FIR";
 		enabled = "accelY interpolate [79.99,80,-1,1]";
 		position[] = {0,-0.2,0};
+		qualityLevel = 2;
 	};
 };
 //FIR Weapons

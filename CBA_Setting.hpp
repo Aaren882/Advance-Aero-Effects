@@ -18,6 +18,7 @@
 	["Advance Aero Effects", "AfterBurner Effect Settings"],
 	true
 ] call CBA_fnc_addSetting;
+
 [
 	"burner_flare_fn","CHECKBOX",
 	["AfterBurner Flare Effect","Active AfterBurner Light Flare"],

@@ -21,4 +21,5 @@ oldVel = [0,0,0];
 SoundVolume_old_time = 0;
 SoundVolume_changed = true;
 last_Sound_Volume = 1;
-SoundVolume_old = getAudioOptionVolumes # 0;
+SoundVolume_old = soundVolume;
+AAE_UnitList_LastUpdate = 0;

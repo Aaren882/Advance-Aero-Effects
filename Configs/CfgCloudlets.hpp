@@ -402,18 +402,18 @@ class CfgCloudlets
 		particleFSLoop = 0;
 		size[] = {2.4,3};
 		rubbing = 0.01;
-		color[] = {{0.85,0.85,0.85,0.15},{0.88,0.88,0.88,0.1},{0.9,0.9,0.9,0.08},{0.9,0.9,0.9,0.07},{0.9,0.9,0.9,0}};
-		lifeTime = 3;
+		color[] = {{0.85,0.85,0.85,0.05},{0.88,0.88,0.88,0.1},{0.9,0.9,0.9,0.08},{0.9,0.9,0.9,0.07},{0.9,0.9,0.9,0}};
+		lifeTime = 1.3;
 		sizeVar = 0.2;
 		interval = "0.01/(vehicleSpeedSize interpolate [0,250,1,3])";
 		animationSpeed[] = {1000};
 		angleVar = 1;
 		position[] = {"positionX","positionY","positionZ"};
-		moveVelocity[]=
+		moveVelocity[] = 
 		{
-			"directionX",
-			"directionY",
-			"directionZ"
+			"directionX + vehicleSpeedLocalX",
+			"directionY + vehicleSpeedLocalY",
+			"directionZ + vehicleSpeedLocalZ"
 		};
 		positionVar[]=
 		{
@@ -486,8 +486,8 @@ class CfgCloudlets
 		particleFSLoop = 0;
 		size[] = {2.4,3};
 		rubbing = 0.01;
-		color[] = {{0.85,0.85,0.85,0.15},{0.88,0.88,0.88,0.1},{0.9,0.9,0.9,0.08},{0.9,0.9,0.9,0.07},{0.9,0.9,0.9,0}};
-		lifeTime = 3;
+		color[] = {{0.85,0.85,0.85,0.15},{0.88,0.88,0.88,0.1},{0.9,0.9,0.9,0.08},{0.9,0.9,0.9,0.07},{0.9,0.9,0.9,0.03},{0.9,0.9,0.9,0}};
+		lifeTime = 5;
 		sizeVar = 0.2;
 		//interval = 0.0003;
 		interval = "0.01/(vehicleSpeedSize interpolate [0,250,1,3])";
