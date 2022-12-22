@@ -22,6 +22,7 @@ class To199_FuselageVapour_FighterJet_L
 		type = "AAE_BodyTrail_FighterJet_A164";
 		position[] = {-0.5,0,-0.3};
 		enabled = "accelY interpolate [34.99,35,-1,1]";
+		qualityLevel = 2;
 	};
 	//2
 	class 2FX_Plane_WingTrail: 1FX_Plane_WingTrail
@@ -75,6 +76,7 @@ class To199_FuselageVapour_FighterJet_R
 		type = "AAE_BodyTrail_FighterJet_A164";
 		position[] = {0.5,0,-0.3};
 		enabled = "accelY interpolate [34.99,35,-1,1]";
+		qualityLevel = 2;
 	};
 	//2
 	class 2FX_Plane_WingTrail: 1FX_Plane_WingTrail
