@@ -16,4 +16,6 @@ if (surfaceIsWater _Depos) then {
 _plane setVariable ["AAE_Ground_Type_Changed",false];
 if ((_plane getVariable ["AAE_Ground_Type","Default"]) != _Particle_Pick) then {
   _plane setVariable ["AAE_Ground_Type_Changed",true];
+  //-exit ground particles
+  _plane setVariable ["AAE_Ground_Activated", false];
 };

@@ -5,18 +5,18 @@ if (_plane getVariable ["AAE_Actived", false]) then {
   _plane setVariable ["AAE_Actived", false];
 
   //Loop Remove
-  removeMissionEventHandler ["EachFrame", (_plane getVariable ["AAE_EachFrame_Engine", -1])];
-  _plane setVariable ["AAE_EachFrame_Engine", -1];
+  /* removeMissionEventHandler ["EachFrame", (_plane getVariable ["AAE_EachFrame_Engine", -1])];
+  _plane setVariable ["AAE_EachFrame_Engine", -1]; */
 
   //G Forces
-  GForces_Filter ppEffectEnable false;
-  ppEffectDestroy GForces_Filter;
+  AAE_GForces_Filter ppEffectEnable false;
+  ppEffectDestroy AAE_GForces_Filter;
 
   //Vars
   _Vapor_Paricles = _plane getVariable ["AAE_Vapor_Paricles",[]];
   _Sonic_Paricles = _plane getVariable ["AAE_Sonic_Paricles",[]];
   _Burner_sources = _plane getVariable ["AAE_Burner_Sources",[]];
-  _Ground_Paricles = _plane getVariable ["AAE_Ground_Paricles",[]];
+  _Ground_Paricles = _plane getVariable ["AAE_Ground_Particles",[]];
   _landed_Particles = _plane getVariable ["AAE_Landed_Paricles",[]];
 
   //Vapor
@@ -41,11 +41,11 @@ if (_plane getVariable ["AAE_Actived", false]) then {
 
   //Ground
   _plane setVariable ["AAE_Ground_Type_Changed",false];
-  _plane setVariable ["AAE_Ground_Activated", false];
-  if (count _Ground_Paricles > 0) then {
+  /* if (count _Ground_Paricles > 0) then {
     {deleteVehicle _x} foreach _Ground_Paricles;
-    _plane setVariable ["AAE_Ground_Paricles", []];
-  };
+    _plane setVariable ["AAE_Ground_Particles", []];
+    _plane setVariable ["AAE_Ground_Activated", false];
+  }; */
 
   //Landed
   if (count _landed_Particles > 0) then {

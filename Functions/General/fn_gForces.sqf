@@ -60,7 +60,7 @@ _plane setVariable ["AAE_CurrentGForce",_strength];
 if (_average > 0.30 * _gBlackOut) then {
   if ((Gforces_fn) and !(HaveACE)) then {
     _strength = ((_average - 0.30 * _gBlackOut) / (0.70 * _gBlackOut)) max 0;
-    GForces_Filter ppEffectAdjust [1,1,0,[0,0,0,1],[0,0,0,0],[1,1,1,1],[2 * (1 - _strength),(1 - _strength),0,0,0,0.1,0.5]];
+    AAE_GForces_Filter ppEffectAdjust [1,1,0,[0,0,0,1],[0,0,0,0],[1,1,1,1],[2 * (1 - _strength),(1 - _strength),0,0,0,0.1,0.5]];
   };
 
   if ((_currentGForce >= 3) and (cameraView == "internal") and (gBreathe_sound_fn)) then {
@@ -78,7 +78,7 @@ if (_average > 0.30 * _gBlackOut) then {
   if (_average < -0.30 * _gRedOut) then {
     if ((Gforces_fn) and !(HaveACE)) then {
       _strength = ((abs _average - 0.30 * _gRedOut) / (0.70 * _gRedOut)) max 0;
-      GForces_Filter ppEffectAdjust [1,1,0,[1,0.2,0.2,1],[0,0,0,0],[1,1,1,1],[2 * (1 - _strength),1 * (1 - _strength),0,0,0,0.1,0.5]];
+      AAE_GForces_Filter ppEffectAdjust [1,1,0,[1,0.2,0.2,1],[0,0,0,0],[1,1,1,1],[2 * (1 - _strength),1 * (1 - _strength),0,0,0,0.1,0.5]];
     };
 
     if ((_currentGForce >= 3) and (cameraView == "internal") and (gBreathe_sound_fn) and ((_plane getVariable ["Breathing_execution_time", -1]) < time)) then {
@@ -90,8 +90,8 @@ if (_average > 0.30 * _gBlackOut) then {
     };
 
   } else {
-    GForces_Filter ppEffectAdjust [1,1,0,[0,0,0,1],[0,0,0,0],[1,1,1,1],[10,10,0,0,0,0.1,0.5]];
+    AAE_GForces_Filter ppEffectAdjust [1,1,0,[0,0,0,1],[0,0,0,0],[1,1,1,1],[10,10,0,0,0,0.1,0.5]];
   };
 };
 
-GForces_Filter ppEffectCommit 0.6;
+AAE_GForces_Filter ppEffectCommit 0.6;
