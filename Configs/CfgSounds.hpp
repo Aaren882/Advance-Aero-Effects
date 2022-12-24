@@ -91,7 +91,7 @@ class CfgSounds
 			5,
 			1
 		};
-		EndTime = 4.412;
+		EndTime = 0.758;
 		name="touchdown_int";
 		titles[]={};
 	};
