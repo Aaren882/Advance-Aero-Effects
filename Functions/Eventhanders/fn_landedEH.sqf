@@ -11,24 +11,23 @@ if (_Wheels_Selections isEqualTo []) then {
 };
 
 //Sounds
-_config_int = getArray (configFile >> "CfgVehicles" >> typeOf _plane >> "AAE_Touchdown_Int");
+_config_int = getText (configFile >> "CfgVehicles" >> typeOf _plane >> "AAE_Touchdown_Int");
 _config_ext = getArray (configFile >> "CfgVehicles" >> typeOf _plane >> "AAE_Touchdown_Ext");
-_file_int = _config_int # 0;
+
 _file_ext = _config_ext # 0;
-
-_vol_int = _config_int # 1;
 _vol_ext = _config_ext # 1;
-
-_pitch_int = _config_int # 2;
 _pitch_ext = _config_ext # 2;
-
 _range_ext = _config_ext # 3;
 
 if (speed _plane <= 100) exitWith {};
 
 if (TDSound_fn) then {
-  playSound3D [_file_int, _plane, true, getPosASL _plane, _vol_int, _pitch_int, 2000];
-  playSound3D [_file_ext, _plane, false, getPosASL _plane, _vol_ext, _pitch_ext, _range_ext];
+  if (cameraView == "INTERNAL") then {
+    //playSound3D [_file_int, _plane, true, getPosASL _plane, _vol_int, _pitch_int, 2000];
+    playSound _config_int;
+  } else {
+    playSound3D [_file_ext, _plane, false, getPosASL _plane, _vol_ext, _pitch_ext, _range_ext];
+  };
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
