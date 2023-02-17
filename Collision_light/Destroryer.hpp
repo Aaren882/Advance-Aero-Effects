@@ -10,8 +10,9 @@ class Land_Destroyer_01_hull_base_F: House_F
 			ambient[] = {0.0,0.0,0.0};
 			intensity = 70;
 			drawLight = 1;
-			drawLightSize = 0.4;
-			drawLightCenterSize = 0.2;
+			drawLightSize = NAVSIZE;
+			drawLightCenterSize = NAVSIZECEN;
+			flaresize = FLASIZE;
 			activeLight = 1;
 			blinking = 0;
 			dayLight = 0;

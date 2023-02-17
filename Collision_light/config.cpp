@@ -19,6 +19,13 @@ class CfgPatches
 		};
 	};
 };
+#define NAVSIZE 0.5
+#define NAVSIZECEN 0.2
+#define FLASIZE 0.5
+
+#define SHIPNAVSIZE 0.8
+#define SHIPNAVSIZECEN 0.2
+#define SHIPFLASIZE 0.8
 class CfgVehicles
 {
 	class House_F;

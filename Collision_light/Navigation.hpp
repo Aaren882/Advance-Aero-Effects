@@ -9,8 +9,9 @@ class Land_NavigLight: House
 			ambient[] = {0.95,0.85,0.15};
 			intensity = 70;
 			drawLight = 1;
-			drawLightSize = 0.8;
-			drawLightCenterSize = 0.4;
+			drawLightSize = NAVSIZE;
+			drawLightCenterSize = NAVSIZECEN;
+			flaresize = FLASIZE;
 			activeLight = 1;
 			blinking = 0;
 			dayLight = 0;
@@ -55,16 +56,17 @@ class Land_Flush_Light_green_F: Land_NavigLight
 		{
 			color[] = {0.05,0.65,0.05};
 			ambient[] = {0.05,0.65,0.05};
-			flareSize = 0.8;
-			drawLightSize = 0.6;
-			drawLightCenterSize = 0.3;
+			drawLightSize = NAVSIZE;
+			drawLightCenterSize = NAVSIZECEN;
+			flaresize = FLASIZE;
+			intensity = 35;
 			class Attenuation
 			{
 				start = 0;
 				constant = 0;
 				linear = 1;
-				quadratic = 1;
-				hardLimitStart = 10;
+				quadratic = 2;
+				hardLimitStart = 0;
 				hardLimitEnd = 100;
 			};
 		};
@@ -98,18 +100,18 @@ class Land_runway_edgelight: Land_NavigLight
 	{
 		class Light_1: Light_1
 		{
-			color[] = {1,0.95,0.85};
-			ambient[] = {1,0.95,0.85};
-			flareSize = 0.5;
-			/*class Attenuation
+			color[] = {2,1.9,1.7};
+			ambient[] = {2,1.9,1.7};
+			flaresize = FLASIZE;
+			class Attenuation
 			{
 				start = 0;
 				constant = 0;
 				linear = 1;
-				quadratic = 0.5;
-				hardLimitStart = 100;
-				hardLimitEnd = 1000;
-			};*/
+				quadratic = 2;
+				hardLimitStart = 2;
+				hardLimitEnd = 200;
+			};
 		};
 	};
 };
@@ -119,8 +121,8 @@ class Land_runway_edgelight_blue_F: Land_runway_edgelight
 	{
 		class Light_1: Light_1
 		{
-			color[] = {0.1,0.1,0.65};
-			ambient[] = {0.1,0.1,0.65};
+			color[] = {0.2,0.2,1.3};
+			ambient[] = {0.2,0.2,1.3};
 		};
 	};
 };
@@ -133,13 +135,14 @@ class Land_Runway_PAPI: Land_VASICore
 	{
 		class Light_1
 		{
-			color[] = {95,15,15};
-			ambient[] = {95,15,15};
+			color[] = {9.5,1.5,1.5};
+			ambient[] = {9.5,1.5,1.5};
 			intensity = 60;
 			name = "Light_red_pos";
 			drawLight = 1;
-			drawLightSize = 0.5;
-			drawLightCenterSize = 0.4;
+			drawLightSize = NAVSIZE;
+			drawLightCenterSize = NAVSIZECEN;
+			flaresize = FLASIZE;
 			activeLight = 1;
 			blinking = 0;
 			dayLight = 1;
@@ -150,8 +153,8 @@ class Land_Runway_PAPI: Land_VASICore
 	{
 		class Light_1: Light_1
 		{
-			color[] = {95,95,95};
-			ambient[] = {95,95,95};
+			color[] = {9.5,1.5,1.5};
+			ambient[] = {9.5,1.5,1.5};
 			name = "Light_white_pos";
 		};
 	};
@@ -164,8 +167,9 @@ class Land_Runway_PAPI: Land_VASICore
 			intensity = 60;
 			name = "Light_red_pos";
 			drawLight = 1;
-			drawLightSize = 0.7;
-			drawLightCenterSize = 0.3;
+			drawLightSize = NAVSIZE;
+			drawLightCenterSize = NAVSIZECEN;
+			flaresize = FLASIZE;
 			cone = 15;
 			slope = 5.4;
 			angleLimitV[] = {-85,5.4};
@@ -177,8 +181,8 @@ class Land_Runway_PAPI: Land_VASICore
 		};
 		class Light_white: Light_red
 		{
-			color[] = {95,95,95};
-			ambient[] = {95,95,95};
+			color[] = {9.5,1.5,1.5};
+			ambient[] = {9.5,1.5,1.5};
 			name = "Light_white_pos";
 			angleLimitV[] = {5.4,85};
 		};

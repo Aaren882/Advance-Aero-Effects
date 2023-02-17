@@ -10,8 +10,9 @@ class Land_Carrier_01_hull_base_F: House_F
 			ambient[] = {0.95,0.85,0.15};
 			intensity = 30;
 			drawLight = 1;
-			drawLightSize = 0.2;
-			drawLightCenterSize = 0.1;
+			drawLightSize = SHIPNAVSIZE;
+			drawLightCenterSize = SHIPNAVSIZECEN;
+			flaresize = SHIPFLASIZE;
 			activeLight = 1;
 			blinking = 0;
 			dayLight = 0;
@@ -137,178 +138,151 @@ class Land_Carrier_01_hull_06_1_F: Land_Carrier_01_hull_base_F
 		};
 		class Landing_Red_01: M_Red_base
 		{
-			name = "Landing_Red_01_pos";
+			name="Landing_Red_01_pos";
 			activeLight = 0;
+			drawLightSize=0.3;
+			drawLightCenterSize=0.3;
+			flaresize=0.2;
 		};
-		class Landing_Red_02: M_Red_base
+		class Landing_Red_02: Landing_Red_01
 		{
-			name = "Landing_Red_02_pos";
-			activeLight = 0;
+			name="Landing_Red_02_pos";
 		};
-		class Landing_Red_03: M_Red_base
+		class Landing_Red_03: Landing_Red_01
 		{
-			name = "Landing_Red_03_pos";
-			activeLight = 0;
+			name="Landing_Red_03_pos";
 		};
-		class Landing_Red_04: M_Red_base
+		class Landing_Red_04: Landing_Red_01
 		{
-			name = "Landing_Red_04_pos";
-			activeLight = 0;
+			name="Landing_Red_04_pos";
 		};
-		class Landing_Red_05: M_Red_base
+		class Landing_Red_05: Landing_Red_01
 		{
-			name = "Landing_Red_05_pos";
-			activeLight = 0;
+			name="Landing_Red_05_pos";
 		};
-		class Landing_Red_06: M_Red_base
+		class Landing_Red_06: Landing_Red_01
 		{
-			name = "Landing_Red_06_pos";
-			activeLight = 0;
+			name="Landing_Red_06_pos";
 		};
-		class Landing_Red_07: M_Red_base
+		class Landing_Red_07: Landing_Red_01
 		{
-			name = "Landing_Red_07_pos";
-			activeLight = 0;
+			name="Landing_Red_07_pos";
 		};
-		class Landing_Red_08: M_Red_base
+		class Landing_Red_08: Landing_Red_01
 		{
-			name = "Landing_Red_08_pos";
-			activeLight = 0;
+			name="Landing_Red_08_pos";
 		};
-		class Landing_Red_09: M_Red_base
+		class Landing_Red_09: Landing_Red_01
 		{
-			name = "Landing_Red_09_pos";
-			activeLight = 0;
+			name="Landing_Red_09_pos";
 		};
-		class Landing_Red_10: M_Red_base
+		class Landing_Red_10: Landing_Red_01
 		{
-			name = "Landing_Red_10_pos";
-			activeLight = 0;
+			name="Landing_Red_10_pos";
 		};
-		class Landing_Red_11: M_Red_base
+		class Landing_Red_11: Landing_Red_01
 		{
-			name = "Landing_Red_11_pos";
-			activeLight = 0;
+			name="Landing_Red_11_pos";
 		};
-		class Landing_Red_12: M_Red_base
+		class Landing_Red_12: Landing_Red_01
 		{
-			name = "Landing_Red_12_pos";
-			activeLight = 0;
+			name="Landing_Red_12_pos";
 		};
-		class Landing_Red_13: M_Red_base
+		class Landing_Red_13: Landing_Red_01
 		{
-			name = "Landing_Red_13_pos";
-			activeLight = 0;
+			name="Landing_Red_13_pos";
 		};
-		class Landing_Red_14: M_Red_base
+		class Landing_Red_14: Landing_Red_01
 		{
-			name = "Landing_Red_14_pos";
-			activeLight = 0;
+			name="Landing_Red_14_pos";
 		};
-		class Landing_Red_15: M_Red_base
+		class Landing_Red_15: Landing_Red_01
 		{
-			name = "Landing_Red_15_pos";
-			activeLight = 0;
+			name="Landing_Red_15_pos";
 		};
-		class Landing_Red_16: M_Red_base
+		class Landing_Red_16: Landing_Red_01
 		{
-			name = "Landing_Red_16_pos";
-			activeLight = 0;
+			name="Landing_Red_16_pos";
 		};
-		class Landing_Red_17: M_Red_base
+		class Landing_Red_17: Landing_Red_01
 		{
-			name = "Landing_Red_17_pos";
-			activeLight = 0;
+			name="Landing_Red_17_pos";
 		};
-		class Landing_Red_18: M_Red_base
+		class Landing_Red_18: Landing_Red_01
 		{
-			name = "Landing_Red_18_pos";
-			activeLight = 0;
+			name="Landing_Red_18_pos";
 		};
-		class Landing_Red_19: M_Red_base
+		class Landing_Red_19: Landing_Red_01
 		{
-			name = "Landing_Red_19_pos";
-			activeLight = 0;
+			name="Landing_Red_19_pos";
 		};
 		class Landing_Blue_01: M_blue_base
 		{
-			name = "Landing_Blue_01_pos";
+			name="Landing_Blue_01_pos";
 			activeLight = 0;
+			drawLightSize=0.3;
+			drawLightCenterSize=0.3;
+			flaresize=0.2;
 		};
-		class Landing_Blue_02: M_blue_base
+		class Landing_Blue_02: Landing_Blue_01
 		{
-			name = "Landing_Blue_02_pos";
-			activeLight = 0;
+			name="Landing_Blue_02_pos";
 		};
-		class Landing_Blue_03: M_blue_base
+		class Landing_Blue_03: Landing_Blue_01
 		{
-			name = "Landing_Blue_03_pos";
-			activeLight = 0;
+			name="Landing_Blue_03_pos";
 		};
-		class Landing_Blue_04: M_blue_base
+		class Landing_Blue_04: Landing_Blue_01
 		{
-			name = "Landing_Blue_04_pos";
-			activeLight = 0;
+			name="Landing_Blue_04_pos";
 		};
-		class Landing_Blue_05: M_blue_base
+		class Landing_Blue_05: Landing_Blue_01
 		{
-			name = "Landing_Blue_05_pos";
-			activeLight = 0;
+			name="Landing_Blue_05_pos";
 		};
-		class Landing_Blue_06: M_blue_base
+		class Landing_Blue_06: Landing_Blue_01
 		{
-			name = "Landing_Blue_06_pos";
-			activeLight = 0;
+			name="Landing_Blue_06_pos";
 		};
-		class Landing_Blue_07: M_blue_base
+		class Landing_Blue_07: Landing_Blue_01
 		{
-			name = "Landing_Blue_07_pos";
-			activeLight = 0;
+			name="Landing_Blue_07_pos";
 		};
-		class Landing_Blue_08: M_blue_base
+		class Landing_Blue_08: Landing_Blue_01
 		{
-			name = "Landing_Blue_08_pos";
-			activeLight = 0;
+			name="Landing_Blue_08_pos";
 		};
-		class Landing_Blue_09: M_blue_base
+		class Landing_Blue_09: Landing_Blue_01
 		{
-			name = "Landing_Blue_09_pos";
-			activeLight = 0;
+			name="Landing_Blue_09_pos";
 		};
-		class Landing_Blue_10: M_blue_base
+		class Landing_Blue_10: Landing_Blue_01
 		{
-			name = "Landing_Blue_10_pos";
-			activeLight = 0;
+			name="Landing_Blue_10_pos";
 		};
-		class Landing_Blue_11: M_blue_base
+		class Landing_Blue_11: Landing_Blue_01
 		{
-			name = "Landing_Blue_11_pos";
-			activeLight = 0;
+			name="Landing_Blue_11_pos";
 		};
-		class Landing_Blue_12: M_blue_base
+		class Landing_Blue_12: Landing_Blue_01
 		{
-			name = "Landing_Blue_12_pos";
-			activeLight = 0;
+			name="Landing_Blue_12_pos";
 		};
-		class Landing_Blue_13: M_blue_base
+		class Landing_Blue_13: Landing_Blue_01
 		{
-			name = "Landing_Blue_13_pos";
-			activeLight = 0;
+			name="Landing_Blue_13_pos";
 		};
-		class Landing_Blue_14: M_blue_base
+		class Landing_Blue_14: Landing_Blue_01
 		{
-			name = "Landing_Blue_14_pos";
-			activeLight = 0;
+			name="Landing_Blue_14_pos";
 		};
-		class Landing_Blue_15: M_blue_base
+		class Landing_Blue_15: Landing_Blue_01
 		{
-			name = "Landing_Blue_15_pos";
-			activeLight = 0;
+			name="Landing_Blue_15_pos";
 		};
-		class Landing_Blue_16: M_blue_base
+		class Landing_Blue_16: Landing_Blue_01
 		{
-			name = "Landing_Blue_16_pos";
-			activeLight = 0;
+			name="Landing_Blue_16_pos";
 		};
 	};
 };
