@@ -10,9 +10,14 @@ _idEH = addMissionEventHandler ["EachFrame", {
   };
 
   //-List Update
-  if (time > (AAE_UnitList_LastUpdate + 0.1)) then {
+  if (time > (AAE_UnitList_LastUpdate + 1)) then {
     AAE_UnitList_LastUpdate = time;
-    missionNamespace setVariable ["AAE_UnitList", vehicles select {(_x iskindof "plane") && (isEngineOn _x) && (_x getVariable ["AAE_Find_Engine",false])}, true];
+    missionNamespace setVariable ["AAE_UnitList", vehicles select {
+      if (!(_x getVariable ["AAE_Find_Engine",false]) && (isEngineOn _x)) then {
+        [_x,true] call AAE_fnc_EngineEH;
+      };
+      (_x iskindof "plane") && (isEngineOn _x) && (_x getVariable ["AAE_Find_Engine",false])
+    }, true];
   };
 
   //-Remove Client Side Handler If Have Multiple Handlers
