@@ -1,6 +1,9 @@
 params ["_plane","_Engine_State"];
 
 if (alive _plane && _Engine_State) then {
+  if !(_plane getVariable ["AAE_Find_Engine",false]) then {
+    call AAE_fnc_InitEH;
+  };
 
   _plane setvariable ["AAE_Vapor_toggle",vapor_sdr + random 20];
 
