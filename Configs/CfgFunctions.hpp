@@ -81,6 +81,18 @@ class CfgFunctions
 			class Carrier01CatapultActionAdd;
 		};
 	};
+	class A3
+	{
+		class Effects
+		{
+			delete effectKilled;
+		};
+		class AAE
+		{
+			file = "MG8\AVDAVFX\Functions\General";
+			class effectKilled;
+		};
+	};
 	class TTT
 	{
 		class CatapultEvents

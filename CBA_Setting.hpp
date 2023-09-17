@@ -144,6 +144,14 @@
 	false
 ] call CBA_fnc_addSetting;
 
+//Crash Cam Shake
+[
+	"crashShake_fn","CHECKBOX",
+	"CamShake Effect When Crashes",
+	["Advance Aero Effects", "Ganeral"],
+	false
+] call CBA_fnc_addSetting;
+
 //Sounds
 [
 	"gBreathe_sound_fn","CHECKBOX",

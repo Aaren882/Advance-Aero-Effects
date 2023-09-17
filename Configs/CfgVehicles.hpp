@@ -135,60 +135,62 @@
 #endif
 
 //F/A-18 Super Hornets
-class JS_JC_FA18E: Plane_Base_F
-{
-	Aircraft_Wingspan = 13.62;
-	AB_Source = "ab_switch";
-	class WingVortices
+#if __has_include("\js_jc_fa18\config.bin")
+	class JS_JC_FA18E: Plane_Base_F
 	{
-		class WingTipLeft
+		Aircraft_Wingspan = 13.62;
+		AB_Source = "ab_switch";
+		class WingVortices
 		{
-			effectName = "FX_FA18_WingVortices";
+			class WingTipLeft
+			{
+				effectName = "FX_FA18_WingVortices";
+			};
+			class WingTipRight
+			{
+				effectName = "FX_FA18_WingVortices";
+			};
 		};
-		class WingTipRight
+		class Exhausts
 		{
-			effectName = "FX_FA18_WingVortices";
+			class Exhaust_left
+			{
+				effect = "ExhaustsEffectPlaneHP";
+			};
+			class Exhaust_right
+			{
+				effect = "ExhaustsEffectPlaneHP";
+			};
 		};
 	};
-	class Exhausts
+	class JS_JC_FA18F: Plane_Base_F
 	{
-		class Exhaust_left
+		Aircraft_Wingspan = 13.62;
+		AB_Source = "ab_switch";
+		class WingVortices
 		{
-			effect = "ExhaustsEffectPlaneHP";
+			class WingTipLeft
+			{
+				effectName = "FX_FA18_WingVortices";
+			};
+			class WingTipRight
+			{
+				effectName = "FX_FA18_WingVortices";
+			};
 		};
-		class Exhaust_right
+		class Exhausts
 		{
-			effect = "ExhaustsEffectPlaneHP";
+			class Exhaust_left
+			{
+				effect = "ExhaustsEffectPlaneHP";
+			};
+			class Exhaust_right
+			{
+				effect = "ExhaustsEffectPlaneHP";
+			};
 		};
 	};
-};
-class JS_JC_FA18F: Plane_Base_F
-{
-	Aircraft_Wingspan = 13.62;
-	AB_Source = "ab_switch";
-	class WingVortices
-	{
-		class WingTipLeft
-		{
-			effectName = "FX_FA18_WingVortices";
-		};
-		class WingTipRight
-		{
-			effectName = "FX_FA18_WingVortices";
-		};
-	};
-	class Exhausts
-	{
-		class Exhaust_left
-		{
-			effect = "ExhaustsEffectPlaneHP";
-		};
-		class Exhaust_right
-		{
-			effect = "ExhaustsEffectPlaneHP";
-		};
-	};
-};
+#endif
 
 //RHS
 class rhsusf_f22: Plane_Fighter_03_base_F

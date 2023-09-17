@@ -268,32 +268,6 @@ class FIR_Gau8_cloud
 		lifeTime = 0.05;
 	};
 };
-class FIR_MissileEffect
-{
-	delete FIR_MissileEffect;
-	class Missile3
-	{
-		simulation = "particles";
-		type = "Missile3";
-		position[] = {0,0,0};
-		intensity = 1;
-		interval = 1;
-		lifeTime = 1;
-	};
-};
-class FIR_MissileEffect2
-{
-	delete FIR_MissileEffect2;
-	class Missile3
-	{
-		simulation = "particles";
-		type = "Missile3";
-		position[] = {0,0,0};
-		intensity = 1;
-		interval = 1;
-		lifeTime = 1;
-	};
-};
 class AAE_TailHook_Sprak
 {
 	class Sparks
@@ -307,43 +281,73 @@ class AAE_TailHook_Sprak
 		lifeTime = 3;
 	};
 };
-//SAM
-class FX_Missile_SAM_LongRange
-{
-	class FX_Missile_SAM_light_01
+#if __has_include("\ANZ_MissileEfxMod\config.cpp")
+#else
+	class FIR_MissileEffect
 	{
-		intensity = 1;
+		delete FIR_MissileEffect;
+		class Missile3
+		{
+			simulation = "particles";
+			type = "Missile3";
+			position[] = {0,0,0};
+			intensity = 1;
+			interval = 1;
+			lifeTime = 1;
+		};
 	};
-	class FX_Plane_Missile_SAM_high
+	class FIR_MissileEffect2
 	{
-		interval = 1;
+		delete FIR_MissileEffect2;
+		class Missile3
+		{
+			simulation = "particles";
+			type = "Missile3";
+			position[] = {0,0,0};
+			intensity = 1;
+			interval = 1;
+			lifeTime = 1;
+		};
 	};
-	class FX_Plane_Missile_SAM_medium
+	
+	//SAM
+	class FX_Missile_SAM_LongRange
 	{
-		interval = 1;
+		class FX_Missile_SAM_light_01
+		{
+			intensity = 1;
+		};
+		class FX_Plane_Missile_SAM_high
+		{
+			interval = 1;
+		};
+		class FX_Plane_Missile_SAM_medium
+		{
+			interval = 1;
+		};
+		class FX_Plane_Missile_SAM_low
+		{
+			interval = 1;
+		};
 	};
-	class FX_Plane_Missile_SAM_low
+	//AA
+	class FX_Missile_AA;
+	class AAE_Missile_AA_Short: FX_Missile_AA
 	{
-		interval = 1;
+		delete FX_Plane_Missile_AA_high;
+		delete FX_Plane_Missile_AA_medium;
+		delete FX_Plane_Missile_AA_low;
+		class Trail
+		{
+			simulation = "particles";
+			type = "AAE_Short_Missile";
+			position[] = {0,0,0};
+			intensity = 1;
+			interval = 1;
+			lifeTime = 1;
+		};
 	};
-};
-//AA
-class FX_Missile_AA;
-class AAE_Missile_AA_Short: FX_Missile_AA
-{
-	delete FX_Plane_Missile_AA_high;
-	delete FX_Plane_Missile_AA_medium;
-	delete FX_Plane_Missile_AA_low;
-	class Trail
-	{
-		simulation = "particles";
-		type = "AAE_Short_Missile";
-		position[] = {0,0,0};
-		intensity = 1;
-		interval = 1;
-		lifeTime = 1;
-	};
-};
+#endif
 //Lights
 class CfgLights
 {

@@ -28,6 +28,7 @@ class CfgPatches
 			"A3_Air_F_Jets_Plane_Fighter_01",
 			"A3_Air_F_Jets_Plane_Fighter_02",
 			"A3_Air_F_Jets_Plane_Fighter_04",
+			"A3_Functions_F",
 			"A3_Functions_F_Jets",
 			"A3_Structures_F_Enoch_VR_Helpers"
 		};

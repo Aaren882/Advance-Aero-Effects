@@ -107,8 +107,37 @@ class Heli_Transport_03_base_F: Helicopter_Base_H
 		};
 	};
 };
-class Heli_Transport_02_base_F;
-class RHS_CH_47F_base: Heli_Transport_02_base_F
-{
-	waterLeakiness = 0.1;
-};
+//-RHSUSAF
+#if __has_include("\rhsusf\addons\rhsusf_main\config.bin")
+	class Heli_Transport_02_base_F;
+	class RHS_CH_47F_base: Heli_Transport_02_base_F
+	{
+		waterLeakiness = 0.1;
+	};
+#endif
+
+//H-60
+#if __has_include("\z\vtx\addons\uh60_config\config.bin")
+	class vtx_H60_base: Heli_Transport_01_base_F
+	{
+		class UserActions: UserActions
+		{
+			class DoorL1_Open: DoorL1_Open
+			{
+				condition = "false";
+			};
+			class DoorR1_Open: DoorR1_Open
+			{
+				condition = "false";
+			};
+			class DoorL1_Close: DoorL1_Close
+			{
+				condition = "false";
+			};
+			class DoorR1_Close: DoorR1_Close
+			{
+				condition = "false";
+			};
+		};
+	};
+#endif
