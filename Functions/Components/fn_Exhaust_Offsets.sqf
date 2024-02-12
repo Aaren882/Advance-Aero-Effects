@@ -1,72 +1,38 @@
-params ["_plane","_Exhausts_count","_engine_offsets","_planePlayer"];
+params ["_planePlayer"];
+private ["_planes","_ASL","_Result","_requireAng"];
 
-_planes = nearestObjects [_planePlayer, ["Plane"], 50];
-
-_engine_offsets params [["_engine1",[0,0,0]],["_engine2",[0,0,0]],["_engine3",[0,0,0]],["_engine4",[0,0,0]]];
+_planes = nearestObjects [_planePlayer, ["Plane"], turbulent_sdr + 30];
+_ASL = getPosASLVisual _planePlayer;
+_Result = [-1];
+_requireAng = round (turbulent_ang_sdr / 2);
 
 {
-  if (_x != cameraon) then {
+  if (_x != _planePlayer) then {
+    private ["_plane","_engine_offsets","_planeDirOP"];
     _plane = _x;
+    _engine_offsets = (_plane call AAE_fnc_InitEH) get "AAE_veh_Engine_Offset";
+    _planeDirOP = (vectorDir _plane) vectorMultiply -1;
 
-    _Result = switch (_Exhausts_count) do
-    {
-      //Turbulent Effect
-      case 1: {
-        _source00 = _plane modelToWorldVisual [(_engine1 # 0), (_engine1 # 1)+(-10-turbulent_sdr),(_engine1 # 2)];
+    //-Returning Range from other Engine to playerAC + angle
+    _Result = _engine_offsets apply {
+      private ["_source","_dis","_dir","_angV","_angH"];
+      _source = _plane modelToWorldVisualWorld [(_x # 0), (_x # 1)-(turbulent_sdr/2),(_x # 2)];
+      _dis = _ASL distance _source;
 
-        _dis0 = _planePlayer distance _source00;
+      _dir = _source vectorFromTo _ASL;
+      _angV = abs round asin (_dir # 2);
+      _angH = abs acos (_planeDirOP vectorCos _dir);
 
-        [
-          [_source00],
-          [_dis0]
-        ]
-      };
-      case 2: {
-        _source00 = _plane modelToWorldVisual [(_engine1 # 0), (_engine1 # 1)+(-10-turbulent_sdr),(_engine1 # 2)];
-        _source01 = _plane modelToWorldVisual [(_engine2 # 0), (_engine2 # 1)+(-10-turbulent_sdr),(_engine2 # 2)];
-
-        _dis0 = _planePlayer distance _source00;
-        _dis1 = _planePlayer distance _source01;
-
-        [
-          [_source00,_source01],
-          [_dis0,_dis1]
-        ]
-      };
-      case 3: {
-        _source00 = _plane modelToWorldVisual [(_engine1 # 0), (_engine1 # 1)+(-10-turbulent_sdr),(_engine1 # 2)];
-        _source01 = _plane modelToWorldVisual [(_engine2 # 0), (_engine2 # 1)+(-10-turbulent_sdr),(_engine2 # 2)];
-        _source02 = _plane modelToWorldVisual [(_engine3 # 0), (_engine3 # 1)+(-10-turbulent_sdr),(_engine3 # 2)];
-
-        _dis0 = _planePlayer distance _source00;
-        _dis1 = _planePlayer distance _source01;
-        _dis2 = _planePlayer distance _source02;
-
-        [
-          [_source00,_source01,_source02],
-          [_dis0,_dis1,_dis2]
-        ]
-      };
-      case 4: {
-        _source00 = _plane modelToWorldVisual [(_engine1 # 0), (_engine1 # 1)+(-10-turbulent_sdr),(_engine1 # 2)];
-        _source01 = _plane modelToWorldVisual [(_engine2 # 0), (_engine2 # 1)+(-10-turbulent_sdr),(_engine2 # 2)];
-        _source02 = _plane modelToWorldVisual [(_engine3 # 0), (_engine3 # 1)+(-10-turbulent_sdr),(_engine3 # 2)];
-        _source03 = _plane modelToWorldVisual [(_engine4 # 0), (_engine4 # 1)+(-10-turbulent_sdr),(_engine4 # 2)];
-
-        _dis0 = _planePlayer distance _source00;
-        _dis1 = _planePlayer distance _source01;
-        _dis2 = _planePlayer distance _source02;
-        _dis3 = _planePlayer distance _source03;
-
-        [
-          [_source00,_source01,_source02,_source03],
-          [_dis0,_dis1,_dis2,_dis3]
-        ]
-      };
+      if (
+          (_angV > _requireAng) || 
+          (_angH > _requireAng) ||
+          (_dis > turbulent_sdr + 5)
+      ) then {continuewith -1};
+      
+      _dis
     };
-    _plane setVariable ["AAE_Turbulent_Sources",_Result # 0];
-    _planePlayer setVariable ["AAE_Turbulent_Source_Distance",_Result # 1];
-    _planePlayer setVariable ["AAE_Turbulent_Source_Distance_Found",true];
-
+    _Result = _Result select {_x > 0};
   };
 } forEach _planes;
+
+[selectMin _Result, _planePlayer]

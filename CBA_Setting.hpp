@@ -254,9 +254,16 @@
 
 [
 	"turbulent_sdr", "SLIDER",
-	["Turbulent Effect Active Scale Slider (Plane)","The Active Scale of Turbulent Effect (Plane)"],
+	["Turbulent Effect Active _Scale Slider (Plane)","The Active _Scale of Turbulent Effect (Plane)"],
 	["Advance Aero Effects", "Settings"],
-	[0, 15, 10, 0]
+	[0, 50, 15, 0]
+] call CBA_fnc_addSetting;
+
+[
+	"turbulent_ang_sdr", "SLIDER",
+	["Turbulent Effect Active _Angle Slider (Plane)","The Active _Angle of Turbulent Effect (Plane)"],
+	["Advance Aero Effects", "Settings"],
+	[10, 120, 30, 0]
 ] call CBA_fnc_addSetting;
 
 [

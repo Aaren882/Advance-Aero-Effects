@@ -1,16 +1,15 @@
 _plane = _x;
-_planePlayer = cameraOn;
+_plane_var = _x call AAE_fnc_InitEH;
 
-_plane setVariable ["AAE_Actived", true];
 _isServer = (player getVariable ["AAE_EachFrame_EH", -1]) != -1;
 
 //Engine
-_Engine_Offsets = _plane getVariable "AAE_veh_Engine_Offset";
-_Exhausts_count = _plane getVariable "AAE_Exhausts_Count";
-_Exhausts_POS = _plane getVariable "AAE_Exhaust_POS";
+_Engine_Offsets = _plane_var get "AAE_veh_Engine_Offset";
+_Exhausts_count = _plane_var get "AAE_Exhausts_Count";
+_Exhausts_POS = _plane_var get "AAE_Exhaust_POS";
 
 //Wingspan
-_Wingspan = _plane getVariable "AAE_Wingspan";
+_Wingspan = _plane_var get "AAE_Wingspan";
 
 //POS
 _AGL_POS = getPos _plane;
@@ -51,7 +50,6 @@ _Burner_Activated = _plane getVariable ["AAE_BurnerActived",false];
 
 //Player only
 if (player in _plane) then {
-  _turbulent_Distance_Found = _planePlayer getVariable ["AAE_Turbulent_Source_Distance_Found",false];
 
   //GForces
   if !(isTouchingGround _planePlayer) then {
@@ -60,9 +58,6 @@ if (player in _plane) then {
 
   if (cameraView == "internal") then {
 
-    //Turbulence Settings
-    [_plane,_Exhausts_count,_engine_offsets,_planePlayer] call AAE_fnc_Exhaust_Offsets;
-
     //Gear Factor
     if (!(isTouchingGround _plane) && (gear_fn)) then {
       [_planePlayer,_speed_Player] call AAE_fnc_gearFactor;
@@ -70,9 +65,10 @@ if (player in _plane) then {
 
     //It's Flying
     if !(isTouchingGround _planePlayer) then {
-      //Turbulence Plane
-      if ((_speed_Player > 200) && (turbulentP_fn) && (_turbulent_Distance_Found)) then {
-        [_planePlayer,_Exhausts_count] call AAE_fnc_turbulence;
+
+      //Turbulence Plane + Turbulence Settings
+      if ((_speed_Player > 200) && (turbulentP_fn)) then {
+        (_planePlayer call AAE_fnc_Exhaust_Offsets) call AAE_fnc_turbulence;
       };
 
       //Turbulence World
@@ -98,17 +94,17 @@ if (player in _plane) then {
 
 
 if (isEngineOn _plane) then {
-  //Camshake
+  // Camshake
   if ((isTouchingGround player) && (_speed >= 150) && !(player in _plane) && (camshake_fn)) then {
     _plane call AAE_fnc_camshake;
   };
 
-  //Sonic
+  // Sonic
   if (sonicboom_fn) then {
     call AAE_fnc_sonicboom;
   };
 
-  //Vapor Trail
+  // Vapor Trail
   if ((_ASL_POS # 2 > (_plane getVariable "AAE_Vapor_toggle")) && (Vapor_sim) && (vapor_fn)) then {
     if !(_Vapor_Activated) then {
       [_plane,_Exhausts_count,_Exhausts_POS] Spawn AAE_fnc_vapor;

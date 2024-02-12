@@ -3,22 +3,19 @@ Find Engine Exhaust POS LODs etc
 
 By: Aaren
 /*///////////////////////////////////////////////////////////////////////
-params["_plane"];
 
 //Classes Directory
-_Exhausts = "true" configClasses (configFile >> "CfgVehicles" >> typeOf _plane >> "Exhausts");
+_Exhausts = "true" configClasses (_config >> "Exhausts");
 
 //Vars
-_Exhausts_count = _plane getVariable ["AAE_Exhausts_Count",count _Exhausts];
-_Exhausts_POS = _plane getVariable ["AAE_Exhaust_POS",[]];
-_Engine_Offset= _plane getVariable ["AAE_veh_Engine_Offset",[]];
-_Exhaust_Dir = _plane getVariable ["AAE_Exhaust_Direction",[]];
-
-_plane setVariable ["AAE_Exhausts_Count",count _Exhausts];
+_Exhausts_count = count _Exhausts;
+_Exhausts_POS = [];
+_Engine_Offset= [];
+_Exhaust_Dir = [];
 
 //Find Engine Exhaust POS and Pushback
-for "_i" from 0 to (_Exhausts_count - 1) step 1 do
-{
+for "_i" from 0 to (_Exhausts_count - 1) step 1 do {
+  private ["_Engine","_pos","_offset","_Dir","_Back_Dir"];
   _Engine = _Exhausts # _i;
 
   _pos = getText (_Engine >> "position");
@@ -36,7 +33,8 @@ for "_i" from 0 to (_Exhausts_count - 1) step 1 do
 };
 
 //Set Variables
-_plane setVariable ["AAE_Exhaust_POS",_Exhausts_POS];
-_plane setVariable ["AAE_veh_Engine_Offset",_Engine_Offset];
-_plane setVariable ["AAE_Exhaust_Direction",_Exhaust_Dir];
-_plane setVariable ["AAE_Find_Engine",true];
+_LocalCache set ["AAE_Exhausts_Count",_Exhausts_count];
+_LocalCache set ["AAE_Exhaust_POS",_Exhausts_POS];
+_LocalCache set ["AAE_veh_Engine_Offset",_Engine_Offset];
+_LocalCache set ["AAE_Exhaust_Direction",_Exhaust_Dir];
+_LocalCache set ["AAE_Find_Engine",true];

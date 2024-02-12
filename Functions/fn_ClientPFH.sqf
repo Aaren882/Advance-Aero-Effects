@@ -1,6 +1,9 @@
 _idEH = addMissionEventHandler ["EachFrame", {
-  _AAE_UnitList = missionNamespace getVariable ["AAE_UnitList", []];
+  private _AAE_UnitList = missionNamespace getVariable ["AAE_UnitList", []];
   if (count _AAE_UnitList != 0) then {
+    _planePlayer = cameraOn;
+    _planePlayer_class = typeof _planePlayer;
+    
     _AAE_UnitList apply {
       if !(isGamePaused) then {
         call AAE_fnc_Main_process;

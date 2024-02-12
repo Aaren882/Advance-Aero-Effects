@@ -1,7 +1,9 @@
 _idEH = addMissionEventHandler ["EachFrame", {
   private _AAE_UnitList = missionNamespace getVariable ["AAE_UnitList", []];
-
   if (count _AAE_UnitList != 0) then {
+    _planePlayer = cameraOn;
+    _planePlayer_class = typeof _planePlayer;
+
     _AAE_UnitList apply {
       if !(isGamePaused) then {
         call AAE_fnc_Main_process;
@@ -13,10 +15,10 @@ _idEH = addMissionEventHandler ["EachFrame", {
   if (time > (AAE_UnitList_LastUpdate + 1)) then {
     AAE_UnitList_LastUpdate = time;
     missionNamespace setVariable ["AAE_UnitList", vehicles select {
-      if (!(_x getVariable ["AAE_Find_Engine",false]) && (isEngineOn _x)) then {
+      if (isEngineOn _x) then {
         [_x,true] call AAE_fnc_EngineEH;
       };
-      (_x iskindof "plane") && (isEngineOn _x) && (_x getVariable ["AAE_Find_Engine",false])
+      (_x iskindof "plane") && (isEngineOn _x) && ((typeOf _x) in (localNamespace getVariable "AAE_Basic_Cache"))
     }, true];
   };
 

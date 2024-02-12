@@ -1,9 +1,9 @@
 params[["_plane",objNull],"_Exhausts_count","_Exhausts_POS"];
 
 //Sound
-_AB_Sound = getText (configFile >> "CfgVehicles" >> typeOf _plane >> "AAE_AB_Sound");
 
-if ((Cameraon isKindOf "Plane") and (cameraView == "INTERNAL") and (_plane == cameraOn)) then {
+
+if ((Cameraon isKindOf "Plane") && (cameraView == "INTERNAL") && (_plane == cameraOn)) then {
   ["AAE_PlaySound",[_AB_Sound]] call CBA_fnc_localEvent;
 };
 
@@ -16,8 +16,8 @@ _result_Particle = [];
 //Burner Lights
 _source_Light = "AAE_AfterBurner_Reflector";
 _source_Particle = "#particlesource";
-if (!(player in _plane) and (burner_flare_fn)) then {
-  _source_Light = "AAE_AfterBurner_Reflector_Flare";
+if (!(player in _plane) && (burner_flare_fn)) then {
+  _source_Light = _source_Light +"_Flare";
 };
 
 //Direction

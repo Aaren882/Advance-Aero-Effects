@@ -1,29 +1,13 @@
-params ["_plane","_Exhausts_count"];
-
+params [["_var",-1],"_plane"];
+private ["_var","_fq"];
 enableCamShake true;
 
-//Turbulent Effect
-_Source_Distance = _plane getVariable "AAE_Turbulent_Source_Distance";
-_Source_Distance params [["_dis0",-1],["_dis1",-1],["_dis2",-1],["_dis3",-1]];
-
-_dis = selectMin _Source_Distance;
+if (_var < 0) exitWith {};
 
 //Trigger Range
-_fq = 10;
-if (
-		(_dis > 0) and (_dis <= 30) and (_dis > 20)
-	) then {
-	_fq = 35;
-};
-if (
-		(_dis > 0) and (_dis <= 20)
-	) then {
-	_fq = 45;
-};
+_fq = linearConversion [3, turbulent_sdr + 5, _var, 45, 10, true];
+addCamShake [2, 0.1, _fq];
 
-if (
-		(_dis > 0) and (_dis <= turbulent_sdr)
-	) then {
-	addCamShake [2, 2, _fq];
-	_plane call AAE_fnc_turbulenceSnd;
+if (_fq > 15) then {
+  call AAE_fnc_turbulenceSnd;
 };
