@@ -1,7 +1,7 @@
 params["_plane"];
 
 //////////////////////////////Functions/////////////////////////////////////////
-_particle_Setups = {
+private _particle_Setups = {
 	params [
 		"_source00","_source01",
 		"_ParticleShape","_ParticleShape01",
@@ -11,6 +11,7 @@ _particle_Setups = {
 		"_Particle00_Size","_Particle01_Size",
 		"_SurfaceType_Pick"
 	];
+	
 	_source00 setParticleParams [
 	_ParticleShape, "", "Billboard",
 	1, _Particle00_Time, [0, (((_velocity # 1) * 0.05) - (_speed*0.05)), 0], [0, 0, 0], 1.25, _weight, _volume, 0.1, _Particle00_Size,
@@ -24,7 +25,7 @@ _particle_Setups = {
 	[1000], 0.1, 0.05, "", "", _source01, 0, true];
 };
 
-_particles = {
+private _particles = {
 	params["_plane","_SurfaceType_Pick","_Depos","_velocity","_speed","_particle01_CycleSpeed"];
 
 	//Math Stuff
@@ -140,12 +141,12 @@ if (surfaceIsWater _Depos) then {
 		_plane,_Particle_Pick,_Depos,_velocity,_speed,0.02
 	] call _effect;
 
-	(!(alive _plane) or !(_plane getVariable ["AAE_Ground_Activated",false]))
+	(!(alive _plane) || !(_plane getVariable ["AAE_Ground_Activated",false]))
 },{
 	params["_plane","","","","_source00","_source01"];
 	//Vars
 	{deleteVehicle _x} foreach [_source00,_source01];
-	_plane setVariable ["AAE_Ground_Particles",[]];
+	_plane setVariable ["AAE_Ground_Particles",nil];
 }, [
 		_plane,_particles,_effect,_Particle_Pick,_source00,_source01
 	]

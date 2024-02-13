@@ -1,3 +1,4 @@
+private ["_velocityFX","_color","_Sonic_MC","_Sonic_SC","_source00","_source01"];
 _velocityFX = [0,(0.35*(_velocity select 1)),0];
 _color = [[1, 1, 1, 0],[1, 1, 1, 0.75]];
 
@@ -23,7 +24,7 @@ _sonicboom_00 = {
   waitUntil {
     !(_plane getVariable ["AAE_SonicBoom_Small_Activated", false])
   };
-  _plane setVariable ["AAE_SonicBoom_Small_Particle",objNull];
+  _plane setVariable ["AAE_SonicBoom_Small_Particle",nil];
   deleteVehicle _source00;
 };
 
@@ -41,7 +42,7 @@ _sonicboom_01 = {
   waitUntil {
     !(_plane getVariable ["AAE_SonicBoom_Main_Activated", false])
   };
-  _plane setVariable ["AAE_SonicBoom_Main_Particle",objNull];
+  _plane setVariable ["AAE_SonicBoom_Main_Particle",nil];
   deleteVehicle _source01;
 };
 

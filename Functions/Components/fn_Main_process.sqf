@@ -8,9 +8,6 @@ _Engine_Offsets = _plane_var get "AAE_veh_Engine_Offset";
 _Exhausts_count = _plane_var get "AAE_Exhausts_Count";
 _Exhausts_POS = _plane_var get "AAE_Exhaust_POS";
 
-//Wingspan
-_Wingspan = _plane_var get "AAE_Wingspan";
-
 //POS
 _AGL_POS = getPos _plane;
 _ASL_POS = getPosASL _plane;
@@ -37,16 +34,6 @@ if (sonicboom_tmp_fn) then {
   AAE_sonicboom_speed_02 = AAE_SpeedSet - 10;
   AAE_sonicboom_speed_03 = AAE_SpeedSet + 10;
 };
-
-//Vapor
-_Vapor_Activated = _plane getVariable ["AAE_Vapor_Activated", false];
-
-//Ground
-_Ground_Activated = _plane getVariable ["AAE_Ground_Activated", false];
-_pitchBank = _plane call BIS_fnc_getPitchBank;
-
-//Burner
-_Burner_Activated = _plane getVariable ["AAE_BurnerActived",false];
 
 //Player only
 if (player in _plane) then {
@@ -83,17 +70,28 @@ if (player in _plane) then {
     };
 
     if (Gforces_Vol_fn) then {
-      //Volume Changed
-      call AAE_fnc_VolumeChangedEH;
-
       //Volume fade out
       call AAE_fnc_ChangeVolume;
     };
   };
 };
 
-
+//- All Planes
 if (isEngineOn _plane) then {
+
+  ///------------Basic Varibles--------------\\\
+  //Vapor
+  private _Vapor_Activated = _plane getVariable ["AAE_Vapor_Activated", false];
+
+  //Ground
+  private _Ground_Activated = _plane getVariable ["AAE_Ground_Activated", false];
+  private _pitchBank = _plane call BIS_fnc_getPitchBank;
+
+  //Burner
+  private _Burner_Activated = _plane getVariable ["AAE_BurnerActived",false];
+
+  ///------------Functions--------------\\\
+
   // Camshake
   if ((isTouchingGround player) && (_speed >= 150) && !(player in _plane) && (camshake_fn)) then {
     _plane call AAE_fnc_camshake;
@@ -117,23 +115,21 @@ if (isEngineOn _plane) then {
   //////////////////////////////////////Vars for ground effect//////////////////////////////////////////////
   //offset variables setup
   // Pitch
-  _pitch = _pitchbank # 0;
-  if (_pitch > 90) then {
-    _pitch = 90;
-  };
-  if (_pitch < 0) then {
-    _pitch = 0;
-  };
+  private _pitch = linearConversion [0,90,_pitchbank # 0,0,90,true];
+
   // Speed
-  _ground_speed_var = (0.1 * _speed) + 1;
+  private _ground_speed_var = (0.1 * _speed) + 1;
   if (_ground_speed_var > 2) then {
     _ground_speed_var = 2;
   };
+
   //Result
-  _ground_result_var = 0.5 * _pitch * _ground_speed_var;
-  _ground_result = groundP_sdr + _ground_result_var;
-  if (Wingspan_fn) then {
-    _ground_result = _Wingspan + _ground_result_var;
+  private _ground_result_var = 0.5 * _pitch * _ground_speed_var;
+  private _ground_result = if (Wingspan_fn) then {
+    // with Wingspan
+    (_plane_var get "AAE_Wingspan") + _ground_result_var
+  } else {
+    groundP_sdr + _ground_result_var
   };
 
   //https://www.desmos.com/calculator/f8zvnybbwk
@@ -150,24 +146,22 @@ if (isEngineOn _plane) then {
   };
 
   //Have Burner
-  _have_AB = _plane getVariable ["AAE_Have_AB",false];
+  private _have_AB = _plane_var get "AAE_Have_AB";
 
   //Burner Source
-  _plane_thrust = if (_plane getVariable ["AAE_Have_AB_Source",false]) then {
+  private _plane_thrust = if (_plane getVariable ["AAE_Have_AB_Source",false]) then {
     (
-      _plane animationSourcePhase (_plane getVariable "AAE_AB_Source") > 0.9 or
+      _plane animationSourcePhase (_plane getVariable "AAE_AB_Source") > 0.9 ||
       _plane animationphase (_plane getVariable "AAE_AB_Source") > 0.9
     );
   } else {
     (_plane getSoundController "thrust") > 0.9;
   };
 
-  _Burner_sources = _plane getVariable ["AAE_Burner_Sources",[]];
-
   //After Burner      #-Else included
   if ((burner_fn) && (_plane_thrust) && (_have_AB)) then {
     if !(_Burner_Activated) then {
-      [_plane,_Exhausts_count,_Exhausts_POS,_isServer] spawn AAE_fnc_burner;
+      [_plane,_Exhausts_POS, _plane_var] spawn AAE_fnc_burner;
       _plane setVariable ["AAE_BurnerActived",true];
     };
   } else {

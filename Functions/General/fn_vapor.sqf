@@ -1,7 +1,6 @@
 params ["_plane","_Exhausts_count","_Exhausts_POS"];
 
 _source = "#particlesource";
-_effect = "AAE_Vapor_Trail";
 _Sources = [];
 
 //Vapor Effect
@@ -14,8 +13,6 @@ for "_i" from 0 to (_Exhausts_count - 1) step 1 do {
   _Particle_source attachTo [_plane, [0,-5,0], _Engine];
 
   //Particle Effect
-  //_Particle_source setParticleClass _effect;
-
   _Particle_source setParticleParams [
 	["\A3\Data_F\ParticleEffects\Universal\Universal",16,12,8,0], "", "Billboard",
 	1, 20, [0,0,0], [0, 0, 0], 20, 1.25, 1, 0.01, [8,15,25,30,40],
@@ -34,8 +31,7 @@ _Vapor_Paricles = _plane getVariable ["AAE_Vapor_Paricles",[]];
 waituntil {
   //Set Interval
   {
-    _interval = 0.025-(0.000013*(Speed _plane));
-    if (_interval <= 0.01) then {_interval = 0.01};
+    private _interval = (0.025-(0.000013*(Speed _plane))) max 0.01;
     _x setDropInterval _interval;
   } forEach _Vapor_Paricles;
 
@@ -43,4 +39,4 @@ waituntil {
 };
 
 {deleteVehicle _x} foreach _Vapor_Paricles;
-_plane setVariable ["AAE_Vapor_Paricles",[]];
+_plane setVariable ["AAE_Vapor_Paricles",nil];

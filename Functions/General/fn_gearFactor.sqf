@@ -1,15 +1,16 @@
 params ["_plane","_speed"];
+private ["_sound_Alarm","_sound_Rum","_gear"];
 
 //Sound Files
 _sound_Alarm = getText (configFile >> "CfgVehicles" >> typeOf _plane >> "AAE_Alarm_Int");
 _sound_Rum = getText (configFile >> "CfgVehicles" >> typeOf _plane >> "AAE_Rumble_Int");
 
 //Debug
-if (_sound_Alarm isEqualTo "") then {
+if (_sound_Alarm == "") then {
   _sound_Alarm = "AAE_Alarm";
 };
 
-if (_sound_Rum isEqualTo "") then {
+if (_sound_Rum == "") then {
   _sound_Rum = "AAE_Rumble";
 };
 

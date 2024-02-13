@@ -1,38 +1,39 @@
-params[["_plane",objNull],"_Exhausts_count","_Exhausts_POS"];
+params[["_plane",objNull],"_Exhausts_POS","_plane_var"];
 
-//Sound
-
-
+//- PlaySound
 if ((Cameraon isKindOf "Plane") && (cameraView == "INTERNAL") && (_plane == cameraOn)) then {
-  ["AAE_PlaySound",[_AB_Sound]] call CBA_fnc_localEvent;
+  ["AAE_PlaySound",[
+    _plane_var get "AAE_AB_Sound"
+  ]] call CBA_fnc_localEvent;
 };
 
-_offset = _plane getVariable ["AAE_Burner_Offset",[0,-0.3,0]];
+private _offset = _plane_var get "AAE_Burner_Offset";
 
 //Array
-_result_Light = [];
-_result_Particle = [];
+private _result_Light = [];
+private _result_Particle = [];
 
 //Burner Lights
-_source_Light = "AAE_AfterBurner_Reflector";
-_source_Particle = "#particlesource";
+private _source_Light = "AAE_AfterBurner_Reflector";
+private _source_Particle = "#particlesource";
 if (!(player in _plane) && (burner_flare_fn)) then {
   _source_Light = _source_Light +"_Flare";
 };
 
 //Direction
-_dir = _plane getVariable ["AAE_Exhaust_Direction",[[0,0,0],[0,0,0]]];
+private _dir = _plane_var get "AAE_Exhaust_Direction";
 
 //Create Object
-for "_i" from 0 to (_Exhausts_count - 1) step 1 do {
+{
+  private ["_velocity","_light_source","_Engine","_Direction","_Attach"];
   _velocity = velocity _plane;
 
   //light Sources
   _light_source = _source_Light createVehicleLocal [0,0,0];
   _light_source hideObject true;
 
-  _Engine = _Exhausts_POS # _i;
-  _Direction = _dir # _i;
+  _Engine = _x;
+  _Direction = _dir # _forEachIndex;
 
   //Attach
   _Attach = [_plane, _offset, _Engine];
@@ -47,7 +48,7 @@ for "_i" from 0 to (_Exhausts_count - 1) step 1 do {
 
   //Particle Effect
   if !(isTouchingGround _plane) then {
-    _Particle_source = _source_Particle createVehicleLocal [0,0,0];
+    private _Particle_source = _source_Particle createVehicleLocal [0,0,0];
     _Particle_source attachTo _Attach;
 
     _Particle_source setParticleParams [
@@ -59,18 +60,16 @@ for "_i" from 0 to (_Exhausts_count - 1) step 1 do {
     _Particle_source setParticleRandom [1, [0.4, 0.4, 0.4], [1, 1, 1], 20, 0.3, [0, 0, 0, 0.04], 0.1, 0.05, 0];
 
     _result_Particle pushBack _Particle_source;
-    _plane setVariable ["AAE_Exhaust_Particle_Sources",_result_Particle];
   };
-};
+} forEach _Exhausts_POS;
 
 _Burner_sources = _plane getVariable ["AAE_Burner_Sources",[]];
-_Particle_sources = _plane getVariable ["AAE_Exhaust_Particle_Sources",[]];
 
 //Unhide Lights
 uisleep 0.1;
 {_x hideObject false} foreach _Burner_sources;
 
-_Particle_sources spawn {
+_result_Particle spawn {
   uisleep 0.3;
   {deleteVehicle _x} foreach _this;
 };
@@ -84,4 +83,4 @@ waituntil{
 uisleep 0.02;
 
 {deleteVehicle _x} foreach _Burner_sources;
-_plane setVariable ["AAE_Burner_Sources",[]];
+_plane setVariable ["AAE_Burner_Sources",nil];

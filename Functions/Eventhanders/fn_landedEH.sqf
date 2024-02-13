@@ -1,29 +1,21 @@
 params ["_plane"];
 
-if (_plane getVariable ["AAE_Landed_CoolDown",false] and (landingVEF_fn)) exitWith {};
-
-_Wheels_Selections = _plane getVariable ["AAE_Wheels_Selections",[]];
-
-//Wheels
-if (_Wheels_Selections isEqualTo []) then {
-  _wheels = call AAE_fnc_wheels;
-  _plane setVariable ["AAE_Wheels_Selections",_wheels];
-};
+if ((_plane getVariable ["AAE_Landed_CoolDown",false]) && !(landingVEF_fn)) exitWith {};
 
 //Sounds
-_config_int = getText (configFile >> "CfgVehicles" >> typeOf _plane >> "AAE_Touchdown_Int");
-_config_ext = getArray (configFile >> "CfgVehicles" >> typeOf _plane >> "AAE_Touchdown_Ext");
+_config = configOf _plane;
+_config_int = getText (_config >> "AAE_Touchdown_Int");
+_config_ext = getArray (_config >> "AAE_Touchdown_Ext");
+_speed_limit = (getNumber (_config >> "landingSpeed") - (20 + random 10)) min 180;
+_tailhook_init = getNumber(_config >> "AnimationSources" >> "TailHook" >> "initPhase");
 
-_file_ext = _config_ext # 0;
-_vol_ext = _config_ext # 1;
-_pitch_ext = _config_ext # 2;
-_range_ext = _config_ext # 3;
+_config_ext params ["_file_ext","_vol_ext","_pitch_ext","_range_ext"];
 
-if (speed _plane <= 100) exitWith {};
+_speed = speed _plane;
+if (_speed <= 100) exitWith {};
 
 if (TDSound_fn) then {
   if (cameraView == "INTERNAL") then {
-    //playSound3D [_file_int, _plane, true, getPosASL _plane, _vol_int, _pitch_int, 2000];
     playSound _config_int;
   } else {
     playSound3D [_file_ext, _plane, false, getPosASL _plane, _vol_ext, _pitch_ext, _range_ext];
@@ -35,42 +27,37 @@ if (TDSound_fn) then {
 if !(landingVEF_fn) exitWith {};
 
 //Gear POS
-_vars = _plane getvariable "AAE_Wheels_Selections";
+_vars = (_plane call AAE_fnc_InitEH) get "AAE_Wheels_Selections";
+_GearsArray = _vars # 2;
+_average = 0;
 
-_GearsArray = _vars # 6;
+_WheelH = _GearsArray apply {
+  private _H = (_plane modelToWorldVisualWorld _x) # 2;
+  _average = _average + _H;
+  _H
+};
+_average = _average / count _GearsArray;
 
-_POS = [0,0,0];
-_Particle_Sources = [];
+{
+  private ["_H","_gear","_effect","_behind"];
+  _H = _WheelH # _forEachIndex;
 
-for "_i" from 0 to (count _GearsArray) - 1 do {
+  //- Skip if -Speed lower than Limit- OR -Above average-
+  if (_speed < _speed_limit || _H > _average) then {continue};
+  _gear = _x;
+
   //Particle Sources
-  _gear = _GearsArray # _i;
-  _effect = "#particlesource" createVehicleLocal _POS;
+  _effect = "#particlesource" createVehicleLocal [0,0,0];
   _effect attachTo [_plane, _gear];
-
+  
   _behind = false;
   if (_gear # 1 < 0) then {
     _behind = true;
   };
 
-  _Particle_Sources pushBack _effect;
-
   //Spawn Effects
-  _Script = [_vars,_effect,_Particle_Sources,_behind] Spawn AAE_fnc_landed;
-
-  //Delete Particles
-  [_effect,_Particle_Sources,_plane,_Script] spawn {
-    params ["_effect","_Particle_Sources","_plane","_Script"];
-    _index = _Particle_Sources find _effect;
-
-    waitUntil {
-      scriptDone _Script
-    };
-    sleep 0.25;
-    _Particle_Sources deleteAt _index;
-    deleteVehicle _effect;
-  };
-};
+  [_plane,_vars,_effect,_behind,_tailhook_init] Spawn AAE_fnc_landed;
+} forEach _GearsArray;
 
 _plane setvariable ["AAE_Landed_Counter",true];
 

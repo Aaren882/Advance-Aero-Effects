@@ -15,9 +15,6 @@ _idEH = addMissionEventHandler ["EachFrame", {
   if (time > (AAE_UnitList_LastUpdate + 1)) then {
     AAE_UnitList_LastUpdate = time;
     missionNamespace setVariable ["AAE_UnitList", vehicles select {
-      if (isEngineOn _x) then {
-        [_x,true] call AAE_fnc_EngineEH;
-      };
       (_x iskindof "plane") && (isEngineOn _x) && ((typeOf _x) in (localNamespace getVariable "AAE_Basic_Cache"))
     }, true];
   };

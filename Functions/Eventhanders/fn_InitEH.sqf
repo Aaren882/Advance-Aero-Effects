@@ -17,7 +17,7 @@ if (_class in _cache) exitWith {
 _LocalCache = createHashMap;
 
 //Basic Definitions
-_config = configFile >> "CfgVehicles" >> _class;
+_config = configOf _plane;
 
 //Find Wingspan
 _Wingspan = getNumber (_config >> "Aircraft_Wingspan");
@@ -57,10 +57,11 @@ _LocalCache set ["AAE_AB_Source",_AB_source];
 // -Have AB
 _have_AB = (_Default_AB == 1) || (_Have_AB_source);
 _LocalCache set ["AAE_Have_AB",_have_AB];
-__LocalCache set ["AAE_AB_Sound", _AB_Sound];
+_LocalCache set ["AAE_AB_Sound", _AB_Sound];
 
 // Find Engine POS
 call AAE_fnc_find_engine;
+call AAE_fnc_wheels;
 
 _cache set [_class, _LocalCache];
 localNamespace setVariable ["AAE_Basic_Cache",_cache];

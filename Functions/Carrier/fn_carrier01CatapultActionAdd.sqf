@@ -62,17 +62,8 @@ private _onStart =
 	//execute custom code from mision config
 	private _codeStart = getText(missionConfigFile >> "CfgCarrier" >> "LaunchSettings" >> "codeStart");
 
-	if (_codeStart != "") then
-	{
+	if (_codeStart != "") then {
 		call compile _codeStart;
-	};
-
-	private _plane = cameraOn;
-	//Get Wheels
-	_Wheels_Selections = _plane getVariable ["AAE_Wheels_Selections",[]];
-	if (_Wheels_Selections isEqualTo []) then {
-	  _wheels = _plane call AAE_fnc_wheels;
-	  _plane setVariable ["AAE_Wheels_Selections",_wheels];
 	};
 };
 
@@ -140,21 +131,20 @@ private _onCompleted =
 	//execute custom code from mision config
 	private _codeEnd = getText(missionConfigFile >> "CfgCarrier" >> "LaunchSettings" >> "codeEnd");
 
-	if (_codeEnd != "") then
-	{
+	if (_codeEnd != "") then {
 		call compile _codeEnd;
 	};
 
 	//Get Wheels
-	_vars = _plane getvariable "AAE_Wheels_Selections";
+	_vars = (_plane call AAE_fnc_InitEH) get "AAE_Wheels_Selections";
 
 	_color = [[0.7,0.8,1,0.8],[0.7,0.8,1,0.5],[0.7,0.8,1,0.3],[0.7,0.8,1,0.15],[0.7,0.8,1,0.05],[0.7,0.8,1,0.01],[0.7,0.8,1,0.0]];
 	_velocity = velocity _plane;
 	_VelocityFX = [0, 0, 0];
 	_size = [1,3,6,20];
-	_gearArray = _vars # 6;
-	_offset = _vars # 7;
-	_offsetF = _vars # 8;
+	_gearArray = _vars # 2;
+	_offset = _vars # 3;
+	_offsetF = _vars # 4;
 
 	//////////////////////////////////////////////////////////////////////////
 	_gear = _gearArray select {(_x # 1)>0};
@@ -175,12 +165,12 @@ private _onCompleted =
 		waituntil {
 			!(isTouchingGround _plane)
 		};
-		if ((_plane iskindof "Plane") and (cameraView == "INTERNAL")) then {
+		if ((_plane iskindof "Plane") && (cameraView == "INTERNAL")) then {
 			playsound "Catapult_End";
 		};
 	};
 
-	if ((_plane iskindof "Plane") and (cameraView == "INTERNAL")) then {
+	if ((_plane iskindof "Plane") && (cameraView == "INTERNAL")) then {
 		playsound "Catapult_Start";
 		playsound "Catapult_int";
 	};

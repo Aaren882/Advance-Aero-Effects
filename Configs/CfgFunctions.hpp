@@ -14,7 +14,6 @@ class CfgFunctions
 		{
 			file="MG8\AVDAVFX\Functions\Eventhanders";
 			class EngineEH;
-			class GearEH;
 			class InitEH;
 			class SurfaceTypeEH;
 			class VolumeChangedEH;

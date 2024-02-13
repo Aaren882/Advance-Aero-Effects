@@ -18,8 +18,8 @@ _idEH = addMissionEventHandler ["EachFrame", {
 
   if ((({(_x getVariable ["AAE_EachFrame_EH",-1]) != -1} count allPlayers) == 0) && ((_AAE_list # 0) == str player)) then {
     call AAE_fnc_ServerPFH;
-    player setVariable ["AAE_EachFrame_EH_Client",-1];
+    player setVariable ["AAE_EachFrame_EH_Client",-1,true];
     removeMissionEventHandler ["EachFrame", _EH];
   };
 }];
-player setVariable ["AAE_EachFrame_EH_Client",_idEH];
+player setVariable ["AAE_EachFrame_EH_Client",_idEH,true];

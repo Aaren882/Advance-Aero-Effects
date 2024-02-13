@@ -1,5 +1,4 @@
 //-Add Eventhadlers
-["Plane","Gear",AAE_fnc_GearEH] call CBA_fnc_addClassEventHandler;
 ["Plane","Engine",AAE_fnc_EngineEH] call CBA_fnc_addClassEventHandler;
 ["Plane","Deleted",AAE_fnc_DeleteEH] call CBA_fnc_addClassEventHandler;
 ["Plane","LandedTouchDown",AAE_fnc_landedEH] call CBA_fnc_addClassEventHandler;

@@ -11,13 +11,23 @@
 //6. Sound Fade Out
 //Edited by Aaren
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
-_plane = _this;
+params ["_plane","_config"];
+private [
+  "_sound","_sound_hold",
+  "_INTERVAL","_MAXVIRTUALG","_MINVIRTUALG",
+  "_var","_GForces","_Index","_oldVel",
+  "_newVel","_accel","_currentGForce",
+  "_average","_gBlackOut","_strength"
+];
 
-_config = configFile >> "CfgVehicles" >> typeOf _plane;
+#if __has_include("z\ace\addons\gforces\config.bin")
+  #define Has_ACE 1
+#endif
+
 _sound = getText (_config >> "AAE_GBreathe");
 _sound_hold = getText (_config >> "AAE_GBreathe_Hold");
 
-if (_sound isEqualTo "") then {
+if (_sound == "") then {
   _sound = "AAE_GBreathe";
   _sound_hold = "AAE_GBreathe_Hold";
 };
@@ -26,45 +36,52 @@ _INTERVAL= 0.2;
 _MAXVIRTUALG = 5;
 _MINVIRTUALG = 2.5;
 
-if ((time - lastUpdateTime) < _INTERVAL) exitWith {};
-lastUpdateTime = time;
+_var = localNamespace getVariable "AAE_GForce_Var";
+_lastUpdateTime = _var get "lastUpdateTime";
+
+if ((time - _lastUpdateTime) < _INTERVAL) exitWith {};
+_var set ["lastUpdateTime", time];
+
+_GForces = _var get "GForces";
+_Index = _var get "Index";
+_oldVel = _var get "oldVel";
 
 //Thanks for ACE team
 _newVel = velocity _plane;
-_accel = (_newVel vectorDiff oldVel) vectorMultiply (1 / _INTERVAL);
+_accel = (_newVel vectorDiff _oldVel) vectorMultiply (1 / _INTERVAL);
 _currentGForce = (((_accel vectorDotProduct (vectorUp _plane)) / 11) max -10) min 10;
 
 if (_currentGForce >= 7) then {
   _sound = _sound_hold;
 };
 
-GForces set [GForces_Index, _currentGForce * gforces_sdr];
-GForces_Index = (GForces_Index + 1) % 30;
+_GForces set [_Index, _currentGForce * gforces_sdr];
 
-oldVel = _newVel;
+_var set ["GForces", _GForces];
+_var set ["Index" , (_Index + 1) % 30];
+_var set ["oldVel", _newVel];
 
 _average = 0;
 
-_count = {
+{
   _average = _average + _x;
-  true
-} count GForces;
+} count _GForces;
 
-if (_count > 0) then {
-  _average = _average / _count;
-};
+_average = _average / 30;
 
 _gBlackOut = _MAXVIRTUALG / 0.55 + _MAXVIRTUALG / 1 - _MAXVIRTUALG;
 _strength = ((_average - 0.30 * _gBlackOut) / (0.70 * _gBlackOut)) max 0;
 _plane setVariable ["AAE_CurrentGForce",_strength];
-if (_average > 0.30 * _gBlackOut) then {
-  if ((Gforces_fn) and !(HaveACE)) then {
-    _strength = ((_average - 0.30 * _gBlackOut) / (0.70 * _gBlackOut)) max 0;
-    AAE_GForces_Filter ppEffectAdjust [1,1,0,[0,0,0,1],[0,0,0,0],[1,1,1,1],[2 * (1 - _strength),(1 - _strength),0,0,0,0.1,0.5]];
-  };
 
-  if ((_currentGForce >= 3) and (cameraView == "internal") and (gBreathe_sound_fn)) then {
-    if ((_currentGForce >= 7) and ((_plane getVariable ["Breathing_execution_time", -1]) < time)) then {
+if (_average > 0.30 * _gBlackOut) then {
+  #ifndef Has_ACE
+    if (Gforces_fn) then {
+      AAE_GForces_Filter ppEffectAdjust [1,1,0,[0,0,0,1],[0,0,0,0],[1,1,1,1],[2 * (1 - _strength),(1 - _strength),0,0,0,0.1,0.5]];
+    };
+  #endif
+
+  if ((_currentGForce >= 3) && (cameraView == "internal") && (gBreathe_sound_fn)) then {
+    if ((_currentGForce >= 7) && ((_plane getVariable ["Breathing_execution_time", -1]) < time)) then {
       [_plane,_sound_Hold] call AAE_fnc_PlayBreathing;
     } else {
       if ((_plane getVariable ["Breathing_execution_time", -1]) < time) then {
@@ -73,25 +90,34 @@ if (_average > 0.30 * _gBlackOut) then {
     };
   };
 } else {
-  _gRedOut = _MINVIRTUALG / 0.55;
+  private _gRedOut = _MINVIRTUALG / 0.55;
 
   if (_average < -0.30 * _gRedOut) then {
-    if ((Gforces_fn) and !(HaveACE)) then {
-      _strength = ((abs _average - 0.30 * _gRedOut) / (0.70 * _gRedOut)) max 0;
-      AAE_GForces_Filter ppEffectAdjust [1,1,0,[1,0.2,0.2,1],[0,0,0,0],[1,1,1,1],[2 * (1 - _strength),1 * (1 - _strength),0,0,0,0.1,0.5]];
-    };
+    #ifndef Has_ACE
+      if (Gforces_fn) then {
+        _strength = ((abs _average - 0.30 * _gRedOut) / (0.70 * _gRedOut)) max 0;
+        AAE_GForces_Filter ppEffectAdjust [1,1,0,[1,0.2,0.2,1],[0,0,0,0],[1,1,1,1],[2 * (1 - _strength),1 * (1 - _strength),0,0,0,0.1,0.5]];
+      };
+    #endif
 
-    if ((_currentGForce >= 3) and (cameraView == "internal") and (gBreathe_sound_fn) and ((_plane getVariable ["Breathing_execution_time", -1]) < time)) then {
+    if ((_currentGForce >= 3) && (cameraView == "internal") && (gBreathe_sound_fn) && ((_plane getVariable ["Breathing_execution_time", -1]) < time)) then {
       [_plane,_sound] call AAE_fnc_PlayBreathing;
 
-      if ((_currentGForce >= 7) and ((_plane getVariable ["Breathing_execution_time", -1]) < time)) then {
+      if ((_currentGForce >= 7) && ((_plane getVariable ["Breathing_execution_time", -1]) < time)) then {
         [_plane,_sound_Hold] call AAE_fnc_PlayBreathing;
       };
     };
 
   } else {
-    AAE_GForces_Filter ppEffectAdjust [1,1,0,[0,0,0,1],[0,0,0,0],[1,1,1,1],[10,10,0,0,0,0.1,0.5]];
+    #ifndef Has_ACE
+      AAE_GForces_Filter ppEffectAdjust [1,1,0,[0,0,0,1],[0,0,0,0],[1,1,1,1],[10,10,0,0,0,0.1,0.5]];
+    #endif
   };
 };
 
-AAE_GForces_Filter ppEffectCommit 0.6;
+#ifndef Has_ACE
+  AAE_GForces_Filter ppEffectCommit 0.6;
+#endif
+
+//- Update Varible
+localNamespace setVariable ["AAE_GForce_Var", _var];
