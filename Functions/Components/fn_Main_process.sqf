@@ -17,7 +17,6 @@ _ASLW_POS = getPosASLW _plane;
 //Speeds
 _velocity = velocity _plane;
 _speed = speed _plane;
-_speed_Player = speed _planePlayer;
 
 //Temperature
 _air_Temp = ambientTemperature # 0;
@@ -39,7 +38,7 @@ if (sonicboom_tmp_fn) then {
 if (player in _plane) then {
 
   //GForces
-  if !(isTouchingGround _planePlayer) then {
+  if !(isTouchingGround _planePlayer && (Gforces_fn || Gforces_Vol_fn)) then {
     _planePlayer call AAE_fnc_gforces;
   };
 
@@ -47,31 +46,26 @@ if (player in _plane) then {
 
     //Gear Factor
     if (!(isTouchingGround _plane) && (gear_fn)) then {
-      [_planePlayer,_speed_Player] call AAE_fnc_gearFactor;
+      [_planePlayer,_speed] call AAE_fnc_gearFactor;
     };
 
     //It's Flying
     if !(isTouchingGround _planePlayer) then {
 
       //Turbulence Plane + Turbulence Settings
-      if ((_speed_Player > 200) && (turbulentP_fn)) then {
+      if ((_speed > 200) && (turbulentP_fn)) then {
         (_planePlayer call AAE_fnc_Exhaust_Offsets) call AAE_fnc_turbulence;
       };
 
       //Turbulence World
       if (turbulentS_fn) then {
-        [_planePlayer,((getpos _planePlayer) # 2),_speed_Player] call AAE_fnc_turbulenceW;
+        [_planePlayer,((getpos _planePlayer) # 2),_speed] call AAE_fnc_turbulenceW;
       };
     };
 
     //Taxing
     if ((isTouchingGround _planePlayer) && (taxiing_fn)) then {
-      [_planePlayer,_speed_Player] call AAE_fnc_taxiing;
-    };
-
-    if (Gforces_Vol_fn) then {
-      //Volume fade out
-      call AAE_fnc_ChangeVolume;
+      [_planePlayer,_speed] call AAE_fnc_taxiing;
     };
   };
 };
@@ -138,7 +132,7 @@ if (isEngineOn _plane) then {
   //Ground
   if (!(isTouchingGround _plane) && ((_AGL_POS # 2) < _ground_result) && (ground_fn) && !("Concrete" in (surfaceType (getPos _plane)))) then {
     if !(_Ground_Activated) then {
-      _plane call AAE_fnc_ground;
+      [_plane,_speed,_velocity] call AAE_fnc_ground;
       _plane setVariable ["AAE_Ground_Activated", true];
     };
   } else {

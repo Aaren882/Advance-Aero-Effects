@@ -2,11 +2,11 @@
 params ["_plane"];
 
 //G Forces
-#if __has_include("z\ace\addons\gforces\config.bin")
-#else
+if !(isnil {AAE_GForces_Filter}) then {
   AAE_GForces_Filter ppEffectEnable false;
   ppEffectDestroy AAE_GForces_Filter;
-#endif
+  AAE_GForces_Filter = nil;
+};
 
 //Vars
 _Vapor_Paricles = _plane getVariable ["AAE_Vapor_Paricles",[]];

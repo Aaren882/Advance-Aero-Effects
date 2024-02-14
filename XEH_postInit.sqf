@@ -4,8 +4,7 @@ _tempMap = createHashMap;
 
 _tempMap set ["old_time", 0];
 _tempMap set ["changed", true];
-_tempMap set ["last_Sound_Volume", 1];
-_tempMap set ["old_Volume", soundVolume];
+_tempMap set ["last_Sound_Volume", call AAE_fnc_getSoundVolume];
 
 localNamespace setVariable [
   "AAE_SoundVol_Var",

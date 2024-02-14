@@ -68,9 +68,24 @@
 
 [
 	"Gforces_fn","CHECKBOX",
-	["G-Forces Effect (Without ACE Installed)","Except For the Breathing Sound"],
+	["G-Forces Effect (Compat with ACE)","Except For the Breathing Sound"],
 	["Advance Aero Effects", "G-Forces"],
-	false
+	false,0,{
+		private _Exist = !isNil{AAE_GForces_Filter};
+		if (_this) then {
+			if (_Exist) exitWith {};
+			AAE_GForces_Filter = ppEffectCreate ["ColorCorrections", 6500];
+			AAE_GForces_Filter ppEffectForceInNVG true;
+			AAE_GForces_Filter ppEffectAdjust [1,1,0,[0,0,0,0],[0,0,0,0],[1,1,1,1],[10,10,0,0,0,0.1,0.5]];
+			AAE_GForces_Filter ppEffectCommit 0.4;
+			AAE_GForces_Filter ppEffectEnable true;
+		} else {
+			if !(_Exist) exitWith {};
+			AAE_GForces_Filter ppEffectEnable false;
+			ppEffectDestroy AAE_GForces_Filter;
+			AAE_GForces_Filter = nil;
+		};
+	}
 ] call CBA_fnc_addSetting;
 
 [
@@ -284,5 +299,10 @@
 	"gforces_Vol_sdr", "SLIDER",
 	["Adjustment for volume Slider (%)"],
 	["Advance Aero Effects", "G-Forces"],
-	[0, 100, 30, 0]
+	[0, 100, 30, 0],0,
+	{
+		private _tempMap = localNamespace getVariable "AAE_SoundVol_Var";
+		_tempMap set ["old_Volume", call AAE_fnc_getSoundVolume];
+		localNamespace setVariable ["AAE_SoundVol_Var",_tempMap];
+	}
 ] call CBA_fnc_addSetting;

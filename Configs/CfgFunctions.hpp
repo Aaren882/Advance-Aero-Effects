@@ -29,6 +29,7 @@ class CfgFunctions
 			class Exhaust_Offsets;
 			class ChangeVolume;
 			class wheels;
+			class getSoundVolume;
 		};
 		//Sound Handler
 		class SoundFn
