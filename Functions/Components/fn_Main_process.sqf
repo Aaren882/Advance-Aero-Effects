@@ -87,7 +87,7 @@ if (isEngineOn _plane) then {
   ///------------Functions--------------\\\
 
   // Camshake
-  if ((isTouchingGround player) && (_speed >= 150) && !(player in _plane) && (camshake_fn)) then {
+  if ((isTouchingGround player) && (_speed >= 10) && !(player in _plane) && (camshake_fn)) then {
     _plane call AAE_fnc_camshake;
   };
 

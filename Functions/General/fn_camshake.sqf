@@ -1,7 +1,10 @@
-if ((_plane iskindof "UAV_02_base_F") or (_plane iskindof "UAV_04_base_F")) exitWith {};
+if ((_plane iskindof "UAV_02_base_F") || (_plane iskindof "UAV_04_base_F")) exitWith {};
 
-_Distance = player distance _plane;
-
-if ((_Distance > 5) && (_Distance <= camshake_sdr)) then {
-	addCamShake [3, 2, 10];
+private _Distance = player distance _plane;
+if (_Distance < camshake_sdr) then {
+	addCamShake [
+		linearConversion [5, camshake_sdr,_Distance, 10,1,true],
+		1, 
+		linearConversion [50, camshake_sdr,_Distance, 20,10,true]
+	];
 };

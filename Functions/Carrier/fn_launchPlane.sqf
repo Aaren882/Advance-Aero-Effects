@@ -7,12 +7,12 @@ private _catEnd = _nimspots modelToWorld (_nimspots selectionPosition (format["%
 	params ["_plane", "_finalDir", "_catName", "_nimspots", "_catObj"];
 	private _unitzVarname = format ["ttt_nimitz_unitz_%1", _catName];
 	private _crew = _nimspots getVariable _unitzVarname;
-	private _catNr = 0;
-	switch (_catName) do {
-		case "C1": { _catNr = 1; };
-		case "C2": { _catNr = 2; };
-		case "C3": { _catNr = 3; };
-		case "C4": { _catNr = 4; };
+	private _catNr = switch (_catName) do {
+		case "C1": {1};
+		case "C2": {2};
+		case "C3": {3};
+		case "C4": {4};
+		default {0};
 	};
 	[_catNr, _crew] call ttt_salute_func;
 
