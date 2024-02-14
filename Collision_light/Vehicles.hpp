@@ -1130,3 +1130,19 @@ class Plane_CAS_02_base_F;
 		#include "FIR\Su-25.hpp"
 	};
 #endif
+
+//-PLA
+#if __has_include("\Jets_c\config.bin")
+	class PLAAF_Fighter_J11_base: Plane_Base_F
+	{
+		#include "PLA\PLA.hpp"
+	};
+	class PLAAF_Fighter_J15_base: Plane_Base_F
+	{
+		#include "PLA\PLA.hpp"
+	};
+	class PLAAF_Fighter_J16_base: Plane_Base_F
+	{
+		#include "PLA\PLA.hpp"
+	};
+#endif

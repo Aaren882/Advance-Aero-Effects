@@ -98,8 +98,8 @@
 #if __has_include("\FIR_Su25SM3_Cfg\config.bin")
 	"FIR_Su25SM3_F",
 #endif
+//-PLA
+#if __has_include("\Jets_c\config.bin")
+	"LK_Jets_C",
+#endif
 //////////////////////////////////////////////////////////
-//CUP
-/*#if __has_include("\CUP\AirVehicles\CUP_AirVehicles_Core\config.bin")
-
-#endif*/

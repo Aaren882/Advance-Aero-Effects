@@ -20,22 +20,32 @@ class RHS_AH1Z: RHS_AH1Z_base
 		};
 		class RedStill
 		{
-			color[] = {0.8,0,0};
-			ambient[] = {0.8,0,0};
-			intensity = 75;
+			color[] = {10,0,0};
+			ambient[] = {0.1,0,0};
+			intensity = 10;
 			drawLight = 1;
-			drawLightSize = 0.1;
-			drawLightCenterSize = 0.02;
+			drawLightSize = 0.15;
+			drawLightCenterSize = 0.04;
+			FlareSize = 0.3;
 			activeLight = 1;
 			blinking = 0;
 			dayLight = 1;
 			useFlare = 1;
 			brightness = 1;
+			class Attenuation
+			{
+				start = 0;
+				constant = 0;
+				linear = 5;
+				quadratic = 1;
+				hardLimitStart = 0.5;
+				hardLimitEnd = 3;
+			};
 		};
 		class GreenStill: RedStill
 		{
-			color[]={0,0.8,0};
-			ambient[]={0,0.8,0};
+			color[] = {0,10,0};
+			ambient[] = {0,0.1,0};
 		};
 		class RedBlinking
 		{
@@ -50,6 +60,15 @@ class RHS_AH1Z: RHS_AH1Z_base
 			useFlare=1;
 			activeLight=1;
 			brightness = 1;
+			class Attenuation
+			{
+				start = 0;
+				constant = 0;
+				linear = 10;
+				quadratic = 10;
+				hardLimitStart = 1;
+				hardLimitEnd = 2;
+			};
 		};
 		class WhiteBlinking: RedBlinking
 		{
